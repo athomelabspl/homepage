@@ -7,12 +7,14 @@
 :root {
   --bg: #faf8f5;
   --text: #2d2a26;
-  --accent: #e07a5f;
+  --accent: #7d9900;
+  --accent-rgb: 125, 153, 0;
   --text-muted: #6b6560;
 }
 
 html {
   scroll-behavior: smooth;
+  /* Avoid horizontal layout shift on Windows scrollbars */
   scrollbar-gutter: stable both-edges;
   overflow-y: scroll;
 }
@@ -23,21 +25,29 @@ body {
   color: var(--text);
   line-height: 1.6;
   min-height: 100vh;
+}
+
+/* Main page wrapper */
+.layout {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   padding: 2rem;
 }
 
-.layout {
+/* Home stays centered */
+body.home .layout {
   max-width: 900px;
   margin: 0 auto;
-  min-height: calc(100vh - 4rem);
-  display: flex;
-  flex-direction: column;
 }
 
-/* Subpages: keep a consistent left inset (not centered) */
+/* Subpages: same left start (viewport-based), not centered */
 body.page .layout {
-  margin-left: clamp(1.5rem, 8vw, 6rem);
-  margin-right: auto;
+  max-width: none;
+  margin: 0;
+  padding-left: clamp(1.5rem, 8vw, 6rem);
+  padding-right: 2rem;
 }
 
 .site-header {
@@ -75,24 +85,56 @@ body.page .layout {
 
 .site-nav a:hover {
   color: var(--text);
-  background-color: rgba(224, 122, 95, 0.12);
+  background-color: rgba(var(--accent-rgb), 0.12);
 }
 
 main {
-  max-width: 640px;
-  margin: 0 auto;
-  text-align: center;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+
+  max-width: 640px;
+  text-align: center;
 }
 
+/* Center main content on home even though wrapper is centered */
+body.home main {
+  margin: 0 auto;
+}
+
+/* Subpages main: left-aligned */
 body.page main {
   max-width: 900px;
   text-align: left;
   justify-content: flex-start;
+  align-items: flex-start;
   padding-top: 1rem;
+}
+
+.site-footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.site-footer a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
 }
 
 h1 {
@@ -104,8 +146,10 @@ h1 {
 }
 
 .tagline {
-  font-size: 1.125rem;
-  color: var(--text-muted);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: -0.01em;
   margin-bottom: 2rem;
 }
 
@@ -116,17 +160,23 @@ h1 {
   line-height: 1.8;
 }
 
+/* Shared button: consistent, accessible size (44px target) */
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  color: var(--accent);
-  text-decoration: none;
+
   font-size: 1rem;
   font-weight: 500;
-  line-height: 1;
-  padding: 0.75rem 1.25rem;
+  line-height: 1.2;
+
+  height: 44px;
+  padding: 0 1.125rem;
+  white-space: nowrap;
+
+  color: var(--accent);
+  text-decoration: none;
   border: 1px solid var(--accent);
   border-radius: 999px;
   transition: background-color 0.2s ease, color 0.2s ease,
