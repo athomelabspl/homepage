@@ -17,15 +17,42 @@
         <link rel="stylesheet" href="./styles.css" />
     </head>
     <body>
-        <main>
-            <h1>At Home Labs</h1>
-            <p class="tagline">We build tools to help you thrive.</p>
-            <p class="bio">
-                Changing the world (a little) by making helpful apps (slowly).
-            </p>
-            <a href="mailto:athomelabs.studio@gmail.com" class="contact"
-                >get in touch</a
-            >
-        </main>
+        <div class="layout">
+            <header class="site-header">
+                <a class="brand" href="/">At Home Labs</a>
+                <nav class="site-nav" aria-label="Main">
+                    <a href="#about">About us</a>
+                    <a href="#apps">Our apps</a>
+                </nav>
+            </header>
+
+            <main>
+                <h1>At Home Labs</h1>
+                <p class="tagline">We build tools to help you thrive.</p>
+                <p class="bio">
+                    Changing the world (a little) by making helpful apps
+                    (slowly).
+                </p>
+                <a href="mailto:athomelabs.studio@gmail.com" class="contact"
+                    >get in touch</a
+                >
+
+                <section id="apps" class="section" aria-label="Our apps">
+                    <h2>Our apps</h2>
+                    <p>
+                        Our first Android app is coming soon. We’ll share the
+                        link here once it’s live.
+                    </p>
+                </section>
+
+                <section id="about" class="section" aria-label="About us">
+                    <h2>About us</h2>
+                    <p>
+                        We’re a small app studio based in Poland. We like
+                        focused, calm products that respect your time.
+                    </p>
+                </section>
+            </main>
+        </div>
     </body>
 </html>
