@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Politique de confidentialité (FR) — At Home Labs</title>
+        <meta
+            name="description"
+            content="Politique de confidentialité pour Breakup Reset."
+        />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="../styles.css" />
+
+        <style>
+            body {
+                display: block;
+                min-height: initial;
+                padding: 2rem;
+                text-align: left;
+            }
+
+            main {
+                max-width: 900px;
+                margin: 0 auto;
+                text-align: left;
+            }
+
+            .topbar {
+                max-width: 900px;
+                margin: 0 auto 1.5rem auto;
+                display: flex;
+                justify-content: flex-start;
+                gap: 1rem;
+            }
+
+            .back {
+                color: #e07a5f;
+                text-decoration: none;
+                font-weight: 500;
+            }
+
+            .back:hover {
+                text-decoration: underline;
+            }
+
+            .policy {
+                line-height: 1.75;
+                word-break: break-word;
+            }
+
+            .policy :is(h1, h2, h3) {
+                font-family: "DM Serif Display", Georgia, serif;
+                font-weight: 400;
+                letter-spacing: -0.02em;
+                margin-top: 1.5rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .policy p {
+                margin-bottom: 1rem;
+            }
+
+            .policy hr {
+                border: none;
+                border-top: 1px solid #e5dfd7;
+                margin: 1.5rem 0;
+            }
+
+            .policy ul {
+                padding-left: 1.25rem;
+                margin-bottom: 1rem;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="topbar">
+            <a href="/" class="back" aria-label="Retour à l’accueil"
+                >← Accueil</a
+            >
+        </div>
+
+        <main>
+            <h1>Politique de confidentialité</h1>
+            <div id="policy" class="policy"></div>
+
+            <noscript>
+                <p>
+                    Ce document est rendu dynamiquement. Si JavaScript est
+                    désactivé, ouvrez :
+                    <a href="./PRIVACY_POLICY_APP.md">PRIVACY_POLICY_APP.md</a>.
+                </p>
+            </noscript>
+        </main>
+
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+        <script>
+            marked.setOptions({
+                gfm: true,
+                breaks: true,
+                mangle: false,
+                headerIds: false,
+            });
+
+            document.addEventListener("DOMContentLoaded", async () => {
+                try {
+                    const res = await fetch("./PRIVACY_POLICY_APP.md", {
+                        cache: "no-store",
+                    });
+                    if (!res.ok) throw new Error("Failed to load markdown");
+                    const md = await res.text();
+
+                    const el = document.getElementById("policy");
+                    el.innerHTML = marked.parse(md);
+                } catch (e) {
+                    const el = document.getElementById("policy");
+                    el.innerHTML =
+                        "<p>Impossible de charger la politique de confidentialité. Veuillez réessayer plus tard.</p>";
+                }
+            });
+        </script>
+    </body>
+</html>
+
