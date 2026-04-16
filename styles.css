@@ -5,14 +5,15 @@
 }
 
 :root {
-  --bg: #FAF8F5;
-  --text: #2D2A26;
-  --accent: #E07A5F;
-  --text-muted: #6B6560;
+  --bg: #faf8f5;
+  --text: #2d2a26;
+  --accent: #e07a5f;
+  --text-muted: #6b6560;
 }
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -22,6 +23,7 @@ body {
   line-height: 1.6;
   min-height: 100vh;
   padding: 2rem;
+  overflow-y: scroll;
 }
 
 .layout {
@@ -108,21 +110,30 @@ h1 {
   line-height: 1.8;
 }
 
-.contact {
-  display: inline-block;
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   color: var(--accent);
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
-  padding: 0.75rem 1.5rem;
+  line-height: 1;
+  padding: 0.75rem 1.25rem;
   border: 1px solid var(--accent);
-  border-radius: 4px;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  border-radius: 999px;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    transform 0.05s ease;
 }
 
-.contact:hover {
+.button:hover {
   background-color: var(--accent);
   color: white;
+}
+
+.button:active {
+  transform: translateY(1px);
 }
 
 .section {
