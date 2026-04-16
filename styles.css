@@ -80,6 +80,13 @@ main {
   justify-content: center;
 }
 
+body.page main {
+  max-width: 900px;
+  text-align: left;
+  justify-content: flex-start;
+  padding-top: 1rem;
+}
+
 h1 {
   font-family: 'DM Serif Display', Georgia, serif;
   font-size: clamp(2.5rem, 6vw, 3.5rem);
@@ -135,3 +142,4 @@ h1 {
   color: var(--text-muted);
   margin-bottom: 0.75rem;
 }
+
