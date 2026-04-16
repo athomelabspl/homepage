@@ -13,7 +13,8 @@
 
 html {
   scroll-behavior: smooth;
-  scrollbar-gutter: stable;
+  scrollbar-gutter: stable both-edges;
+  overflow-y: scroll;
 }
 
 body {
@@ -23,7 +24,6 @@ body {
   line-height: 1.6;
   min-height: 100vh;
   padding: 2rem;
-  overflow-y: scroll;
 }
 
 .layout {
@@ -32,6 +32,12 @@ body {
   min-height: calc(100vh - 4rem);
   display: flex;
   flex-direction: column;
+}
+
+/* Subpages: keep a consistent left inset (not centered) */
+body.page .layout {
+  margin-left: clamp(1.5rem, 8vw, 6rem);
+  margin-right: auto;
 }
 
 .site-header {
