@@ -1,0 +1,8 @@
+{
+  "name": "at-home-labs-web",
+  "version": "1.0.0",
+  "description": "At Home Labs website",
+  "scripts": {
+    "dev": "npx serve . -p 3000"
+  }
+}
