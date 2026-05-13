@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Warunki korzystania (PL) — At Home Labs</title>
+        <meta
+            name="description"
+            content="Warunki korzystania z aplikacji Breakup Reset."
+        />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="../styles.css" />
+
+        <style>
+            body {
+                display: block;
+                min-height: initial;
+                padding: 2rem;
+                text-align: left;
+            }
+
+            main {
+                max-width: 900px;
+                margin: 0 auto;
+                text-align: left;
+            }
+
+            .topbar {
+                max-width: 900px;
+                margin: 0 auto 1.5rem auto;
+                display: flex;
+                justify-content: flex-start;
+                gap: 1rem;
+            }
+
+            .back {
+                color: var(--accent);
+                text-decoration: none;
+                font-weight: 500;
+            }
+
+            .back:hover {
+                text-decoration: underline;
+            }
+
+            .policy {
+                line-height: 1.75;
+                word-break: break-word;
+            }
+
+            .policy :is(h1, h2, h3) {
+                font-family: "DM Serif Display", Georgia, serif;
+                font-weight: 400;
+                letter-spacing: -0.02em;
+                margin-top: 1.5rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .policy p {
+                margin-bottom: 1rem;
+            }
+
+            .policy hr {
+                border: none;
+                border-top: 1px solid #e5dfd7;
+                margin: 1.5rem 0;
+            }
+
+            .policy ul {
+                padding-left: 1.25rem;
+                margin-bottom: 1rem;
+            }
+
+            .policy table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 1rem;
+            }
+
+            .policy th,
+            .policy td {
+                border: 1px solid #e5dfd7;
+                padding: 0.5rem 0.75rem;
+                text-align: left;
+                vertical-align: top;
+            }
+
+            .policy th {
+                font-weight: 600;
+                background: #faf8f5;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="topbar">
+            <a href="/" class="back" aria-label="Wróć do strony głównej"
+                >← Strona główna</a
+            >
+        </div>
+
+        <main>
+            <div id="policy" class="policy"></div>
+
+            <noscript>
+                <p>
+                    Ten dokument jest renderowany dynamicznie. Jeśli JavaScript
+                    jest wyłączony, otwórz plik:
+                    <a href="./TERMS_OF_SERVICE_APP.md">TERMS_OF_SERVICE_APP.md</a>.
+                </p>
+            </noscript>
+        </main>
+
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+        <script>
+            marked.setOptions({
+                gfm: true,
+                breaks: true,
+                mangle: false,
+                headerIds: false,
+            });
+
+            document.addEventListener("DOMContentLoaded", async () => {
+                try {
+                    const res = await fetch("./TERMS_OF_SERVICE_APP.md", {
+                        cache: "no-store",
+                    });
+                    if (!res.ok) throw new Error("Failed to load markdown");
+                    const md = await res.text();
+
+                    const el = document.getElementById("policy");
+                    el.innerHTML = marked.parse(md);
+                } catch (e) {
+                    const el = document.getElementById("policy");
+                    el.innerHTML =
+                        "<p>Nie udało się wczytać warunków korzystania. Spróbuj ponownie później.</p>";
+                }
+            });
+        </script>
+
+        <footer class="site-footer">
+            <span>© 2026 CommunicateIT</span>
+            <a href="mailto:athomelabs.studio@gmail.com"
+                >athomelabs.studio@gmail.com</a
+            >
+        </footer>
+    </body>
+</html>
