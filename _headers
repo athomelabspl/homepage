@@ -1,0 +1,6 @@
+## Ensure the BIMI SVG is served with a correct SVG MIME type and fetchable caching.
+/bimi.svg
+  Content-Type: image/svg+xml; charset=utf-8
+  Cache-Control: public, max-age=300
+  X-Content-Type-Options: nosniff
+
