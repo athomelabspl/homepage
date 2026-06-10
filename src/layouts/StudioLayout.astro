@@ -1,0 +1,30 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { brands } from '../config/brands';
+
+interface Props {
+  title: string;
+  description: string;
+  bodyClass?: string;
+}
+
+const { title, description, bodyClass = 'page' } = Astro.props;
+const brand = brands.studio;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  brand={brand}
+  bodyClass={bodyClass}
+>
+  <div class="layout">
+    <SiteHeader brand={brand} homeHref="/" />
+    <main>
+      <slot />
+    </main>
+    <SiteFooter brand={brand} />
+  </div>
+</BaseLayout>

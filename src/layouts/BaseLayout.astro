@@ -1,0 +1,60 @@
+---
+import '../styles/global.css';
+import Canonical from '../components/seo/Canonical.astro';
+import Analytics from '../components/Analytics.astro';
+import type { BrandConfig } from '../config/brands';
+
+interface Props {
+  title: string;
+  description: string;
+  brand: BrandConfig;
+  bodyClass?: string;
+  disableAnalytics?: boolean;
+  smartAppBanner?: boolean;
+}
+
+const {
+  title,
+  description,
+  brand,
+  bodyClass,
+  disableAnalytics = false,
+  smartAppBanner = false,
+} = Astro.props;
+
+const fullTitle =
+  brand.id === 'studio' ? title : `${title} — ${brand.name}`;
+
+const iosAppId = brand.stores?.ios?.appId;
+const deepLink = brand.stores?.deepLinkScheme;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <Canonical />
+    {
+      smartAppBanner && iosAppId && (
+        <meta
+          name="apple-itunes-app"
+          content={`app-id=${iosAppId}${deepLink ? `, app-argument=${deepLink}` : ''}`}
+        />
+      )
+    }
+    <slot name="head" />
+  </head>
+  <body data-brand={brand.id} class={bodyClass}>
+    <slot />
+    <Analytics brand={brand} disabled={disableAnalytics} />
+  </body>
+</html>

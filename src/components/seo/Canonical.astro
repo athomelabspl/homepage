@@ -1,0 +1,9 @@
+---
+const site = Astro.site?.href.replace(/\/$/, '') ?? 'https://athomelabs.eu';
+const pathname = Astro.url.pathname.endsWith('/')
+  ? Astro.url.pathname
+  : `${Astro.url.pathname}/`;
+const canonical = `${site}${pathname}`;
+---
+
+<link rel="canonical" href={canonical} />

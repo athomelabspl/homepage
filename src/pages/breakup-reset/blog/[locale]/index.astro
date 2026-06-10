@@ -1,0 +1,59 @@
+---
+import AppLayout from '../../../../layouts/AppLayout.astro';
+import { getCollection } from 'astro:content';
+import { LOCALES, type Locale } from '../../../../config/locales';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const posts = (await getCollection('breakup-blog'))
+  .filter((p) => p.data.locale === locale)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+function postSlug(id: string): string {
+  const parts = id.split('/');
+  return parts[parts.length - 1] ?? id;
+}
+---
+
+<AppLayout
+  title="Blog"
+  description="Articles on breakup recovery, emotional healing, and moving forward — from Breakup Reset."
+>
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title={`Breakup Reset Blog (${locale})`}
+    href={`/breakup-reset/blog/${locale}/rss.xml`}
+    slot="head"
+  />
+
+  <h1>Blog</h1>
+  <p class="bio">Calm, practical guidance for your healing journey.</p>
+
+  {
+    posts.length === 0 ? (
+      <p class="muted">No articles yet — check back soon.</p>
+    ) : (
+      <ul class="blog-list">
+        {posts.map((post) => (
+          <li>
+            <a href={`/breakup-reset/blog/${locale}/${postSlug(post.id)}/`}>
+              {post.data.title}
+            </a>
+            <p class="blog-meta">
+              {post.data.pubDate.toLocaleDateString('en-GB', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </p>
+            <p class="muted">{post.data.description}</p>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</AppLayout>

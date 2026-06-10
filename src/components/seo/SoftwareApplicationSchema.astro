@@ -1,0 +1,28 @@
+---
+import type { BrandConfig } from '../../config/brands';
+
+interface Props {
+  brand: BrandConfig;
+}
+
+const { brand } = Astro.props;
+const stores = brand.stores;
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: brand.name,
+    operatingSystem: 'iOS, Android',
+    applicationCategory: 'HealthApplication',
+    description: brand.description,
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    ...(stores?.ios?.url ? { downloadUrl: stores.ios.url } : {}),
+  })}
+/>

@@ -1,0 +1,27 @@
+---
+import type { BrandConfig } from '../config/brands';
+
+interface Props {
+  brand: BrandConfig;
+  homeHref: string;
+}
+
+const { brand, homeHref } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <a class="brand" href={homeHref}>{brand.name}</a>
+  <nav class="site-nav" aria-label="Main">
+    {
+      brand.nav.map((item) => (
+        <a
+          href={item.href}
+          aria-current={currentPath === item.href ? 'page' : undefined}
+        >
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+</header>

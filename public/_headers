@@ -1,0 +1,14 @@
+# BIMI
+/bimi.svg
+  Content-Type: image/svg+xml; charset=utf-8
+  Cache-Control: public, max-age=300
+  X-Content-Type-Options: nosniff
+
+# Legal pages
+/breakup-reset/legal/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+
+# App assets
+/breakup-reset/logos/*
+  Cache-Control: public, max-age=86400

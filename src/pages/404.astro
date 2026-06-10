@@ -1,0 +1,36 @@
+---
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page not found</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body data-brand="studio">
+    <div class="layout error-page">
+      <h1>Page not found</h1>
+      <p class="bio">The page you're looking for doesn't exist.</p>
+      <a id="home-link" href="/" class="button">Go home</a>
+    </div>
+    <script>
+      const path = window.location.pathname;
+      const zones = [
+        { prefix: '/breakup-reset', brand: 'breakup-reset', home: '/breakup-reset/' },
+      ];
+      const zone = zones.find((z) => path.startsWith(z.prefix));
+      if (zone) {
+        document.body.setAttribute('data-brand', zone.brand);
+        const link = document.getElementById('home-link');
+        if (link) link.setAttribute('href', zone.home);
+      }
+    </script>
+  </body>
+</html>

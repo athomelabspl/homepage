@@ -1,0 +1,61 @@
+---
+import AppLayout from '../../layouts/AppLayout.astro';
+import SoftwareApplicationSchema from '../../components/seo/SoftwareApplicationSchema.astro';
+import FAQPageSchema from '../../components/seo/FAQPageSchema.astro';
+import { brands } from '../../config/brands';
+
+const brand = brands['breakup-reset'];
+
+const faqItems = [
+  {
+    question: 'How long does it take to get over a breakup?',
+    answer:
+      'Most people report meaningful emotional stability within 3–6 months, though timelines vary widely.',
+  },
+  {
+    question: 'Is Breakup Reset a therapy app?',
+    answer:
+      'No — it is a self-help wellness tool, not clinical treatment or therapy.',
+  },
+  {
+    question: 'Is Breakup Reset free?',
+    answer: 'The app is free to download with optional in-app features.',
+  },
+];
+---
+
+<AppLayout
+  title="Home"
+  description={brand.description ?? ''}
+  showSmartBanner={brand.smartAppBanner}
+>
+  <Fragment slot="head">
+    <SoftwareApplicationSchema brand={brand} />
+    <FAQPageSchema items={faqItems} />
+  </Fragment>
+
+  <h1>{brand.name}</h1>
+  <p class="tagline" style="text-align: left; max-width: 640px;">
+    {brand.tagline}
+  </p>
+  <p class="bio">
+    {brand.description} Built for Android and iOS with calm, grounded guidance —
+    not hype, not clinical language.
+  </p>
+  <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem;">
+    <a href="/breakup-reset/blog/en/" class="button">Read the blog</a>
+    <a href="mailto:athomelabs.studio@gmail.com" class="button">Contact us</a>
+  </div>
+
+  <section class="faq-section" style="margin-top: 3rem;">
+    <h2>Frequently asked questions</h2>
+    {
+      faqItems.map((item) => (
+        <article class="faq-item">
+          <h3>{item.question}</h3>
+          <p>{item.answer}</p>
+        </article>
+      ))
+    }
+  </section>
+</AppLayout>

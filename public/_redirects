@@ -1,0 +1,18 @@
+# Blog default locale
+/breakup-reset/blog/    /breakup-reset/blog/en/    301
+
+# Breakup Reset - Privacy Policies
+/privacy-policy-en/    /breakup-reset/legal/privacy/en/    301
+/privacy-policy-es/    /breakup-reset/legal/privacy/es/    301
+/privacy-policy-fr/    /breakup-reset/legal/privacy/fr/    301
+/privacy-policy-de/    /breakup-reset/legal/privacy/de/    301
+/privacy-policy-pt/    /breakup-reset/legal/privacy/pt/    301
+/privacy-policy-pl/    /breakup-reset/legal/privacy/pl/    301
+
+# Breakup Reset - Terms of Service
+/terms-of-service-en/  /breakup-reset/legal/terms/en/      301
+/terms-of-service-es/  /breakup-reset/legal/terms/es/      301
+/terms-of-service-fr/  /breakup-reset/legal/terms/fr/      301
+/terms-of-service-de/  /breakup-reset/legal/terms/de/      301
+/terms-of-service-pt/  /breakup-reset/legal/terms/pt/      301
+/terms-of-service-pl/  /breakup-reset/legal/terms/pl/      301
