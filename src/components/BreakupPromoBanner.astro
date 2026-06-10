@@ -1,0 +1,79 @@
+---
+import { brands } from '../config/brands';
+import { breakupPromo, getPromoCopy } from '../config/breakup-promo';
+import type { Locale } from '../config/locales';
+
+interface Props {
+  locale: Locale;
+  source?: string;
+}
+
+const { locale, source = 'blog' } = Astro.props;
+const copy = getPromoCopy(locale);
+const brand = brands['breakup-reset'];
+const { mode, waitlistUrl, image } = breakupPromo;
+
+const androidUrl =
+  brand.stores?.android?.url ??
+  `https://play.google.com/store/apps/details?id=${brand.stores?.android?.packageId}`;
+const iosUrl = brand.stores?.ios?.url;
+const liveUrl = iosUrl ?? androidUrl;
+---
+
+<section
+  class="breakup-promo"
+  lang={locale}
+  aria-labelledby="breakup-promo-heading"
+  data-promo-mode={mode}
+>
+  <div class="breakup-promo-inner">
+    <div class="breakup-promo-copy">
+      <h2 id="breakup-promo-heading" class="breakup-promo-title">
+        {copy.title}
+      </h2>
+      <p class="breakup-promo-subtitle">{copy.subtitle}</p>
+      <ul class="feature-list breakup-promo-features">
+        {copy.features.map((feature) => <li>{feature}</li>)}
+      </ul>
+    </div>
+
+    <figure class="breakup-promo-figure">
+      <img
+        class="breakup-promo-graphic"
+        src={image}
+        alt={copy.imageAlt}
+        width="360"
+        height="640"
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
+  </div>
+
+  <div class="breakup-promo-action">
+    {
+      mode === 'coming-soon' && (
+        <p class="breakup-promo-badge" aria-live="polite">
+          {copy.comingSoonLabel}
+        </p>
+      )
+    }
+    {
+      mode === 'waitlist' && waitlistUrl && (
+        <a
+          href={`${waitlistUrl}?source=${source}`}
+          class="button button-filled button-cta"
+        >
+          {copy.waitlistCtaLabel}
+        </a>
+      )
+    }
+    {
+      mode === 'live' && liveUrl && (
+        <a href={`${liveUrl}?source=${source}`} class="button button-filled button-cta">
+          {copy.liveCtaLabel}
+        </a>
+      )
+    }
+  </div>
+</section>

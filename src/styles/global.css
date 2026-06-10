@@ -1,5 +1,6 @@
 @import './tokens/studio.css';
 @import './tokens/breakup-reset.css';
+@import './breakup-reset.css';
 
 * {
   margin: 0;
@@ -50,12 +51,22 @@ body.page .layout {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
   font-family: var(--font-display);
   font-size: 1.25rem;
   letter-spacing: -0.02em;
   color: var(--text);
   text-decoration: none;
   white-space: nowrap;
+}
+
+.brand-logo {
+  display: block;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
 }
 
 .site-nav {
@@ -401,4 +412,12 @@ h2 {
 
 .error-page h1 {
   font-size: 2rem;
+}
+
+[data-brand='breakup-reset'].error-page h1 {
+  font-family: var(--font-body);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-headline);
 }

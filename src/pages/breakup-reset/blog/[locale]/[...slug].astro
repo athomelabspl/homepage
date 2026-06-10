@@ -4,6 +4,7 @@ import Hreflang from '../../../../components/seo/Hreflang.astro';
 import FAQPageSchema from '../../../../components/seo/FAQPageSchema.astro';
 import AISummary from '../../../../components/mdx/AISummary.astro';
 import AppFeatureCallout from '../../../../components/mdx/AppFeatureCallout.astro';
+import BreakupPromoBanner from '../../../../components/BreakupPromoBanner.astro';
 import DownloadCTA from '../../../../components/mdx/DownloadCTA.astro';
 import FAQ from '../../../../components/mdx/FAQ.astro';
 import { getCollection, render } from 'astro:content';
@@ -63,5 +64,6 @@ const faqItems = post.data.faq ?? [];
       }}
     />
     {faqItems.length > 0 && <FAQ items={faqItems} />}
+    <BreakupPromoBanner locale={locale} source={`blog-${slug}`} />
   </article>
 </AppLayout>

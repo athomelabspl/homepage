@@ -6,22 +6,35 @@ import { brands } from '../../config/brands';
 
 const brand = brands['breakup-reset'];
 
+const features = [
+  'Daily challenges for your situation',
+  'Recovery that fits how you actually feel',
+  'Start your journey in 2 minutes',
+];
+
 const faqItems = [
   {
     question: 'How long does it take to get over a breakup?',
     answer:
-      'Most people report meaningful emotional stability within 3–6 months, though timelines vary widely.',
+      'There is no fixed timeline. Some days feel heavier than others, and that is normal.',
   },
   {
     question: 'Is Breakup Reset a therapy app?',
     answer:
-      'No — it is a self-help wellness tool, not clinical treatment or therapy.',
+      'No. It is a self-help wellness tool, not clinical treatment or therapy.',
   },
   {
     question: 'Is Breakup Reset free?',
-    answer: 'The app is free to download with optional in-app features.',
+    answer:
+      'Yes. Every feature is free. You can optionally donate to support the app.',
   },
 ];
+
+const androidUrl =
+  brand.stores?.android?.url ??
+  `https://play.google.com/store/apps/details?id=${brand.stores?.android?.packageId}`;
+const iosUrl = brand.stores?.ios?.url;
+const getStartedUrl = iosUrl ?? androidUrl;
 ---
 
 <AppLayout
@@ -34,21 +47,26 @@ const faqItems = [
     <FAQPageSchema items={faqItems} />
   </Fragment>
 
-  <h1>{brand.name}</h1>
-  <p class="tagline" style="text-align: left; max-width: 640px;">
-    {brand.tagline}
-  </p>
-  <p class="bio">
-    {brand.description} Built for Android and iOS with calm, grounded guidance —
-    not hype, not clinical language.
-  </p>
-  <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem;">
-    <a href="/breakup-reset/blog/en/" class="button">Read the blog</a>
-    <a href="mailto:athomelabs.studio@gmail.com" class="button">Contact us</a>
+  <h1 class="hero-headline">{brand.tagline}</h1>
+  <p class="hero-subtitle">{brand.description}</p>
+
+  <ul class="feature-list">
+    {features.map((feature) => <li>{feature}</li>)}
+  </ul>
+
+  <div class="hero-actions">
+    {
+      getStartedUrl ? (
+        <a href={getStartedUrl} class="button button-filled button-cta">
+          Get started
+        </a>
+      ) : null
+    }
+    <a href="/breakup-reset/blog/en/" class="button button-secondary">Read the blog</a>
   </div>
 
-  <section class="faq-section" style="margin-top: 3rem;">
-    <h2>Frequently asked questions</h2>
+  <section class="faq-section">
+    <h2 class="section-title">Frequently asked questions</h2>
     {
       faqItems.map((item) => (
         <article class="faq-item">

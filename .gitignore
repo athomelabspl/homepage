@@ -8,3 +8,11 @@ dist/
 # Local Netlify folder
 .netlify
 deno.lock
+
+# Internal planning & content-production docs (local only)
+docs/MIGRATION_PLAN.md
+docs/AI_CONTENT_GENERATOR_BRIEF.md
+docs/BREAKUP_RESET_CONTENT_BRIEFS.md
+docs/*_BRIEF*.md
+docs/*_PLAN.md
+scripts/convert-content-briefs.py

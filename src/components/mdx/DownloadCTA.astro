@@ -13,19 +13,31 @@ const pathname = Astro.url.pathname.replace(/\/$/, '');
 const trackingUrl = `${pathname}?source=${source}`;
 const site = Astro.site?.href.replace(/\/$/, '') ?? 'https://athomelabs.eu';
 const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(`${site}${trackingUrl}`)}`;
+
+const androidUrl =
+  stores?.android?.url ??
+  `https://play.google.com/store/apps/details?id=${stores?.android?.packageId}`;
+const iosUrl = stores?.ios?.url;
 ---
 
 <section class="download-cta" aria-label={`Download ${brand.name}`}>
-  <h3>Try {brand.name}</h3>
+  <h3 class="section-title">Try Breakup Reset</h3>
   <p class="muted" style="margin-bottom: 1rem;">
-    A gentle, structured reset to help you move forward.
+    Every feature is free. Start with small steps that fit how you feel.
   </p>
 
   <div class="download-cta-desktop">
     {
-      stores?.ios?.url && (
-        <a href={stores.ios.url} class="button button-filled" style="margin-bottom: 1rem;">
-          App Store
+      iosUrl && (
+        <a href={iosUrl} class="button button-filled button-cta" style="margin-bottom: 1rem;">
+          Get started
+        </a>
+      )
+    }
+    {
+      !iosUrl && androidUrl && (
+        <a href={androidUrl} class="button button-filled button-cta" style="margin-bottom: 1rem;">
+          Get started
         </a>
       )
     }
@@ -37,16 +49,16 @@ const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${e
 
   <div class="download-cta-mobile">
     {
-      stores?.ios?.url && (
-        <a href={stores.ios.url} class="button button-filled ios-cta" style="margin: 0.5rem;">
-          Download on the App Store
+      iosUrl && (
+        <a href={iosUrl} class="button button-filled button-cta ios-cta" style="margin: 0.5rem;">
+          Get started
         </a>
       )
     }
     {
-      stores?.android?.url && (
-        <a href={stores.android.url} class="button android-cta" style="margin: 0.5rem;">
-          Get it on Google Play
+      androidUrl && (
+        <a href={androidUrl} class="button button-cta android-cta" style="margin: 0.5rem;">
+          Get started
         </a>
       )
     }

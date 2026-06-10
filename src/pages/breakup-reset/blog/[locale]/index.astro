@@ -20,7 +20,7 @@ function postSlug(id: string): string {
 
 <AppLayout
   title="Blog"
-  description="Articles on breakup recovery, emotional healing, and moving forward — from Breakup Reset."
+  description="Calm, practical articles on breakup recovery and emotional healing from Breakup Reset."
 >
   <link
     rel="alternate"
@@ -30,12 +30,12 @@ function postSlug(id: string): string {
     slot="head"
   />
 
-  <h1>Blog</h1>
-  <p class="bio">Calm, practical guidance for your healing journey.</p>
+  <h1 class="page-title">Blog</h1>
+  <p class="page-intro">Calm, practical guidance for your healing journey.</p>
 
   {
     posts.length === 0 ? (
-      <p class="muted">No articles yet — check back soon.</p>
+      <p class="muted">No articles yet. Check back soon.</p>
     ) : (
       <ul class="blog-list">
         {posts.map((post) => (
