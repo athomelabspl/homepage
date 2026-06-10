@@ -1,0 +1,67 @@
+---
+import AppLayout from '../../../../layouts/AppLayout.astro';
+import Hreflang from '../../../../components/seo/Hreflang.astro';
+import FAQPageSchema from '../../../../components/seo/FAQPageSchema.astro';
+import AISummary from '../../../../components/mdx/AISummary.astro';
+import AppFeatureCallout from '../../../../components/mdx/AppFeatureCallout.astro';
+import DownloadCTA from '../../../../components/mdx/DownloadCTA.astro';
+import FAQ from '../../../../components/mdx/FAQ.astro';
+import { getCollection, render } from 'astro:content';
+import type { Locale } from '../../../../config/locales';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('breakup-blog');
+  return posts.map((post) => {
+    const parts = post.id.split('/');
+    const locale = parts[0] as Locale;
+    const slug = parts.slice(1).join('/') || parts[parts.length - 1];
+    return {
+      params: { locale, slug },
+      props: { post },
+    };
+  });
+}
+
+const { post } = Astro.props;
+const { locale, slug } = Astro.params as { locale: Locale; slug: string };
+
+const siblings = (await getCollection('breakup-blog')).filter(
+  (p) => p.data.translationKey === post.data.translationKey
+);
+
+const hreflangPaths = Object.fromEntries(
+  siblings.map((p) => {
+    const parts = p.id.split('/');
+    const loc = parts[0];
+    const s = parts.slice(1).join('/') || parts[parts.length - 1];
+    return [loc, `/breakup-reset/blog/${loc}/${s}/`];
+  })
+);
+
+const { Content } = await render(post);
+const faqItems = post.data.faq ?? [];
+---
+
+<AppLayout title={post.data.title} description={post.data.description}>
+  <Hreflang paths={hreflangPaths} slot="head" />
+  {faqItems.length > 0 && <FAQPageSchema items={faqItems} slot="head" />}
+
+  <article class="prose">
+    <p class="blog-meta">
+      {post.data.pubDate.toLocaleDateString('en-GB', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })}
+    </p>
+    <h1>{post.data.title}</h1>
+    <Content
+      components={{
+        AISummary,
+        AppFeatureCallout,
+        DownloadCTA,
+      }}
+    />
+    {faqItems.length > 0 && <FAQ items={faqItems} />}
+  </article>
+</AppLayout>

@@ -1,0 +1,29 @@
+---
+import AppLayout from '../../../../layouts/AppLayout.astro';
+import Hreflang from '../../../../components/seo/Hreflang.astro';
+import { LOCALES, type Locale } from '../../../../config/locales';
+import { getLegalPath } from '../../../../config/legal';
+import { getLegalTitle, loadLegalHtml } from '../../../../utils/legal';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const html = loadLegalHtml('privacy', locale);
+const title = getLegalTitle('privacy', locale);
+
+const hreflangPaths = Object.fromEntries(
+  LOCALES.map((l) => [l, getLegalPath('privacy', l)])
+);
+---
+
+<AppLayout
+  title={title}
+  description={`${title} for Breakup Reset.`}
+  disableAnalytics
+>
+  <Hreflang paths={hreflangPaths} slot="head" />
+  <h1>{title}</h1>
+  <div class="legal-content" set:html={html} />
+</AppLayout>

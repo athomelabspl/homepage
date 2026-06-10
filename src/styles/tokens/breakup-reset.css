@@ -1,0 +1,12 @@
+[data-brand='breakup-reset'] {
+  --bg: #edeae0;
+  --surface: #f8f5ec;
+  --text: #1c2b1a;
+  --text-muted: #4a5d45;
+  --accent: #2d6a4f;
+  --accent-rgb: 45, 106, 79;
+  --secondary: #5c6b3c;
+  --border: #d8d3c4;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'DM Serif Display', Georgia, serif;
+}

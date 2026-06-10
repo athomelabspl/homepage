@@ -1,0 +1,29 @@
+---
+interface FAQItem {
+  question: string;
+  answer: string;
+  elaboration?: string;
+}
+
+interface Props {
+  items?: FAQItem[];
+}
+
+const { items = [] } = Astro.props;
+---
+
+{
+  items.length > 0 && (
+    <section class="faq-section" aria-label="Frequently asked questions">
+      {items.map((item) => (
+        <article class="faq-item">
+          <h3>{item.question}</h3>
+          <p>
+            <strong>{item.answer}</strong>
+          </p>
+          {item.elaboration && <p class="muted">{item.elaboration}</p>}
+        </article>
+      ))}
+    </section>
+  )
+}

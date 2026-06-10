@@ -1,0 +1,73 @@
+---
+import { brands } from '../../config/brands';
+
+interface Props {
+  app?: 'breakup-reset';
+  source?: string;
+}
+
+const { app = 'breakup-reset', source = 'blog' } = Astro.props;
+const brand = brands[app];
+const stores = brand.stores;
+const pathname = Astro.url.pathname.replace(/\/$/, '');
+const trackingUrl = `${pathname}?source=${source}`;
+const site = Astro.site?.href.replace(/\/$/, '') ?? 'https://athomelabs.eu';
+const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(`${site}${trackingUrl}`)}`;
+---
+
+<section class="download-cta" aria-label={`Download ${brand.name}`}>
+  <h3>Try {brand.name}</h3>
+  <p class="muted" style="margin-bottom: 1rem;">
+    A gentle, structured reset to help you move forward.
+  </p>
+
+  <div class="download-cta-desktop">
+    {
+      stores?.ios?.url && (
+        <a href={stores.ios.url} class="button button-filled" style="margin-bottom: 1rem;">
+          App Store
+        </a>
+      )
+    }
+    <img src={qrUrl} alt={`QR code to download ${brand.name}`} width="180" height="180" />
+    <p class="muted" style="margin-top: 0.75rem; font-size: 0.85rem;">
+      Scan with your phone to install
+    </p>
+  </div>
+
+  <div class="download-cta-mobile">
+    {
+      stores?.ios?.url && (
+        <a href={stores.ios.url} class="button button-filled ios-cta" style="margin: 0.5rem;">
+          Download on the App Store
+        </a>
+      )
+    }
+    {
+      stores?.android?.url && (
+        <a href={stores.android.url} class="button android-cta" style="margin: 0.5rem;">
+          Get it on Google Play
+        </a>
+      )
+    }
+  </div>
+</section>
+
+<script>
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  const desktop = document.querySelector('.download-cta-desktop');
+  const mobile = document.querySelector('.download-cta-mobile');
+  const iosCta = document.querySelector('.ios-cta');
+  const androidCta = document.querySelector('.android-cta');
+
+  if (window.matchMedia('(min-width: 1024px)').matches) {
+    desktop?.setAttribute('style', 'display: block');
+    mobile?.setAttribute('style', 'display: none');
+  } else {
+    desktop?.setAttribute('style', 'display: none');
+    mobile?.setAttribute('style', 'display: block');
+    if (isIOS && androidCta) (androidCta as HTMLElement).style.display = 'none';
+    if (isAndroid && iosCta) (iosCta as HTMLElement).style.display = 'none';
+  }
+</script>

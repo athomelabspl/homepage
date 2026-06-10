@@ -1,8 +1,19 @@
 {
   "name": "at-home-labs-web",
-  "version": "1.0.0",
-  "description": "At Home Labs website",
+  "version": "2.0.0",
+  "description": "At Home Labs — multi-brand website",
+  "type": "module",
   "scripts": {
-    "dev": "npx serve . -p 3000"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/rss": "^4.0.15",
+    "@astrojs/sitemap": "^3.7.0",
+    "astro": "^5.16.15",
+    "marked": "^15.0.12",
+    "zod": "^3.25.76"
   }
 }

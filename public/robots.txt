@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://athomelabs.eu/sitemap-index.xml
+Sitemap: https://athomelabs.eu/breakup-reset/sitemap.xml

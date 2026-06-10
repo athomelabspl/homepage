@@ -1,0 +1,22 @@
+---
+import type { BrandConfig } from '../config/brands';
+
+interface Props {
+  brand: BrandConfig;
+  showStudioLink?: boolean;
+}
+
+const { brand, showStudioLink = false } = Astro.props;
+---
+
+<footer class="site-footer">
+  <span>© 2026 CommunicateIT</span>
+  <a href="mailto:athomelabs.studio@gmail.com">athomelabs.studio@gmail.com</a>
+  {
+    showStudioLink && (
+      <a href="/" class="studio-escape">
+        At Home Labs
+      </a>
+    )
+  }
+</footer>

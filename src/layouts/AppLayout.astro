@@ -1,0 +1,42 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { brands } from '../config/brands';
+
+interface Props {
+  title: string;
+  description: string;
+  bodyClass?: string;
+  disableAnalytics?: boolean;
+  showSmartBanner?: boolean;
+}
+
+const {
+  title,
+  description,
+  bodyClass = 'page',
+  disableAnalytics = false,
+  showSmartBanner = false,
+} = Astro.props;
+
+const brand = brands['breakup-reset'];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  brand={brand}
+  bodyClass={bodyClass}
+  disableAnalytics={disableAnalytics}
+  smartAppBanner={showSmartBanner && brand.smartAppBanner}
+>
+  <slot name="head" slot="head" />
+  <div class="layout">
+    <SiteHeader brand={brand} homeHref={brand.basePath} />
+    <main>
+      <slot />
+    </main>
+    <SiteFooter brand={brand} showStudioLink />
+  </div>
+</BaseLayout>

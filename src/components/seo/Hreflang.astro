@@ -1,0 +1,23 @@
+---
+import { LOCALES, DEFAULT_LOCALE } from '../../config/locales';
+
+interface Props {
+  paths: Partial<Record<string, string>>;
+}
+
+const { paths } = Astro.props;
+const site = Astro.site?.href.replace(/\/$/, '') ?? 'https://athomelabs.eu';
+---
+
+{
+  LOCALES.map((locale) => {
+    const path = paths[locale];
+    if (!path) return null;
+    return <link rel="alternate" hreflang={locale} href={`${site}${path}`} />;
+  })
+}
+<link
+  rel="alternate"
+  hreflang="x-default"
+  href={`${site}${paths[DEFAULT_LOCALE] ?? Object.values(paths)[0]}`}
+/>

@@ -1,0 +1,22 @@
+---
+import { brands } from '../../config/brands';
+
+interface Props {
+  app?: 'breakup-reset';
+  title: string;
+  description: string;
+  feature?: string;
+}
+
+const { app = 'breakup-reset', title, description, feature } = Astro.props;
+const brand = brands[app];
+---
+
+<aside class="feature-callout" data-feature={feature}>
+  <p class="muted" style="margin-bottom: 0.5rem;">{brand.name}</p>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <a href={brand.basePath} class="button" style="margin-top: 1rem;">
+    Learn more
+  </a>
+</aside>
