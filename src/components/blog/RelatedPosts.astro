@@ -10,23 +10,50 @@ interface Props {
 
 const { locale, posts } = Astro.props;
 const ui = getBlogUi(locale);
+const placeholderMark = '/breakup-reset/logos/bamboo-mark.svg';
 ---
 
 {
   posts.length > 0 && (
-    <section class="related-posts" aria-label={ui.relatedArticles}>
-      <h2 class="section-title">{ui.relatedArticles}</h2>
+    <section class="related-posts related-posts--sidebar">
+      <h2 class="related-posts-heading">{ui.relatedArticles}</h2>
       <ul class="related-posts-list">
-        {posts.map((post) => (
-          <li>
-            <a href={`/breakup-reset/blog/${locale}/${postSlug(post.id)}/`}>
-              {post.data.title}
-            </a>
-            <p class="blog-article-meta">
-              {ui.minRead(readingTimeMinutes(post.body))}
-            </p>
-          </li>
-        ))}
+        {posts.map((post) => {
+          const href = `/breakup-reset/blog/${locale}/${postSlug(post.id)}/`;
+          const cover = post.data.cover;
+
+          return (
+            <li>
+              <a class="related-post-card" href={href}>
+                <span class="related-post-media">
+                  {
+                    cover ? (
+                      <img
+                        class="related-post-thumb"
+                        src={cover.src}
+                        alt=""
+                        width="272"
+                        height="153"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : (
+                      <span class="related-post-thumb related-post-thumb--placeholder">
+                        <img src={placeholderMark} alt="" width="28" height="28" />
+                      </span>
+                    )
+                  }
+                </span>
+                <span class="related-post-body">
+                  <span class="related-post-title">{post.data.title}</span>
+                  <span class="related-post-meta">
+                    {ui.minRead(readingTimeMinutes(post.body))}
+                  </span>
+                </span>
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </section>
   )

@@ -99,6 +99,10 @@ export interface BlogPostRef {
     pubDate: Date;
     translationKey: string;
     locale: Locale;
+    cover?: {
+      src: string;
+      alt: string;
+    };
   };
   body?: string;
 }
@@ -106,7 +110,7 @@ export interface BlogPostRef {
 export function getRelatedPosts(
   posts: BlogPostRef[],
   current: BlogPostRef,
-  limit = 2
+  limit = 3
 ): BlogPostRef[] {
   return posts
     .filter(
