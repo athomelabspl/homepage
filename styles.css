@@ -15,7 +15,7 @@
 html {
   scroll-behavior: smooth;
   /* Avoid horizontal layout shift on Windows scrollbars */
-  scrollbar-gutter: stable both-edges;
+  scrollbar-gutter: stable;
   overflow-y: scroll;
 }
 

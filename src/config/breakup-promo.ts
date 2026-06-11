@@ -16,22 +16,21 @@ export interface PromoCopy {
 export const breakupPromo = {
   mode: 'coming-soon' satisfies PromoMode,
   waitlistUrl: '',
-  image: '/breakup-reset/promo/coming-soon.png',
+  image: '/breakup-reset/promo/todays-pulse.png',
   copies: {
     en: {
-      title: 'Time to heal after your breakup',
-      subtitle:
-        'No two breakups feel the same. Get support that understands you.',
+      title: 'Free support for the week ahead',
+      subtitle: '',
       features: [
-        'Daily challenges for your situation',
-        'Recovery that fits how you actually feel',
-        'Start your journey in 2 minutes',
+        'Completely free',
+        'Three challenges a day',
+        'At your own pace',
       ],
       comingSoonLabel: 'Coming soon',
       waitlistCtaLabel: 'Join the waitlist',
       liveCtaLabel: 'Get started',
       imageAlt:
-        'Breakup Reset app preview: daily challenges, personalized recovery support, and a calm path forward after a breakup.',
+        "Breakup Reset Today's Pulse screen with daily inspiration, insights, and peace tracking.",
     },
   } satisfies Partial<Record<Locale, PromoCopy>>,
 } as const;

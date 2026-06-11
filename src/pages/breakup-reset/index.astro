@@ -2,6 +2,7 @@
 import AppLayout from '../../layouts/AppLayout.astro';
 import SoftwareApplicationSchema from '../../components/seo/SoftwareApplicationSchema.astro';
 import FAQPageSchema from '../../components/seo/FAQPageSchema.astro';
+import FAQ from '../../components/mdx/FAQ.astro';
 import { brands } from '../../config/brands';
 
 const brand = brands['breakup-reset'];
@@ -65,15 +66,5 @@ const getStartedUrl = iosUrl ?? androidUrl;
     <a href="/breakup-reset/blog/en/" class="button button-secondary">Read the blog</a>
   </div>
 
-  <section class="faq-section">
-    <h2 class="section-title">Frequently asked questions</h2>
-    {
-      faqItems.map((item) => (
-        <article class="faq-item">
-          <h3>{item.question}</h3>
-          <p>{item.answer}</p>
-        </article>
-      ))
-    }
-  </section>
+  <FAQ items={faqItems} />
 </AppLayout>

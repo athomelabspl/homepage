@@ -1,0 +1,35 @@
+---
+export interface BlogCoverData {
+  src: string;
+  alt: string;
+  credit: string;
+  creditUrl: string;
+  photoUrl: string;
+}
+
+interface Props {
+  cover: BlogCoverData;
+}
+
+const { cover } = Astro.props;
+---
+
+<figure class="blog-cover">
+  <img
+    class="blog-cover-image"
+    src={cover.src}
+    alt={cover.alt}
+    width="1440"
+    height="640"
+    loading="eager"
+    decoding="async"
+  />
+  <figcaption class="blog-photo-credit">
+    Photo by
+    <a href={cover.creditUrl} rel="noopener noreferrer" target="_blank">
+      {cover.credit}
+    </a>
+    on
+    <a href={cover.photoUrl} rel="noopener noreferrer" target="_blank">Unsplash</a>
+  </figcaption>
+</figure>

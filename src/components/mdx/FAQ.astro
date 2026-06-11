@@ -14,16 +14,16 @@ const { items = [] } = Astro.props;
 
 {
   items.length > 0 && (
-    <section class="faq-section" aria-label="Frequently asked questions">
-      <h2 class="section-title">Frequently asked questions</h2>
+    <section class="faq-section" aria-label="Frequently Asked Questions">
+      <h2 class="section-title">Frequently Asked Questions</h2>
       {items.map((item) => (
-        <article class="faq-item">
-          <h3>{item.question}</h3>
-          <p>
-            <strong>{item.answer}</strong>
-          </p>
-          {item.elaboration && <p class="muted">{item.elaboration}</p>}
-        </article>
+        <details class="faq-item">
+          <summary class="faq-question">{item.question}</summary>
+          <div class="faq-answer">
+            <p>{item.answer}</p>
+            {item.elaboration && <p class="faq-elaboration">{item.elaboration}</p>}
+          </div>
+        </details>
       ))}
     </section>
   )

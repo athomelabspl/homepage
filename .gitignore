@@ -1,18 +1,32 @@
+# Dependencies & build output
 node_modules/
 dist/
 .astro/
+.astro-legal-cache/
+
+# Secrets
 .env
 .env.*
 !.env.example
 
-# Local Netlify folder
+# Local tooling
 .netlify
 deno.lock
+
+# OS junk
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
 
 # Internal planning & content-production docs (local only)
 docs/MIGRATION_PLAN.md
 docs/AI_CONTENT_GENERATOR_BRIEF.md
 docs/BREAKUP_RESET_CONTENT_BRIEFS.md
+docs/AI_OVERUSED_PHRASES.md
 docs/*_BRIEF*.md
 docs/*_PLAN.md
 scripts/convert-content-briefs.py

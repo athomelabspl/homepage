@@ -1,0 +1,33 @@
+---
+import type { Locale } from '../../config/locales';
+import { getBlogUi, postSlug, readingTimeMinutes } from '../../utils/blog';
+import type { BlogPostRef } from '../../utils/blog';
+
+interface Props {
+  locale: Locale;
+  posts: BlogPostRef[];
+}
+
+const { locale, posts } = Astro.props;
+const ui = getBlogUi(locale);
+---
+
+{
+  posts.length > 0 && (
+    <section class="related-posts" aria-label={ui.relatedArticles}>
+      <h2 class="section-title">{ui.relatedArticles}</h2>
+      <ul class="related-posts-list">
+        {posts.map((post) => (
+          <li>
+            <a href={`/breakup-reset/blog/${locale}/${postSlug(post.id)}/`}>
+              {post.data.title}
+            </a>
+            <p class="blog-article-meta">
+              {ui.minRead(readingTimeMinutes(post.body))}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

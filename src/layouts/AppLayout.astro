@@ -33,10 +33,14 @@ const brand = brands['breakup-reset'];
 >
   <slot name="head" slot="head" />
   <div class="layout">
-    <SiteHeader brand={brand} homeHref={brand.basePath} />
-    <main>
-      <slot />
-    </main>
-    <SiteFooter brand={brand} showStudioLink />
+    <div class="site-chrome">
+      <SiteHeader brand={brand} homeHref={brand.basePath} />
+    </div>
+    <div class="site-body">
+      <main>
+        <slot />
+      </main>
+      <SiteFooter brand={brand} showStudioLink />
+    </div>
   </div>
 </BaseLayout>
