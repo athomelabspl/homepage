@@ -1,6 +1,8 @@
 [data-brand='studio'],
 :root {
   --bg: #faf8f5;
+  --bg-chrome: #ffffff;
+  --layout-gutter: clamp(1.5rem, 5vw, 4rem);
   --text: #2d2a26;
   --accent: #3c7a89;
   --accent-rgb: 60, 122, 137;

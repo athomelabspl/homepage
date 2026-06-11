@@ -10,7 +10,7 @@ import '../styles/global.css';
     <title>Page not found</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500&family=Roboto:wght@400;700;800;900&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -27,9 +27,13 @@ import '../styles/global.css';
       ];
       const zone = zones.find((z) => path.startsWith(z.prefix));
       if (zone) {
+        document.body.classList.add('error-page');
         document.body.setAttribute('data-brand', zone.brand);
         const link = document.getElementById('home-link');
-        if (link) link.setAttribute('href', zone.home);
+        if (link) {
+          link.setAttribute('href', zone.home);
+          link.classList.add('button-cta');
+        }
       }
     </script>
   </body>

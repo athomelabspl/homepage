@@ -24,6 +24,6 @@ const hreflangPaths = Object.fromEntries(
   disableAnalytics
 >
   <Hreflang paths={hreflangPaths} slot="head" />
-  <h1>{title}</h1>
+  <h1 class="page-title page-title--legal">{title}</h1>
   <div class="legal-content" set:html={html} />
 </AppLayout>

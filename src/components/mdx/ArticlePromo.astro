@@ -1,0 +1,15 @@
+---
+import BreakupPromoBanner from '../BreakupPromoBanner.astro';
+import { LOCALES, type Locale } from '../../config/locales';
+
+const match = Astro.url.pathname.match(/\/breakup-reset\/blog\/([^/]+)\/([^/]+)/);
+const localeCandidate = match?.[1];
+const locale = (
+  localeCandidate && LOCALES.includes(localeCandidate as Locale)
+    ? localeCandidate
+    : 'en'
+) as Locale;
+const slug = match?.[2] ?? 'blog';
+---
+
+<BreakupPromoBanner locale={locale} source={`blog-${slug}`} />

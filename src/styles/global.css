@@ -1,5 +1,6 @@
 @import './tokens/studio.css';
 @import './tokens/breakup-reset.css';
+@import './breakup-reset.css';
 
 * {
   margin: 0;
@@ -9,7 +10,7 @@
 
 html {
   scroll-behavior: smooth;
-  scrollbar-gutter: stable both-edges;
+  scrollbar-gutter: stable;
   overflow-y: scroll;
 }
 
@@ -26,19 +27,32 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
 }
 
-body.home .layout {
+.site-chrome {
+  background: var(--bg-chrome, var(--surface));
+  border-bottom: 1px solid var(--border);
+  padding: 1rem var(--layout-gutter, 2rem);
+}
+
+.site-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  padding: 2rem var(--layout-gutter, 2rem) 3rem;
+}
+
+body.home .site-body {
   max-width: 900px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
-body.page .layout {
-  max-width: none;
-  margin: 0;
-  padding-left: clamp(1.5rem, 8vw, 6rem);
-  padding-right: 2rem;
+body.home .site-header {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .site-header {
@@ -46,16 +60,27 @@ body.page .layout {
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  padding: 0.25rem 0 2rem;
+  width: 100%;
+  max-width: 900px;
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
   font-family: var(--font-display);
   font-size: 1.25rem;
   letter-spacing: -0.02em;
   color: var(--text);
   text-decoration: none;
   white-space: nowrap;
+}
+
+.brand-logo {
+  display: block;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
 }
 
 .site-nav {
@@ -96,17 +121,19 @@ body.home main {
 
 body.page main {
   max-width: 900px;
+  width: 100%;
   text-align: left;
   justify-content: flex-start;
   align-items: flex-start;
-  padding-top: 1rem;
 }
 
 .site-footer {
-  margin-top: 3rem;
+  width: 100%;
+  max-width: 900px;
+  margin-top: 2.5rem;
   padding-top: 1.5rem;
-  padding-bottom: 0.5rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-bottom: 0;
+  border-top: 1px solid var(--border);
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem 1.25rem;
@@ -325,6 +352,7 @@ h2 {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--text-muted);
+  margin-top: 0;
   margin-bottom: 0.75rem;
 }
 
@@ -381,17 +409,29 @@ h2 {
 }
 
 .faq-section {
-  margin-top: 3rem;
+  margin-top: 2.5rem;
   width: 100%;
 }
 
 .faq-item {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
-.faq-item h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.35rem;
+.faq-question {
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-answer p {
+  font-weight: 400;
+  line-height: 1.65;
 }
 
 .error-page {
@@ -401,4 +441,63 @@ h2 {
 
 .error-page h1 {
   font-size: 2rem;
+}
+
+[data-brand='breakup-reset'].error-page h1 {
+  font-family: var(--font-body);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-headline);
+}
+
+/* Breakup Reset buttons — after global .button rules; each variant owns all states */
+[data-brand='breakup-reset'] .button {
+  font-family: var(--font-body);
+  border-radius: 8px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    filter 0.2s ease,
+    transform 0.05s ease;
+}
+
+/* Override global .button:hover — filled & secondary variants set their own hovers below */
+[data-brand='breakup-reset'] a.button:hover {
+  background-color: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+  filter: none;
+}
+
+[data-brand='breakup-reset'] a.button.button-filled,
+[data-brand='breakup-reset'] a.button.button-cta {
+  background-color: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+[data-brand='breakup-reset'] a.button.button-filled:hover,
+[data-brand='breakup-reset'] a.button.button-cta:hover {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  filter: brightness(1.08);
+}
+
+[data-brand='breakup-reset'] a.button.button-secondary {
+  background-color: transparent;
+  color: var(--text-headline);
+  border-color: var(--text-headline);
+}
+
+[data-brand='breakup-reset'] a.button.button-secondary:hover {
+  background-color: var(--text-headline);
+  border-color: var(--text-headline);
+  color: #fff;
+  filter: none;
 }

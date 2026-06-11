@@ -21,10 +21,14 @@ const brand = brands.studio;
   bodyClass={bodyClass}
 >
   <div class="layout">
-    <SiteHeader brand={brand} homeHref="/" />
-    <main>
-      <slot />
-    </main>
-    <SiteFooter brand={brand} />
+    <div class="site-chrome">
+      <SiteHeader brand={brand} homeHref="/" />
+    </div>
+    <div class="site-body">
+      <main>
+        <slot />
+      </main>
+      <SiteFooter brand={brand} />
+    </div>
   </div>
 </BaseLayout>

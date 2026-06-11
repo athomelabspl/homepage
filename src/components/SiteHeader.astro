@@ -11,7 +11,21 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header class="site-header">
-  <a class="brand" href={homeHref}>{brand.name}</a>
+  <a class="brand" href={homeHref}>
+    {
+      brand.logo && (
+        <img
+          class="brand-logo"
+          src={brand.logo}
+          alt=""
+          width="36"
+          height="36"
+          decoding="async"
+        />
+      )
+    }
+    <span class="brand-name">{brand.name}</span>
+  </a>
   <nav class="site-nav" aria-label="Main">
     {
       brand.nav.map((item) => (

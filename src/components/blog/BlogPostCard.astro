@@ -1,0 +1,63 @@
+---
+import type { Locale } from '../../config/locales';
+import type { BlogCoverData } from './BlogCover.astro';
+import {
+  formatBlogDate,
+  getBlogUi,
+  postSlug,
+  readingTimeMinutes,
+} from '../../utils/blog';
+
+interface Props {
+  locale: Locale;
+  id: string;
+  title: string;
+  description: string;
+  pubDate: Date;
+  body?: string;
+  cover?: BlogCoverData;
+  featured?: boolean;
+}
+
+const {
+  locale,
+  id,
+  title,
+  description,
+  pubDate,
+  body,
+  cover,
+  featured = false,
+} = Astro.props;
+
+const ui = getBlogUi(locale);
+const href = `/breakup-reset/blog/${locale}/${postSlug(id)}/`;
+const minutes = readingTimeMinutes(body);
+---
+
+<article class:list={['blog-card', { 'blog-card--featured': featured }]}>
+  {
+    cover && (
+      <a class="blog-card-cover" href={href} tabindex="-1" aria-hidden="true">
+        <img src={cover.src} alt="" width="720" height="320" loading="lazy" decoding="async" />
+      </a>
+    )
+  }
+  {
+    featured && (
+      <p class="blog-card-eyebrow">{ui.startHere}</p>
+    )
+  }
+  <h2 class="blog-card-title">
+    <a href={href}>{title}</a>
+  </h2>
+  <p class="blog-article-meta">
+    <time datetime={pubDate.toISOString()}>{formatBlogDate(pubDate, locale)}</time>
+    <span class="blog-meta-sep" aria-hidden="true">·</span>
+    <span>{ui.minRead(minutes)}</span>
+  </p>
+  <p class="blog-card-description">{description}</p>
+  <a class="blog-card-link" href={href} aria-label={`${ui.readArticle} ${title}`}>
+    {ui.readArticle}
+  </a>
+</article>

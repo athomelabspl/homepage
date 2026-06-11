@@ -1,0 +1,137 @@
+---
+import { brands } from '../config/brands';
+import { breakupPromo, getPromoCopy } from '../config/breakup-promo';
+import type { Locale } from '../config/locales';
+
+interface Props {
+  locale: Locale;
+  source?: string;
+  variant?: 'full' | 'compact';
+}
+
+const { locale, source = 'blog', variant = 'full' } = Astro.props;
+const isCompact = variant === 'compact';
+const copy = getPromoCopy(locale);
+const brand = brands['breakup-reset'];
+const { mode, waitlistUrl, image } = breakupPromo;
+
+const androidUrl =
+  brand.stores?.android?.url ??
+  `https://play.google.com/store/apps/details?id=${brand.stores?.android?.packageId}`;
+const iosUrl = brand.stores?.ios?.url;
+const liveUrl = iosUrl ?? androidUrl;
+---
+
+<section
+  class:list={['breakup-promo', { 'breakup-promo--compact': isCompact }]}
+  lang={locale}
+  aria-labelledby="breakup-promo-heading"
+  data-promo-mode={mode}
+>
+  {
+    isCompact ? (
+      <div class="breakup-promo-compact-copy">
+        <h2 id="breakup-promo-heading" class="breakup-promo-title">
+          {copy.title}
+        </h2>
+        {copy.subtitle && (
+          <p class="breakup-promo-subtitle">{copy.subtitle}</p>
+        )}
+      </div>
+    ) : (
+      <div class="breakup-promo-inner">
+        <div class="breakup-promo-copy">
+          <p class="breakup-promo-eyebrow">{brand.name}</p>
+          <h2 id="breakup-promo-heading" class="breakup-promo-title">
+            {copy.title}
+          </h2>
+          {copy.subtitle && (
+            <p class="breakup-promo-subtitle">{copy.subtitle}</p>
+          )}
+          <ul class="breakup-promo-features">
+            {copy.features.map((feature) => (
+              <li>{feature}</li>
+            ))}
+          </ul>
+          <div class="breakup-promo-action">
+            {
+              mode === 'coming-soon' && (
+                <p class="breakup-promo-badge" aria-live="polite">
+                  {copy.comingSoonLabel}
+                </p>
+              )
+            }
+            {
+              mode === 'waitlist' && waitlistUrl && (
+                <a
+                  href={`${waitlistUrl}?source=${source}`}
+                  class="button button-filled button-cta"
+                >
+                  {copy.waitlistCtaLabel}
+                </a>
+              )
+            }
+            {
+              mode === 'live' && liveUrl && (
+                <a
+                  href={`${liveUrl}?source=${source}`}
+                  class="button button-filled button-cta"
+                >
+                  {copy.liveCtaLabel}
+                </a>
+              )
+            }
+          </div>
+        </div>
+
+        <div class="breakup-promo-visual">
+          <figure class="breakup-promo-figure">
+            <img
+              class="breakup-promo-graphic"
+              src={image}
+              alt={copy.imageAlt}
+              width="491"
+              height="605"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
+      </div>
+    )
+  }
+
+  {
+    isCompact && (
+      <div class="breakup-promo-action">
+        {
+          mode === 'coming-soon' && (
+            <p class="breakup-promo-badge" aria-live="polite">
+              {copy.comingSoonLabel}
+            </p>
+          )
+        }
+        {
+          mode === 'waitlist' && waitlistUrl && (
+            <a
+              href={`${waitlistUrl}?source=${source}`}
+              class="button button-filled button-cta"
+            >
+              {copy.waitlistCtaLabel}
+            </a>
+          )
+        }
+        {
+          mode === 'live' && liveUrl && (
+            <a
+              href={`${liveUrl}?source=${source}`}
+              class="button button-filled button-cta"
+            >
+              {copy.liveCtaLabel}
+            </a>
+          )
+        }
+      </div>
+    )
+  }
+</section>

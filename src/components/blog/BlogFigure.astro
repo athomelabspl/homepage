@@ -1,0 +1,29 @@
+---
+import type { BlogCoverData } from './BlogCover.astro';
+
+interface Props {
+  photo: BlogCoverData;
+}
+
+const { photo } = Astro.props;
+---
+
+<figure class="blog-figure">
+  <img
+    class="blog-figure-image"
+    src={photo.src}
+    alt={photo.alt}
+    width="1200"
+    height="675"
+    loading="lazy"
+    decoding="async"
+  />
+  <figcaption class="blog-photo-credit">
+    Photo by
+    <a href={photo.creditUrl} rel="noopener noreferrer" target="_blank">
+      {photo.credit}
+    </a>
+    on
+    <a href={photo.photoUrl} rel="noopener noreferrer" target="_blank">Unsplash</a>
+  </figcaption>
+</figure>

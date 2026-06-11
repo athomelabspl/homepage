@@ -1,0 +1,36 @@
+---
+import type { Locale } from '../../config/locales';
+import BlogCover, { type BlogCoverData } from './BlogCover.astro';
+import {
+  formatBlogDate,
+  getBlogUi,
+  readingTimeMinutes,
+} from '../../utils/blog';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  pubDate: Date;
+  body?: string;
+  cover?: BlogCoverData;
+}
+
+const { locale, title, description, pubDate, body, cover } = Astro.props;
+const ui = getBlogUi(locale);
+const minutes = readingTimeMinutes(body);
+---
+
+<header class="blog-article-header">
+  <a class="blog-back-link" href={`/breakup-reset/blog/${locale}/`}>
+    ← {ui.backToBlog}
+  </a>
+  <p class="blog-article-meta">
+    <time datetime={pubDate.toISOString()}>{formatBlogDate(pubDate, locale)}</time>
+    <span class="blog-meta-sep" aria-hidden="true">·</span>
+    <span>{ui.minRead(minutes)}</span>
+  </p>
+  <h1>{title}</h1>
+  <p class="blog-article-description">{description}</p>
+  {cover && <BlogCover cover={cover} />}
+</header>

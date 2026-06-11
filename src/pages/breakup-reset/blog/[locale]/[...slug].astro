@@ -2,11 +2,15 @@
 import AppLayout from '../../../../layouts/AppLayout.astro';
 import Hreflang from '../../../../components/seo/Hreflang.astro';
 import FAQPageSchema from '../../../../components/seo/FAQPageSchema.astro';
+import BlogArticleHeader from '../../../../components/blog/BlogArticleHeader.astro';
+import BlogFigure from '../../../../components/blog/BlogFigure.astro';
+import RelatedPosts from '../../../../components/blog/RelatedPosts.astro';
 import AISummary from '../../../../components/mdx/AISummary.astro';
-import AppFeatureCallout from '../../../../components/mdx/AppFeatureCallout.astro';
+import ArticlePromo from '../../../../components/mdx/ArticlePromo.astro';
 import DownloadCTA from '../../../../components/mdx/DownloadCTA.astro';
 import FAQ from '../../../../components/mdx/FAQ.astro';
 import { getCollection, render } from 'astro:content';
+import { getBlogUi, getRelatedPosts } from '../../../../utils/blog';
 import type { Locale } from '../../../../config/locales';
 
 export async function getStaticPaths() {
@@ -23,9 +27,12 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { locale, slug } = Astro.params as { locale: Locale; slug: string };
+const { locale } = Astro.params as { locale: Locale; slug: string };
 
-const siblings = (await getCollection('breakup-blog')).filter(
+const allPosts = await getCollection('breakup-blog');
+const relatedPosts = getRelatedPosts(allPosts, post);
+
+const siblings = allPosts.filter(
   (p) => p.data.translationKey === post.data.translationKey
 );
 
@@ -46,22 +53,38 @@ const faqItems = post.data.faq ?? [];
   <Hreflang paths={hreflangPaths} slot="head" />
   {faqItems.length > 0 && <FAQPageSchema items={faqItems} slot="head" />}
 
-  <article class="prose">
-    <p class="blog-meta">
-      {post.data.pubDate.toLocaleDateString('en-GB', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      })}
-    </p>
-    <h1>{post.data.title}</h1>
-    <Content
-      components={{
-        AISummary,
-        AppFeatureCallout,
-        DownloadCTA,
-      }}
-    />
-    {faqItems.length > 0 && <FAQ items={faqItems} />}
+  <article class="blog-article">
+    <div class="prose blog-article-intro">
+      <BlogArticleHeader
+        locale={locale}
+        title={post.data.title}
+        description={post.data.description}
+        pubDate={post.data.pubDate}
+        body={post.body}
+        cover={post.data.cover}
+      />
+    </div>
+    <div class="blog-article-layout">
+      <div class="blog-article-main">
+        <div class="prose">
+          <Content
+            components={{
+              AISummary,
+              ArticlePromo,
+              BlogFigure,
+              DownloadCTA,
+            }}
+          />
+          {faqItems.length > 0 && <FAQ items={faqItems} />}
+        </div>
+      </div>
+      {
+        relatedPosts.length > 0 && (
+          <aside class="blog-article-sidebar" aria-label={getBlogUi(locale).relatedArticles}>
+            <RelatedPosts locale={locale} posts={relatedPosts} />
+          </aside>
+        )
+      }
+    </div>
   </article>
 </AppLayout>

@@ -9,6 +9,7 @@ export interface BrandConfig {
   id: BrandId;
   basePath: string;
   name: string;
+  logo?: string;
   tokens: BrandId;
   tagline?: string;
   description?: string;
@@ -48,10 +49,11 @@ export const brands: Record<BrandId, BrandConfig> = {
     id: 'breakup-reset',
     basePath: '/breakup-reset/',
     name: 'Breakup Reset',
+    logo: '/breakup-reset/logos/bamboo-mark.svg',
     tokens: 'breakup-reset',
-    tagline: 'Navigate your breakup, rediscover yourself.',
+    tagline: "You're in the right place.",
     description:
-      'A gentle, structured reset to help you move forward after a breakup.',
+      'No two breakups feel the same. Get support that understands you.',
     nav: [
       { label: 'Home', href: '/breakup-reset/' },
       { label: 'Blog', href: '/breakup-reset/blog/en/' },
