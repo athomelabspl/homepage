@@ -118,4 +118,4 @@ export function getRelatedPosts(
     .slice(0, limit);
 }
 
-export const FEATURED_TRANSLATION_KEY = 'welcome-to-breakup-reset';
+export const FEATURED_TRANSLATION_KEY = 'what-to-do-after-a-breakup';
