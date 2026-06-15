@@ -23,6 +23,8 @@ const stores = brand.stores;
       price: '0',
       priceCurrency: 'USD',
     },
-    ...(stores?.ios?.url ? { downloadUrl: stores.ios.url } : {}),
+    ...(stores?.ios?.url || stores?.android?.url
+      ? { downloadUrl: stores.ios?.url ?? stores.android?.url }
+      : {}),
   })}
 />

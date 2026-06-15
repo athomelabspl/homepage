@@ -14,7 +14,7 @@ export interface PromoCopy {
 }
 
 export const breakupPromo = {
-  mode: 'coming-soon' satisfies PromoMode,
+  mode: 'live' satisfies PromoMode,
   waitlistUrl: '',
   image: '/breakup-reset/promo/todays-pulse.png',
   copies: {

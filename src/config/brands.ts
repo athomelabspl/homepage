@@ -70,8 +70,10 @@ export const brands: Record<BrandId, BrandConfig> = {
         url: import.meta.env.PUBLIC_BREAKUP_IOS_URL,
       },
       android: {
-        packageId: 'com.athomelabs.breakupreset',
-        url: import.meta.env.PUBLIC_BREAKUP_ANDROID_URL,
+        packageId: 'com.breakupreset',
+        url:
+          import.meta.env.PUBLIC_BREAKUP_ANDROID_URL ??
+          'https://play.google.com/store/apps/details?id=com.breakupreset',
       },
       deepLinkScheme: 'breakupreset://',
     },

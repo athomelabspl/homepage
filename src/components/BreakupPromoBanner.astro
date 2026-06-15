@@ -20,6 +20,12 @@ const androidUrl =
   `https://play.google.com/store/apps/details?id=${brand.stores?.android?.packageId}`;
 const iosUrl = brand.stores?.ios?.url;
 const liveUrl = iosUrl ?? androidUrl;
+
+function withSource(url: string, sourceParam: string): string {
+  const parsed = new URL(url);
+  parsed.searchParams.set('source', sourceParam);
+  return parsed.toString();
+}
 ---
 
 <section
@@ -64,7 +70,7 @@ const liveUrl = iosUrl ?? androidUrl;
             {
               mode === 'waitlist' && waitlistUrl && (
                 <a
-                  href={`${waitlistUrl}?source=${source}`}
+                  href={withSource(waitlistUrl, source)}
                   class="button button-filled button-cta"
                 >
                   {copy.waitlistCtaLabel}
@@ -74,7 +80,7 @@ const liveUrl = iosUrl ?? androidUrl;
             {
               mode === 'live' && liveUrl && (
                 <a
-                  href={`${liveUrl}?source=${source}`}
+                  href={withSource(liveUrl, source)}
                   class="button button-filled button-cta"
                 >
                   {copy.liveCtaLabel}
@@ -114,7 +120,7 @@ const liveUrl = iosUrl ?? androidUrl;
         {
           mode === 'waitlist' && waitlistUrl && (
             <a
-              href={`${waitlistUrl}?source=${source}`}
+              href={withSource(waitlistUrl, source)}
               class="button button-filled button-cta"
             >
               {copy.waitlistCtaLabel}
@@ -124,7 +130,7 @@ const liveUrl = iosUrl ?? androidUrl;
         {
           mode === 'live' && liveUrl && (
             <a
-              href={`${liveUrl}?source=${source}`}
+              href={withSource(liveUrl, source)}
               class="button button-filled button-cta"
             >
               {copy.liveCtaLabel}
