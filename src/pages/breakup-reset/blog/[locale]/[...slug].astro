@@ -7,6 +7,7 @@ import BlogFigure from '../../../../components/blog/BlogFigure.astro';
 import RelatedPosts from '../../../../components/blog/RelatedPosts.astro';
 import AISummary from '../../../../components/mdx/AISummary.astro';
 import ArticlePromo from '../../../../components/mdx/ArticlePromo.astro';
+import YouTubeEmbed from '../../../../components/mdx/YouTubeEmbed.astro';
 import DownloadCTA from '../../../../components/mdx/DownloadCTA.astro';
 import FAQ from '../../../../components/mdx/FAQ.astro';
 import { getCollection, render } from 'astro:content';
@@ -73,6 +74,7 @@ const faqItems = post.data.faq ?? [];
               ArticlePromo,
               BlogFigure,
               DownloadCTA,
+              YouTubeEmbed,
             }}
           />
           {faqItems.length > 0 && <FAQ items={faqItems} />}
