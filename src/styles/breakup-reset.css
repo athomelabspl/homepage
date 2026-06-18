@@ -466,6 +466,22 @@ body.breakup-home main {
   margin: var(--space-4) 0 var(--space-8);
 }
 
+[data-brand='breakup-reset'] .youtube-embed-caption {
+  margin-top: var(--space-2);
+  font-size: 0.875rem;
+  color: var(--color-text-muted, #6b6b6b);
+}
+
+[data-brand='breakup-reset'] .youtube-embed-caption a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+[data-brand='breakup-reset'] .youtube-embed-caption a:hover {
+  color: var(--color-text, inherit);
+}
+
 [data-brand='breakup-reset'] .blog-card-cover {
   display: block;
   margin: calc(-1 * var(--space-6)) calc(-1 * var(--space-6)) var(--space-4);
