@@ -19,6 +19,8 @@ export const GET: APIRoute = async () => {
     urls.push(`${site}/breakup-reset/blog/${locale}/`);
   }
 
+  urls.push(`${site}/breakup-reset/blog/en/friends-with-ex-quiz/`);
+
   for (const post of posts) {
     const parts = post.id.split('/');
     const locale = parts[0];

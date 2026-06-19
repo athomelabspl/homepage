@@ -1,0 +1,12 @@
+---
+import '@phosphor-icons/web/fill';
+
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+---
+
+<i class:list={['ph-fill', `ph-${name}`, className]} aria-hidden="true"></i>

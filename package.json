@@ -12,6 +12,7 @@
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/rss": "^4.0.15",
     "@astrojs/sitemap": "^3.7.0",
+    "@phosphor-icons/web": "^2.1.2",
     "astro": "^5.16.15",
     "marked": "^15.0.12",
     "zod": "^3.25.76"
