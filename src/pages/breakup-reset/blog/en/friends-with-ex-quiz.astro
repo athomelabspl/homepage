@@ -252,11 +252,11 @@ const relatedArticles = [
           decoding="async"
         />
         <h2 id="fc-not-ready-heading" class="fc-panel-heading">
-          You aren't ready to be friends yet. And that's completely okay.
+          You aren't ready to be friends yet.
         </h2>
         <p class="fc-panel-copy">
-          You're still attached, and that's okay. You're not doing anything
-          wrong.
+          You're still attached, and that's completely normal. You're not doing
+          anything wrong.
         </p>
         <p class="fc-panel-copy">
           What you want right now probably isn't friendship. It's the closeness
@@ -521,7 +521,7 @@ const relatedArticles = [
     if (notReady) {
       setCardResult('not-ready');
       await showPanel('result-not-ready');
-      announce('Result: you are not ready to be friends yet, and that is okay.');
+      announce('Result: you are not ready to be friends yet.');
     } else {
       setCardResult('ready');
       await showPanel('result-ready');

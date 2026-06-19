@@ -1,9 +1,11 @@
 ---
 import AppLayout from '../../../../layouts/AppLayout.astro';
 import BlogPostCard from '../../../../components/blog/BlogPostCard.astro';
+import LaunchBanner from '../../../../components/LaunchBanner.astro';
 import { getCollection } from 'astro:content';
 import { LOCALES, type Locale } from '../../../../config/locales';
 import { FEATURED_TRANSLATION_KEY } from '../../../../utils/blog';
+import { brands } from '../../../../config/brands';
 
 export function getStaticPaths() {
   return LOCALES.map((locale) => ({ params: { locale } }));
@@ -20,6 +22,13 @@ const featured = posts.find(
 const rest = posts.filter(
   (p) => p.data.translationKey !== FEATURED_TRANSLATION_KEY
 );
+
+const brand = brands['breakup-reset'];
+const androidUrl =
+  brand.stores?.android?.url ??
+  `https://play.google.com/store/apps/details?id=${brand.stores?.android?.packageId}`;
+const iosUrl = brand.stores?.ios?.url;
+const downloadUrl = iosUrl ?? androidUrl;
 ---
 
 <AppLayout
@@ -34,38 +43,50 @@ const rest = posts.filter(
     slot="head"
   />
 
-  <h1 class="page-title">Blog</h1>
-  <p class="page-intro">Calm, practical guidance for your healing journey.</p>
+  <div class="blog-index-layout">
+    <div class="blog-index-main">
+      <h1 class="page-title">Blog</h1>
+      <p class="page-intro">Calm, practical guidance for your healing journey.</p>
 
-  {
-    posts.length === 0 ? (
-      <p class="muted">No articles yet. Check back soon.</p>
-    ) : (
-      <div class="blog-grid">
-        {featured && (
-          <BlogPostCard
-            locale={locale}
-            id={featured.id}
-            title={featured.data.title}
-            description={featured.data.description}
-            pubDate={featured.data.pubDate}
-            body={featured.body}
-            cover={featured.data.cover}
-            featured
-          />
-        )}
-        {rest.map((post) => (
-          <BlogPostCard
-            locale={locale}
-            id={post.id}
-            title={post.data.title}
-            description={post.data.description}
-            pubDate={post.data.pubDate}
-            body={post.body}
-            cover={post.data.cover}
-          />
-        ))}
-      </div>
-    )
-  }
+      {
+        posts.length === 0 ? (
+          <p class="muted">No articles yet. Check back soon.</p>
+        ) : (
+          <div class="blog-grid">
+            {featured && (
+              <BlogPostCard
+                locale={locale}
+                id={featured.id}
+                title={featured.data.title}
+                description={featured.data.description}
+                pubDate={featured.data.pubDate}
+                body={featured.body}
+                cover={featured.data.cover}
+                featured
+              />
+            )}
+            {rest.map((post) => (
+              <BlogPostCard
+                locale={locale}
+                id={post.id}
+                title={post.data.title}
+                description={post.data.description}
+                pubDate={post.data.pubDate}
+                body={post.body}
+                cover={post.data.cover}
+              />
+            ))}
+          </div>
+        )
+      }
+    </div>
+
+    {
+      downloadUrl ? (
+        <div class="blog-index-sidebar">
+          <LaunchBanner downloadUrl={downloadUrl} />
+        </div>
+      ) : null
+    }
+  </div>
 </AppLayout>
