@@ -62,9 +62,9 @@ const deepLink = brand.stores?.deepLinkScheme;
       )
     }
     <slot name="head" />
+    <Analytics brand={brand} disabled={disableAnalytics} />
   </head>
   <body data-brand={brand.id} class={bodyClass}>
     <slot />
-    <Analytics brand={brand} disabled={disableAnalytics} />
   </body>
 </html>
