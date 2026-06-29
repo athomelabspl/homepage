@@ -20,6 +20,7 @@ export const GET: APIRoute = async () => {
   }
 
   urls.push(`${site}/breakup-reset/blog/en/friends-with-ex-quiz/`);
+  urls.push(`${site}/breakup-reset/blog/en/should-i-do-no-contact-quiz/`);
 
   for (const post of posts) {
     const parts = post.id.split('/');
