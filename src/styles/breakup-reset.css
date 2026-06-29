@@ -1182,22 +1182,27 @@ body.breakup-home main {
 body.friends-with-ex-quiz-page .site-body,
 body.friends-with-ex-quiz-page .site-header,
 body.no-contact-quiz-page .site-body,
-body.no-contact-quiz-page .site-header {
+body.no-contact-quiz-page .site-header,
+body.ready-to-date-quiz-page .site-body,
+body.ready-to-date-quiz-page .site-header {
   max-width: 720px;
 }
 
 [data-brand='breakup-reset'] .friends-with-ex-quiz,
-[data-brand='breakup-reset'] .no-contact-quiz {
+[data-brand='breakup-reset'] .no-contact-quiz,
+[data-brand='breakup-reset'] .ready-to-date-quiz {
   width: 100%;
 }
 
 [data-brand='breakup-reset'] .friends-with-ex-quiz-header,
-[data-brand='breakup-reset'] .no-contact-quiz-header {
+[data-brand='breakup-reset'] .no-contact-quiz-header,
+[data-brand='breakup-reset'] .ready-to-date-quiz-header {
   margin-bottom: var(--space-8);
 }
 
 [data-brand='breakup-reset'] .friends-with-ex-quiz-title,
-[data-brand='breakup-reset'] .no-contact-quiz-title {
+[data-brand='breakup-reset'] .no-contact-quiz-title,
+[data-brand='breakup-reset'] .ready-to-date-quiz-title {
   font-size: clamp(1.75rem, 4vw, 2.25rem);
   font-weight: 800;
   line-height: 1.15;
@@ -1266,7 +1271,8 @@ body.no-contact-quiz-page .site-header {
   image-rendering: auto;
 }
 
-[data-brand='breakup-reset'] .no-contact-quiz .fc-landing-illustration {
+[data-brand='breakup-reset'] .no-contact-quiz .fc-landing-illustration,
+[data-brand='breakup-reset'] .ready-to-date-quiz .fc-landing-illustration {
   width: clamp(12rem, 42vw, 20rem);
   max-height: 9.5rem;
   object-fit: contain;
@@ -1405,7 +1411,8 @@ body.no-contact-quiz-page .site-header {
 }
 
 [data-brand='breakup-reset'] .friends-with-ex-quiz-card,
-[data-brand='breakup-reset'] .no-contact-quiz-card {
+[data-brand='breakup-reset'] .no-contact-quiz-card,
+[data-brand='breakup-reset'] .ready-to-date-quiz-card {
   --fc-motion-duration: 200ms;
   --fc-motion-ease-enter: cubic-bezier(0, 0, 0.2, 1);
   --fc-motion-ease-exit: cubic-bezier(0.4, 0, 1, 1);
@@ -1426,7 +1433,8 @@ body.no-contact-quiz-page .site-header {
 }
 
 [data-brand='breakup-reset'] .friends-with-ex-quiz-card--result-ready,
-[data-brand='breakup-reset'] .no-contact-quiz-card--result-ok {
+[data-brand='breakup-reset'] .no-contact-quiz-card--result-ok,
+[data-brand='breakup-reset'] .ready-to-date-quiz-card--result-ready {
   background: #eef5f0;
   border-color: rgba(45, 106, 79, 0.28);
   border-top-color: #3d8b66;
@@ -1436,7 +1444,8 @@ body.no-contact-quiz-page .site-header {
 }
 
 [data-brand='breakup-reset'] .friends-with-ex-quiz-card--result-not-ready,
-[data-brand='breakup-reset'] .no-contact-quiz-card--result-more {
+[data-brand='breakup-reset'] .no-contact-quiz-card--result-more,
+[data-brand='breakup-reset'] .ready-to-date-quiz-card--result-slow-down {
   background: #faf3e8;
   border-color: rgba(181, 130, 55, 0.28);
   border-top-color: #c9923a;
@@ -1453,7 +1462,8 @@ body.no-contact-quiz-page .site-header {
 
 @media (prefers-reduced-motion: reduce) {
   [data-brand='breakup-reset'] .friends-with-ex-quiz-card,
-  [data-brand='breakup-reset'] .no-contact-quiz-card {
+  [data-brand='breakup-reset'] .no-contact-quiz-card,
+  [data-brand='breakup-reset'] .ready-to-date-quiz-card {
     --fc-motion-duration: 0ms;
   }
 
