@@ -1,0 +1,25 @@
+---
+description: Never deploy to Netlify or production unless the user explicitly asks
+alwaysApply: true
+---
+
+# No deploy without explicit request
+
+Do **not** deploy, push to trigger a deploy, or run Netlify production deploy commands unless the user **explicitly** asks in that conversation.
+
+This includes:
+
+- `git push` to a branch that auto-deploys (e.g. `main`)
+- `netlify deploy` or `netlify deploy --prod`
+- Netlify CLI/API calls that publish or promote a build
+- Suggesting "I'll deploy this now" or deploying as a follow-up without being asked
+
+**Allowed without a deploy request:**
+
+- Local `npm run build` / `npm run preview` to verify changes
+- Commits when the user asked to commit (commits alone do not deploy unless pushed)
+- Explaining deploy steps the user can run themselves
+
+**When the user does ask to deploy**, confirm what will ship (branch, scope) before pushing or running a production deploy.
+
+Production deploys cost Netlify credits (~15 per deploy). Batch changes and deploy only when the user requests it.
