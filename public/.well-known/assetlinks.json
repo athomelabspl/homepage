@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.breakupreset",
+      "sha256_cert_fingerprints": [
+        "01:07:05:9A:EF:D7:52:99:53:18:44:F1:E9:0D:FB:1F:39:B2:1C:55:A0:5D:43:E6:55:A6:FB:45:95:D0:02:10",
+        "EE:A5:5D:1E:40:32:9C:78:9C:A7:FE:86:19:94:5B:E7:8C:CE:EC:F9:D8:B0:13:81:C0:24:9C:FA:7B:E9:FA:6B"
+      ]
+    }
+  }
+]

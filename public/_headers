@@ -12,3 +12,9 @@
 # App assets
 /breakup-reset/logos/*
   Cache-Control: public, max-age=86400
+
+# Mobile app deep-link verification (iOS Universal Links / Android App Links)
+/.well-known/apple-app-site-association
+  Content-Type: application/json
+/.well-known/assetlinks.json
+  Content-Type: application/json
