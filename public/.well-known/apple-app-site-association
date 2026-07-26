@@ -8,7 +8,9 @@
           "/auth/callback",
           "/auth/callback/*",
           "/reset-password",
-          "/reset-password/*"
+          "/reset-password/*",
+          "/breakup-reset/reset-password",
+          "/breakup-reset/reset-password/*"
         ]
       }
     ]
