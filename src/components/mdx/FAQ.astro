@@ -7,14 +7,15 @@ interface FAQItem {
 
 interface Props {
   items?: FAQItem[];
+  class?: string;
 }
 
-const { items = [] } = Astro.props;
+const { items = [], class: className } = Astro.props;
 ---
 
 {
   items.length > 0 && (
-    <section class="faq-section" aria-label="Frequently Asked Questions">
+    <section class:list={['faq-section', className]} aria-label="Frequently Asked Questions">
       <h2 class="section-title">Frequently Asked Questions</h2>
       {items.map((item) => (
         <details class="faq-item">

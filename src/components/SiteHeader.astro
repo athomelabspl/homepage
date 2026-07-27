@@ -1,5 +1,9 @@
 ---
 import type { BrandConfig } from '../config/brands';
+import {
+  getBreakupPlayStoreUrl,
+  storePlacements,
+} from '../utils/storeLinks';
 
 interface Props {
   brand: BrandConfig;
@@ -8,6 +12,10 @@ interface Props {
 
 const { brand, homeHref } = Astro.props;
 const currentPath = Astro.url.pathname;
+const isBreakupReset = brand.id === 'breakup-reset';
+const androidUrl = isBreakupReset
+  ? getBreakupPlayStoreUrl(storePlacements.homeHeaderDownload)
+  : undefined;
 ---
 
 <header class="site-header">
@@ -26,16 +34,29 @@ const currentPath = Astro.url.pathname;
     }
     <span class="brand-name">{brand.name}</span>
   </a>
-  <nav class="site-nav" aria-label="Main">
+  <div class="site-header-end">
+    <nav class="site-nav" aria-label="Main">
+      {
+        brand.nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={currentPath === item.href ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
     {
-      brand.nav.map((item) => (
+      isBreakupReset && androidUrl && (
         <a
-          href={item.href}
-          aria-current={currentPath === item.href ? 'page' : undefined}
+          href={androidUrl}
+          class="button button-filled site-header-cta"
+          rel="noopener noreferrer"
         >
-          {item.label}
+          Download
         </a>
-      ))
+      )
     }
-  </nav>
+  </div>
 </header>

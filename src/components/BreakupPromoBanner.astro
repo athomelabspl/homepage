@@ -2,6 +2,11 @@
 import { brands } from '../config/brands';
 import { breakupPromo, getPromoCopy } from '../config/breakup-promo';
 import type { Locale } from '../config/locales';
+import {
+  getBreakupDownloadUrl,
+  storePlacements,
+  withStoreTracking,
+} from '../utils/storeLinks';
 
 interface Props {
   locale: Locale;
@@ -9,23 +14,17 @@ interface Props {
   variant?: 'full' | 'compact';
 }
 
-const { locale, source = 'blog', variant = 'full' } = Astro.props;
+const { locale, source = storePlacements.blogPromo, variant = 'full' } =
+  Astro.props;
 const isCompact = variant === 'compact';
 const copy = getPromoCopy(locale);
 const brand = brands['breakup-reset'];
 const { mode, waitlistUrl, image } = breakupPromo;
 
-const androidUrl =
-  brand.stores?.android?.url ??
-  `https://play.google.com/store/apps/details?id=${brand.stores?.android?.packageId}`;
-const iosUrl = brand.stores?.ios?.url;
-const liveUrl = iosUrl ?? androidUrl;
-
-function withSource(url: string, sourceParam: string): string {
-  const parsed = new URL(url);
-  parsed.searchParams.set('source', sourceParam);
-  return parsed.toString();
-}
+const liveUrl = getBreakupDownloadUrl(source);
+const trackedWaitlistUrl = waitlistUrl
+  ? withStoreTracking(waitlistUrl, source)
+  : undefined;
 ---
 
 <section
@@ -68,9 +67,9 @@ function withSource(url: string, sourceParam: string): string {
               )
             }
             {
-              mode === 'waitlist' && waitlistUrl && (
+              mode === 'waitlist' && trackedWaitlistUrl && (
                 <a
-                  href={withSource(waitlistUrl, source)}
+                  href={trackedWaitlistUrl}
                   class="button button-filled button-cta"
                 >
                   {copy.waitlistCtaLabel}
@@ -80,7 +79,7 @@ function withSource(url: string, sourceParam: string): string {
             {
               mode === 'live' && liveUrl && (
                 <a
-                  href={withSource(liveUrl, source)}
+                  href={liveUrl}
                   class="button button-filled button-cta"
                 >
                   {copy.liveCtaLabel}
@@ -118,9 +117,9 @@ function withSource(url: string, sourceParam: string): string {
           )
         }
         {
-          mode === 'waitlist' && waitlistUrl && (
+          mode === 'waitlist' && trackedWaitlistUrl && (
             <a
-              href={withSource(waitlistUrl, source)}
+              href={trackedWaitlistUrl}
               class="button button-filled button-cta"
             >
               {copy.waitlistCtaLabel}
@@ -130,7 +129,7 @@ function withSource(url: string, sourceParam: string): string {
         {
           mode === 'live' && liveUrl && (
             <a
-              href={withSource(liveUrl, source)}
+              href={liveUrl}
               class="button button-filled button-cta"
             >
               {copy.liveCtaLabel}

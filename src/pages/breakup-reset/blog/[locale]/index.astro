@@ -5,7 +5,10 @@ import LaunchBanner from '../../../../components/LaunchBanner.astro';
 import { getCollection } from 'astro:content';
 import { LOCALES, type Locale } from '../../../../config/locales';
 import { FEATURED_TRANSLATION_KEY } from '../../../../utils/blog';
-import { brands } from '../../../../config/brands';
+import {
+  getBreakupDownloadUrl,
+  storePlacements,
+} from '../../../../utils/storeLinks';
 
 export function getStaticPaths() {
   return LOCALES.map((locale) => ({ params: { locale } }));
@@ -23,12 +26,7 @@ const rest = posts.filter(
   (p) => p.data.translationKey !== FEATURED_TRANSLATION_KEY
 );
 
-const brand = brands['breakup-reset'];
-const androidUrl =
-  brand.stores?.android?.url ??
-  `https://play.google.com/store/apps/details?id=${brand.stores?.android?.packageId}`;
-const iosUrl = brand.stores?.ios?.url;
-const downloadUrl = iosUrl ?? androidUrl;
+const downloadUrl = getBreakupDownloadUrl(storePlacements.blogSidebarLaunch);
 ---
 
 <AppLayout

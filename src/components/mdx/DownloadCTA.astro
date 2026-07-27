@@ -1,12 +1,18 @@
 ---
 import { brands } from '../../config/brands';
+import {
+  getBreakupPlayStoreUrl,
+  storePlacements,
+  withStoreTracking,
+} from '../../utils/storeLinks';
 
 interface Props {
   app?: 'breakup-reset';
   source?: string;
 }
 
-const { app = 'breakup-reset', source = 'blog' } = Astro.props;
+const { app = 'breakup-reset', source = storePlacements.blogDownloadCta } =
+  Astro.props;
 const brand = brands[app];
 const stores = brand.stores;
 const pathname = Astro.url.pathname.replace(/\/$/, '');
@@ -14,10 +20,12 @@ const trackingUrl = `${pathname}?source=${source}`;
 const site = Astro.site?.href.replace(/\/$/, '') ?? 'https://athomelabs.eu';
 const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(`${site}${trackingUrl}`)}`;
 
-const androidUrl =
-  stores?.android?.url ??
-  `https://play.google.com/store/apps/details?id=${stores?.android?.packageId}`;
-const iosUrl = stores?.ios?.url;
+const androidUrl = stores?.android
+  ? getBreakupPlayStoreUrl(source)
+  : undefined;
+const iosUrl = stores?.ios?.url
+  ? withStoreTracking(stores.ios.url, source)
+  : undefined;
 ---
 
 <section class="download-cta" aria-label={`Download ${brand.name}`}>
