@@ -6,9 +6,7 @@ interface Props {
 const { downloadUrl } = Astro.props;
 ---
 
-<aside class="launch-banner" aria-label="Breakup Reset is available now">
-  <p class="launch-banner-sparkle">Available now</p>
-
+<aside class="launch-banner" aria-label="Breakup Reset free app">
   <div class="launch-banner-bamboo" aria-hidden="true">
     <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -42,11 +40,12 @@ const { downloadUrl } = Astro.props;
   </h2>
 
   <p class="launch-banner-sub">
-    Dealing with a tough breakup? Breakup Reset is out now. Get through this with our help, for free.
+    Dealing with a tough breakup? Get through it at your own pace with our free
+    daily challenges and structured support.
   </p>
 
   <a class="launch-banner-cta button button-filled button-cta" href={downloadUrl}>
-    Download free
+    Get the Free App
   </a>
 
   <div class="launch-banner-stats">
@@ -54,12 +53,10 @@ const { downloadUrl } = Astro.props;
       <span class="launch-banner-stat-num">3</span>
       <span class="launch-banner-stat-lbl">Challenges a day</span>
     </div>
-    <div class="launch-banner-stat-sep" aria-hidden="true"></div>
     <div class="launch-banner-stat">
       <span class="launch-banner-stat-num">4</span>
       <span class="launch-banner-stat-lbl">Recovery paths</span>
     </div>
-    <div class="launch-banner-stat-sep" aria-hidden="true"></div>
     <div class="launch-banner-stat">
       <span class="launch-banner-stat-num">100%</span>
       <span class="launch-banner-stat-lbl">On your pace</span>

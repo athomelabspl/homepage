@@ -16,7 +16,7 @@ export interface PromoCopy {
 export const breakupPromo = {
   mode: 'live' satisfies PromoMode,
   waitlistUrl: '',
-  image: '/breakup-reset/promo/todays-pulse.png',
+  image: '/breakup-reset/promo/iphone-promo.png',
   copies: {
     en: {
       title: 'Free support for the week ahead',
@@ -30,7 +30,7 @@ export const breakupPromo = {
       waitlistCtaLabel: 'Join the waitlist',
       liveCtaLabel: 'Get started',
       imageAlt:
-        "Breakup Reset Today's Pulse screen with daily inspiration, insights, and peace tracking.",
+        'Breakup Reset app on iPhone showing a calm daily support screen.',
     },
   } satisfies Partial<Record<Locale, PromoCopy>>,
 } as const;
