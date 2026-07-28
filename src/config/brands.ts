@@ -36,8 +36,8 @@ export const brands: Record<BrandId, BrandConfig> = {
     name: 'At Home Labs',
     tokens: 'studio',
     nav: [
-      { label: 'About us', href: '/about/' },
-      { label: 'Our apps', href: '/apps/' },
+      { label: 'About', href: '/about/' },
+      { label: 'Portfolio', href: '/#apps' },
     ],
     analytics: {
       posthogProjectKey: import.meta.env.PUBLIC_POSTHOG_STUDIO_KEY,

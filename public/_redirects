@@ -1,3 +1,7 @@
+# Studio — apps page consolidated into homepage portfolio
+/apps    /    301
+/apps/   /    301
+
 # Breakup Reset - auth handoff (legacy root paths → app zone)
 /reset-password    /breakup-reset/reset-password/    301
 /reset-password/*    /breakup-reset/reset-password/:splat    301
