@@ -374,6 +374,16 @@ body.breakup-home main {
     box-shadow 0.2s ease;
 }
 
+[data-brand='breakup-reset'] .quiz-preview-icon {
+  display: block;
+  width: auto;
+  height: 4.5rem;
+  max-width: 7rem;
+  margin-bottom: var(--space-2);
+  object-fit: contain;
+  object-position: left center;
+}
+
 [data-brand='breakup-reset'] .quiz-preview-card:hover {
   border-color: rgba(45, 106, 79, 0.35);
   box-shadow: 0 8px 24px rgba(28, 43, 26, 0.06);
@@ -1604,18 +1614,20 @@ body.ready-to-date-quiz-page .site-header {
 
 [data-brand='breakup-reset'] .fc-landing-illustration {
   display: block;
-  width: clamp(11rem, 38vw, 18rem);
+  width: clamp(9rem, 32vw, 14rem);
   max-width: 100%;
   height: auto;
+  max-height: 12rem;
   margin: 0 auto var(--space-5);
-  border-radius: 12px;
+  object-fit: contain;
   image-rendering: auto;
 }
 
-[data-brand='breakup-reset'] .no-contact-quiz .fc-landing-illustration,
-[data-brand='breakup-reset'] .ready-to-date-quiz .fc-landing-illustration {
-  width: clamp(12rem, 42vw, 20rem);
-  max-height: 9.5rem;
+[data-brand='breakup-reset'] .friends-with-ex-quiz-page .fc-landing-illustration,
+[data-brand='breakup-reset'] .no-contact-quiz-page .fc-landing-illustration,
+[data-brand='breakup-reset'] .ready-to-date-quiz-page .fc-landing-illustration {
+  width: clamp(10rem, 36vw, 15rem);
+  max-height: 12rem;
   object-fit: contain;
 }
 

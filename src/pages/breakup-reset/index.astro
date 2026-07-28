@@ -67,18 +67,36 @@ const featuredQuizzes = [
     title: 'Am I ready to be friends with my ex?',
     description:
       'Four yes-or-no questions. See whether you are still attached or actually ready.',
+    image: {
+      src: '/breakup-reset/quiz/friends-with-ex-quiz-landing.svg',
+      alt: 'Two overlapping heart outlines',
+      width: 240,
+      height: 160,
+    },
   },
   {
     href: '/breakup-reset/blog/en/should-i-do-no-contact-quiz/',
     title: 'Should I do no contact?',
     description:
       'Works if you share kids, a pet, or a lease — not just clean-break situations.',
+    image: {
+      src: '/breakup-reset/quiz/no-contact-quiz-landing.svg',
+      alt: 'A barrier gate beside a winding path',
+      width: 300,
+      height: 250,
+    },
   },
   {
     href: '/breakup-reset/blog/en/ready-to-date-again-quiz/',
     title: 'Am I ready to date again?',
     description:
       'No timeline gimmicks. Check if you want someone new, or just escape missing your ex.',
+    image: {
+      src: '/breakup-reset/quiz/ready-to-date-again-quiz-landing.svg',
+      alt: 'A single flower outline on a stem',
+      width: 180,
+      height: 300,
+    },
   },
 ];
 ---
@@ -269,6 +287,15 @@ const featuredQuizzes = [
       {
         featuredQuizzes.map((quiz) => (
           <article class="quiz-preview-card">
+            <img
+              class="quiz-preview-icon"
+              src={quiz.image.src}
+              alt=""
+              width={quiz.image.width}
+              height={quiz.image.height}
+              loading="lazy"
+              decoding="async"
+            />
             <p class="quiz-preview-eyebrow">Free quiz</p>
             <h3 class="quiz-preview-title">
               <a href={quiz.href}>{quiz.title}</a>

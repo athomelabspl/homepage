@@ -119,11 +119,10 @@ const constraintTips: Record<string, string> = {
 };
 
 const landingIllustration = {
-  src: '/breakup-reset/quiz/no-contact-quiz-fork.png',
-  alt: 'Illustration of two paths: full distance on one side, brief practical contact on the other',
-  width: 512,
-  height: 384,
-  intrinsicWidth: 1024,
+  src: '/breakup-reset/quiz/no-contact-quiz-landing.svg',
+  alt: 'A barrier gate beside a winding path',
+  width: 300,
+  height: 250,
 };
 
 const resultImages = {
@@ -233,8 +232,6 @@ const questionCount = questionsPathA.length;
           <img
             class="fc-landing-illustration"
             src={landingIllustration.src}
-            srcset={`${landingIllustration.src} ${landingIllustration.intrinsicWidth}w`}
-            sizes="(min-width: 480px) 18rem, 38vw"
             alt={landingIllustration.alt}
             width={landingIllustration.width}
             height={landingIllustration.height}
