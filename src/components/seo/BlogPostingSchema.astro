@@ -1,0 +1,86 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: Date | string;
+  dateModified?: Date | string;
+  image?: string;
+  imageAlt?: string;
+  locale?: string;
+}
+
+const site = Astro.site?.href.replace(/\/$/, '') ?? 'https://athomelabs.eu';
+
+const {
+  title,
+  description,
+  url,
+  datePublished,
+  dateModified,
+  image,
+  imageAlt,
+  locale = 'en',
+} = Astro.props;
+
+const imageUrl = image
+  ? image.startsWith('http')
+    ? image
+    : `${site}${image}`
+  : undefined;
+
+const published =
+  datePublished instanceof Date
+    ? datePublished.toISOString()
+    : new Date(datePublished).toISOString();
+const modified = dateModified
+  ? dateModified instanceof Date
+    ? dateModified.toISOString()
+    : new Date(dateModified).toISOString()
+  : published;
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description,
+    datePublished: published,
+    dateModified: modified,
+    inLanguage: locale,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': url,
+    },
+    isPartOf: {
+      '@type': 'Blog',
+      name: 'Breakup Reset Blog',
+      url: `${site}/breakup-reset/blog/en/`,
+    },
+    author: {
+      '@type': 'Organization',
+      name: 'Breakup Reset',
+      url: `${site}/breakup-reset/`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Breakup Reset',
+      url: `${site}/breakup-reset/`,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${site}/breakup-reset/logos/bamboo-mark.svg`,
+      },
+    },
+    ...(imageUrl
+      ? {
+          image: {
+            '@type': 'ImageObject',
+            url: imageUrl,
+            ...(imageAlt ? { caption: imageAlt } : {}),
+          },
+        }
+      : {}),
+  })}
+/>

@@ -2101,3 +2101,169 @@ body.ready-to-date-quiz-page .site-header {
 [data-brand='breakup-reset'] .fc-related-back a:hover {
   color: var(--accent);
 }
+
+/* Topic browse (blog index) */
+[data-brand='breakup-reset'] .topic-browse {
+  margin: 0 0 var(--space-7);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--border);
+}
+
+[data-brand='breakup-reset'] .topic-browse-heading {
+  margin: 0 0 var(--space-4);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+[data-brand='breakup-reset'] .topic-browse-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+}
+
+[data-brand='breakup-reset'] .topic-browse-list a {
+  color: var(--text-headline);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+[data-brand='breakup-reset'] .topic-browse-list a:hover {
+  color: var(--accent);
+}
+
+/* In-topic sidebar nav */
+[data-brand='breakup-reset'] .topic-nav {
+  margin: 0 0 var(--space-6);
+}
+
+[data-brand='breakup-reset'] .topic-nav-hub {
+  margin: 0 0 var(--space-3);
+  font-size: 0.875rem;
+}
+
+[data-brand='breakup-reset'] .topic-nav-hub a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+[data-brand='breakup-reset'] .topic-nav-hub a:hover {
+  text-decoration: underline;
+}
+
+[data-brand='breakup-reset'] .topic-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+[data-brand='breakup-reset'] .topic-nav-link {
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--text);
+  text-decoration: none;
+}
+
+[data-brand='breakup-reset'] .topic-nav-link:hover {
+  color: var(--accent);
+}
+
+[data-brand='breakup-reset'] .topic-nav-link--pillar {
+  font-weight: 700;
+  color: var(--text-headline);
+}
+
+/* Topic hub pages */
+[data-brand='breakup-reset'] .topic-hub-back {
+  margin: 0 0 var(--space-4);
+  font-size: 0.875rem;
+}
+
+[data-brand='breakup-reset'] .topic-hub-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+[data-brand='breakup-reset'] .topic-hub-back a:hover {
+  color: var(--accent);
+}
+
+[data-brand='breakup-reset'] .topic-hub-quiz {
+  margin: 0 0 var(--space-6);
+}
+
+[data-brand='breakup-reset'] .topic-hub-quiz a {
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+[data-brand='breakup-reset'] .topic-hub-quiz a:hover {
+  text-decoration: underline;
+}
+
+[data-brand='breakup-reset'] .topic-hub-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  max-width: 42rem;
+}
+
+[data-brand='breakup-reset'] .topic-hub-card {
+  padding: 0 0 var(--space-5);
+  border-bottom: 1px solid var(--border);
+}
+
+[data-brand='breakup-reset'] .topic-hub-card--pillar {
+  padding: var(--space-5);
+  margin: 0 0 var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(45, 106, 79, 0.04);
+}
+
+[data-brand='breakup-reset'] .topic-hub-eyebrow {
+  margin: 0 0 var(--space-2);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+[data-brand='breakup-reset'] .topic-hub-card-title {
+  margin: 0 0 var(--space-2);
+  font-size: 1.125rem;
+  line-height: 1.35;
+}
+
+[data-brand='breakup-reset'] .topic-hub-card-title a {
+  color: var(--text-headline);
+  text-decoration: none;
+}
+
+[data-brand='breakup-reset'] .topic-hub-card-title a:hover {
+  color: var(--accent);
+}
+
+[data-brand='breakup-reset'] .topic-hub-card-desc {
+  margin: 0 0 var(--space-2);
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+[data-brand='breakup-reset'] .topic-hub-card-meta {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+

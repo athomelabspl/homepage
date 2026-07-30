@@ -11,6 +11,7 @@ interface Props {
   bodyClass?: string;
   disableAnalytics?: boolean;
   smartAppBanner?: boolean;
+  lang?: string;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   bodyClass,
   disableAnalytics = false,
   smartAppBanner = false,
+  lang = 'en',
 } = Astro.props;
 
 const fullTitle =
@@ -30,7 +32,7 @@ const deepLink = brand.stores?.deepLinkScheme;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -66,5 +68,47 @@ const deepLink = brand.stores?.deepLinkScheme;
   </head>
   <body data-brand={brand.id} class={bodyClass}>
     <slot />
+
+    {brand.id === 'breakup-reset' && (
+      <script>
+        (() => {
+          try {
+            const body = document.body;
+            if (!body || body.dataset.brand !== 'breakup-reset') return;
+
+            const params = new URLSearchParams(window.location.search);
+            const utm_source = params.get('utm_source');
+            const utm_medium = params.get('utm_medium');
+            const utm_campaign = params.get('utm_campaign');
+            if (!utm_source || !utm_medium || !utm_campaign) return;
+
+            // Match the exact format Play expects inside the referrer payload.
+            const referrerPayload = `utm_source=${utm_source}&utm_medium=${utm_medium}&utm_campaign=${utm_campaign}`;
+
+            document
+              .querySelectorAll(
+                'a[href*="play.google.com/store/apps/details"]'
+              )
+              .forEach((a) => {
+                try {
+                  const href = a.getAttribute('href');
+                  if (!href) return;
+
+                  const u = new URL(href, window.location.origin);
+                  if (u.searchParams.get('id') !== 'com.breakupreset')
+                    return;
+
+                  u.searchParams.set('referrer', referrerPayload);
+                  a.setAttribute('href', u.toString());
+                } catch {
+                  // Ignore malformed URLs.
+                }
+              });
+          } catch {
+            // No-op.
+          }
+        })();
+      </script>
+    )}
   </body>
 </html>

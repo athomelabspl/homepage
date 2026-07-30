@@ -1,10 +1,13 @@
 ---
 import AppLayout from '../../../../layouts/AppLayout.astro';
 import Hreflang from '../../../../components/seo/Hreflang.astro';
+import OpenGraph from '../../../../components/seo/OpenGraph.astro';
 import FAQPageSchema from '../../../../components/seo/FAQPageSchema.astro';
+import BlogPostingSchema from '../../../../components/seo/BlogPostingSchema.astro';
 import BlogArticleHeader from '../../../../components/blog/BlogArticleHeader.astro';
 import BlogFigure from '../../../../components/blog/BlogFigure.astro';
 import RelatedPosts from '../../../../components/blog/RelatedPosts.astro';
+import TopicNav from '../../../../components/blog/TopicNav.astro';
 import AISummary from '../../../../components/mdx/AISummary.astro';
 import ArticlePromo from '../../../../components/mdx/ArticlePromo.astro';
 import FriendsWithExQuizPromo from '../../../../components/mdx/FriendsWithExQuizPromo.astro';
@@ -14,7 +17,7 @@ import YouTubeEmbed from '../../../../components/mdx/YouTubeEmbed.astro';
 import DownloadCTA from '../../../../components/mdx/DownloadCTA.astro';
 import FAQ from '../../../../components/mdx/FAQ.astro';
 import { getCollection, render } from 'astro:content';
-import { getBlogUi, getRelatedPosts } from '../../../../utils/blog';
+import { getBlogUi, getRelatedPosts, getTopicNav, postSlug } from '../../../../utils/blog';
 import type { Locale } from '../../../../config/locales';
 
 export async function getStaticPaths() {
@@ -35,6 +38,7 @@ const { locale } = Astro.params as { locale: Locale; slug: string };
 
 const allPosts = await getCollection('breakup-blog');
 const relatedPosts = getRelatedPosts(allPosts, post);
+const topicNav = getTopicNav(allPosts, post);
 
 const siblings = allPosts.filter(
   (p) => p.data.translationKey === post.data.translationKey
@@ -51,10 +55,37 @@ const hreflangPaths = Object.fromEntries(
 
 const { Content } = await render(post);
 const faqItems = post.data.faq ?? [];
+const site = Astro.site?.href.replace(/\/$/, '') ?? 'https://athomelabs.eu';
+const pagePath = `/breakup-reset/blog/${locale}/${postSlug(post.id)}/`;
+const pageUrl = `${site}${pagePath}`;
+const cover = post.data.cover;
 ---
 
-<AppLayout title={post.data.title} description={post.data.description}>
+<AppLayout
+  title={post.data.title}
+  description={post.data.description}
+  lang={locale}
+>
   <Hreflang paths={hreflangPaths} slot="head" />
+  <OpenGraph
+    title={post.data.title}
+    description={post.data.description}
+    url={pageUrl}
+    type="article"
+    image={cover?.src}
+    imageAlt={cover?.alt}
+    slot="head"
+  />
+  <BlogPostingSchema
+    title={post.data.title}
+    description={post.data.description}
+    url={pageUrl}
+    datePublished={post.data.pubDate}
+    image={cover?.src}
+    imageAlt={cover?.alt}
+    locale={locale}
+    slot="head"
+  />
   {faqItems.length > 0 && <FAQPageSchema items={faqItems} slot="head" />}
 
   <article class="blog-article">
@@ -87,8 +118,9 @@ const faqItems = post.data.faq ?? [];
         </div>
       </div>
       {
-        relatedPosts.length > 0 && (
+        (relatedPosts.length > 0 || topicNav.siblings.length > 0 || topicNav.pillar) && (
           <aside class="blog-article-sidebar" aria-label={getBlogUi(locale).relatedArticles}>
+            <TopicNav locale={locale} topicNav={topicNav} />
             <RelatedPosts locale={locale} posts={relatedPosts} />
           </aside>
         )

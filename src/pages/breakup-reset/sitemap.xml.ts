@@ -16,12 +16,30 @@ export const GET: APIRoute = async () => {
   for (const locale of LOCALES) {
     urls.push(`${site}${getLegalPath('privacy', locale)}`);
     urls.push(`${site}${getLegalPath('terms', locale)}`);
-    urls.push(`${site}/breakup-reset/blog/${locale}/`);
+  }
+
+  // Only list blog indexes that have published posts (EN today).
+  const localesWithPosts = new Set(posts.map((p) => p.id.split('/')[0]));
+  for (const locale of LOCALES) {
+    if (localesWithPosts.has(locale)) {
+      urls.push(`${site}/breakup-reset/blog/${locale}/`);
+    }
   }
 
   urls.push(`${site}/breakup-reset/blog/en/friends-with-ex-quiz/`);
   urls.push(`${site}/breakup-reset/blog/en/should-i-do-no-contact-quiz/`);
   urls.push(`${site}/breakup-reset/blog/en/ready-to-date-again-quiz/`);
+
+  for (const cluster of [
+    'no-contact',
+    'attachment',
+    'grief-functioning',
+    'readiness',
+    'situational',
+    'product',
+  ]) {
+    urls.push(`${site}/breakup-reset/blog/en/topics/${cluster}/`);
+  }
 
   for (const post of posts) {
     const parts = post.id.split('/');
