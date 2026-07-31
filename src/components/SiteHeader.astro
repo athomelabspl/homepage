@@ -1,5 +1,5 @@
 ---
-import type { BrandConfig } from '../config/brands';
+import type { BrandConfig, BrandNavItem } from '../config/brands';
 import {
   getBreakupPlayStoreUrl,
   storePlacements,
@@ -8,9 +8,12 @@ import {
 interface Props {
   brand: BrandConfig;
   homeHref: string;
+  nav?: BrandNavItem[];
+  downloadLabel?: string;
 }
 
-const { brand, homeHref } = Astro.props;
+const { brand, homeHref, nav, downloadLabel = 'Download' } = Astro.props;
+const navItems = nav ?? brand.nav;
 const currentPath = Astro.url.pathname;
 const isBreakupReset = brand.id === 'breakup-reset';
 const androidUrl = isBreakupReset
@@ -37,7 +40,7 @@ const androidUrl = isBreakupReset
   <div class="site-header-end">
     <nav class="site-nav" aria-label="Main">
       {
-        brand.nav.map((item) => (
+        navItems.map((item) => (
           <a
             href={item.href}
             aria-current={currentPath === item.href ? 'page' : undefined}
@@ -54,7 +57,7 @@ const androidUrl = isBreakupReset
           class="button button-filled site-header-cta"
           rel="noopener noreferrer"
         >
-          Download
+          {downloadLabel}
         </a>
       )
     }

@@ -1,0 +1,677 @@
+---
+import AppLayout from '../../layouts/AppLayout.astro';
+import Canonical from '../../components/seo/Canonical.astro';
+import OpenGraph from '../../components/seo/OpenGraph.astro';
+import Hreflang from '../../components/seo/Hreflang.astro';
+import FAQPageSchema from '../../components/seo/FAQPageSchema.astro';
+import FAQ from '../../components/mdx/FAQ.astro';
+import PhosphorIcon from '../../components/icons/PhosphorIcon.astro';
+import { brands } from '../../config/brands';
+import { getReadyToDateQuizCopy, readyToDateImages } from '../../config/quizzes/ready-to-date-again';
+import { OG_LOCALE_MAP, ogLocaleAlternate, type QuizLocale } from '../../config/quizzes/shared';
+import {
+  getBreakupChrome,
+  marketingQuizHreflangPaths,
+} from '../../config/breakup-chrome';
+
+interface Props {
+  locale: QuizLocale;
+}
+
+const { locale } = Astro.props;
+const copy = getReadyToDateQuizCopy(locale);
+const brand = brands['breakup-reset'];
+const { landingIllustration, resultImages } = readyToDateImages;
+const chrome = getBreakupChrome(locale);
+
+const slug = 'ready-to-date-again-quiz' as const;
+const hreflangPaths = marketingQuizHreflangPaths(slug);
+const localizedChrome = locale === 'en' ? undefined : chrome;
+
+const webAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: copy.schemaName,
+  url: copy.pageUrl,
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  browserRequirements: 'Requires JavaScript',
+  description: copy.schemaDescription,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  author: {
+    '@type': 'Organization',
+    name: brand.name,
+    url: 'https://athomelabs.eu/breakup-reset/',
+  },
+};
+
+const questionCount = 4;
+const announceQuestions = Array.from({ length: questionCount }, (_, index) =>
+  copy.announce.question(index + 1, questionCount)
+);
+---
+
+<AppLayout
+  title={copy.title}
+  description={copy.description}
+  bodyClass="page ready-to-date-quiz-page"
+  showSmartBanner
+  lang={locale}
+  nav={localizedChrome?.nav}
+  homeHref={localizedChrome?.homeHref}
+  downloadLabel={localizedChrome?.downloadLabel}
+>
+  <Canonical slot="head" />
+  <Hreflang paths={hreflangPaths} slot="head" />
+  <OpenGraph
+    slot="head"
+    title={copy.ogTitle}
+    description={copy.description}
+    url={copy.pageUrl}
+    image={copy.ogImage.src}
+    imageWidth={copy.ogImage.width}
+    imageHeight={copy.ogImage.height}
+    imageAlt={copy.ogImage.alt}
+    locale={OG_LOCALE_MAP[locale]}
+    localeAlternates={ogLocaleAlternate(locale)}
+  />
+  <script type="application/ld+json" set:html={JSON.stringify(webAppSchema)} slot="head" />
+  <FAQPageSchema items={copy.faqItems} slot="head" />
+
+  <article class="ready-to-date-quiz" aria-labelledby="rtd-title">
+    <header class="ready-to-date-quiz-header">
+      <h1 id="rtd-title" class="ready-to-date-quiz-title">
+        {copy.heading}
+      </h1>
+    </header>
+
+    <div
+      class="fc-progress-bar"
+      id="fc-progress-bar"
+      role="progressbar"
+      aria-valuemin={0}
+      aria-valuemax={questionCount}
+      aria-valuenow={0}
+      aria-label={copy.progress.ariaLabel}
+      hidden
+    >
+      <ol class="fc-progress-steps">
+        {
+          Array.from({ length: questionCount }, (_, index) => (
+            <li class="fc-progress-step" data-step={index}>
+              <span class="fc-progress-step-marker" aria-hidden="true" />
+              <span class="fc-progress-step-label">{copy.progress.stepLabel(index + 1)}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+
+    <div
+      class="ready-to-date-quiz-card"
+      id="ready-to-date-quiz"
+      data-download-url={copy.downloadUrl}
+    >
+      <div class="fc-panels-viewport">
+        <section
+          class="fc-panel fc-panel--active"
+          data-panel="landing"
+          aria-labelledby="rtd-landing-heading"
+        >
+          <h2 id="rtd-landing-heading" class="fc-panel-heading">
+            {copy.landing.heading}
+          </h2>
+          <img
+            class="fc-landing-illustration"
+            src={landingIllustration.src}
+            alt={copy.landing.illustrationAlt}
+            width={landingIllustration.width}
+            height={landingIllustration.height}
+            loading="eager"
+            decoding="async"
+          />
+          <p class="fc-panel-copy">
+            {copy.landing.copy}
+          </p>
+          <p class="fc-panel-copy fc-panel-copy--follow">
+            {copy.landing.followCopy}
+          </p>
+          <button type="button" class="fc-btn fc-btn--primary" data-action="start">
+            {copy.landing.startButton}
+          </button>
+        </section>
+
+        <section
+          class="fc-panel"
+          data-panel="constraint"
+          aria-labelledby="rtd-constraint-heading"
+          hidden
+        >
+          <p class="fc-progress fc-progress--eyebrow">{copy.constraintPanel.eyebrow}</p>
+          <h2 id="rtd-constraint-heading" class="fc-panel-heading">
+            {copy.constraintPanel.heading}
+          </h2>
+          <p class="fc-panel-copy fc-panel-copy--constraint">
+            {copy.constraintPanel.copy}
+          </p>
+          <div
+            class="fc-constraint-list"
+            role="group"
+            aria-label={copy.constraintPanel.heading}
+          >
+            {
+              copy.constraints.map((item) => (
+                <button
+                  type="button"
+                  class="fc-constraint-card"
+                  data-action="constraint"
+                  data-constraint={item.id}
+                >
+                  {item.label}
+                </button>
+              ))
+            }
+          </div>
+          <p class="fc-panel-copy fc-panel-copy--helper">
+            {copy.constraintPanel.helper}
+          </p>
+        </section>
+
+        {
+          copy.questionsShared.map((text, index) => (
+            <section
+              class="fc-panel"
+              data-panel={`question-${index}`}
+              aria-labelledby={`rtd-q-${index}-heading`}
+              hidden
+            >
+              <p class="fc-progress">{copy.questionOf(index + 1, questionCount)}</p>
+              <h2 id={`rtd-q-${index}-heading`} class="fc-panel-heading">
+                {text}
+              </h2>
+              <div class="fc-answers" role="group" aria-label={copy.answers.groupLabel(index + 1)}>
+                <button type="button" class="fc-answer-card" data-answer="yes">
+                  <PhosphorIcon name="heart-break" class="fc-answer-icon" />
+                  <span class="fc-answer-label">{copy.answers.yes}</span>
+                </button>
+                <button type="button" class="fc-answer-card" data-answer="no">
+                  <PhosphorIcon name="heart" class="fc-answer-icon" />
+                  <span class="fc-answer-label">{copy.answers.no}</span>
+                </button>
+              </div>
+            </section>
+          ))
+        }
+
+        <section
+          class="fc-panel"
+          data-panel="question-3"
+          aria-labelledby="rtd-q-3-heading"
+          hidden
+        >
+          <p class="fc-progress">{copy.questionOf(4, questionCount)}</p>
+          <h2 id="rtd-q-3-heading" class="fc-panel-heading">
+            {copy.question4ByConstraint.steady}
+          </h2>
+          <div class="fc-answers" role="group" aria-label={copy.answers.groupLabel(4)}>
+            <button type="button" class="fc-answer-card" data-answer="yes">
+              <PhosphorIcon name="heart-break" class="fc-answer-icon" />
+              <span class="fc-answer-label">{copy.answers.yes}</span>
+            </button>
+            <button type="button" class="fc-answer-card" data-answer="no">
+              <PhosphorIcon name="heart" class="fc-answer-icon" />
+              <span class="fc-answer-label">{copy.answers.no}</span>
+            </button>
+          </div>
+        </section>
+
+        <section
+          class="fc-panel"
+          data-panel="result-slow-down"
+          aria-labelledby="rtd-slow-down-heading"
+          hidden
+        >
+          <img
+            class="fc-result-photo"
+            src={resultImages.slowDown.src}
+            srcset={`${resultImages.slowDown.src} ${resultImages.slowDown.intrinsicWidth}w`}
+            sizes="100vw"
+            alt={copy.results.slowDown.imageAlt}
+            width={resultImages.slowDown.width}
+            height={resultImages.slowDown.height}
+            loading="lazy"
+            decoding="async"
+          />
+          <h2 id="rtd-slow-down-heading" class="fc-panel-heading">
+            {copy.results.slowDown.heading}
+          </h2>
+          {copy.results.slowDown.introParagraphs.map((paragraph) => <p class="fc-panel-copy">{paragraph}</p>)}
+          {
+            Object.entries(copy.slowDownTips).map(([id, tip]) => (
+              <p class="fc-panel-copy fc-constraint-tip" data-constraint-tip={id} hidden>
+                {tip}
+              </p>
+            ))
+          }
+          <p class="fc-panel-copy">
+            {copy.results.slowDown.closingParagraph}
+          </p>
+        </section>
+
+        <section
+          class="fc-panel"
+          data-panel="result-go-slow"
+          aria-labelledby="rtd-go-slow-heading"
+          hidden
+        >
+          <h2 id="rtd-go-slow-heading" class="fc-panel-heading">
+            {copy.results.goSlow.heading}
+          </h2>
+          {copy.results.goSlow.introParagraphs.map((paragraph) => <p class="fc-panel-copy">{paragraph}</p>)}
+          <p
+            class="fc-panel-copy fc-constraint-tip"
+            data-constraint-tip="fresh"
+            data-go-slow-only
+            hidden
+          >
+            {copy.goSlowFreshTip}
+          </p>
+          <p class="fc-panel-copy">
+            {copy.results.goSlow.closingParagraph}
+          </p>
+        </section>
+
+        <section
+          class="fc-panel"
+          data-panel="result-ready"
+          aria-labelledby="rtd-ready-heading"
+          hidden
+        >
+          <img
+            class="fc-result-photo"
+            src={resultImages.ready.src}
+            srcset={`${resultImages.ready.src} ${resultImages.ready.intrinsicWidth}w`}
+            sizes="100vw"
+            alt={copy.results.ready.imageAlt}
+            width={resultImages.ready.width}
+            height={resultImages.ready.height}
+            loading="lazy"
+            decoding="async"
+          />
+          <h2 id="rtd-ready-heading" class="fc-panel-heading">
+            {copy.results.ready.heading}
+          </h2>
+          {copy.results.ready.paragraphs.map((paragraph) => <p class="fc-panel-copy">{paragraph}</p>)}
+        </section>
+      </div>
+
+      <section class="fc-cta" id="fc-cta" hidden aria-labelledby="fc-cta-heading">
+        <h2 id="fc-cta-heading" class="fc-cta-heading" data-cta-tier="slow-down" hidden>
+          {copy.cta.tierSlowDown}
+        </h2>
+        <h2 class="fc-cta-heading" data-cta-tier="go-slow" hidden>
+          {copy.cta.tierGoSlow}
+        </h2>
+        <h2 class="fc-cta-heading" data-cta-tier="ready" hidden>
+          {copy.cta.tierReady}
+        </h2>
+        <p class="fc-cta-copy">
+          {copy.cta.copy}
+        </p>
+        <a
+          href={copy.downloadUrl}
+          class="fc-btn fc-btn--primary fc-btn--cta"
+          id="fc-download"
+        >
+          {copy.cta.button}
+        </a>
+      </section>
+
+      <div class="fc-live" aria-live="polite" aria-atomic="true" hidden></div>
+    </div>
+
+    <nav class="fc-related" aria-labelledby="rtd-related-heading">
+      <h2 id="rtd-related-heading" class="fc-related-heading">{copy.related.heading}</h2>
+      <ul class="fc-related-list">
+        {
+          copy.related.items.map((item) => (
+            <li>
+              <a class="fc-related-link" href={item.href}>
+                {item.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="fc-related-back">
+        <a href={copy.related.footerHref}>{copy.related.footerLabel}</a>
+      </p>
+    </nav>
+
+    <FAQ
+      items={copy.faqItems}
+      heading={chrome.faqHeading}
+    />
+  </article>
+</AppLayout>
+
+<script
+  define:vars={{
+    questionCount,
+    question4ByConstraint: copy.question4ByConstraint,
+    announceQuestions,
+    announcePickWhereAreYou: copy.announce.pickWhereAreYou,
+    announceGotIt: copy.announce.gotItFourQuestions,
+    announceResultSlowDown: copy.announce.resultSlowDown,
+    announceResultGoSlow: copy.announce.resultGoSlow,
+    announceResultReady: copy.announce.resultReady,
+  }}
+>
+  const root = document.getElementById('ready-to-date-quiz');
+  if (!root) throw new Error('Ready to date quiz root not found');
+
+  const viewport = root.querySelector('.fc-panels-viewport');
+  const panels = Array.from(root.querySelectorAll('.fc-panel'));
+  const progressBar = document.getElementById('fc-progress-bar');
+  const progressSteps = progressBar
+    ? Array.from(progressBar.querySelectorAll('.fc-progress-step'))
+    : [];
+  const cta = document.getElementById('fc-cta');
+  const ctaHeadings = cta ? Array.from(cta.querySelectorAll('[data-cta-tier]')) : [];
+  const question4Heading = document.getElementById('rtd-q-3-heading');
+  const live = root.querySelector('.fc-live');
+  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const answers = [];
+  let selectedConstraint = 'steady';
+  let currentIndex = -1;
+  let transitioning = false;
+
+  function motionEnabled() {
+    return !motionQuery.matches;
+  }
+
+  function motionDuration() {
+    if (!motionEnabled()) return 0;
+    const value = getComputedStyle(root).getPropertyValue('--fc-motion-duration').trim();
+    return Number.parseInt(value, 10) || 200;
+  }
+
+  function wait(ms) {
+    return new Promise((resolve) => window.setTimeout(resolve, ms));
+  }
+
+  function waitForOpacityTransition(el) {
+    const duration = motionDuration();
+    if (duration === 0) return Promise.resolve();
+
+    return new Promise((resolve) => {
+      let settled = false;
+      const finish = () => {
+        if (settled) return;
+        settled = true;
+        el.removeEventListener('transitionend', onEnd);
+        resolve();
+      };
+      const onEnd = (event) => {
+        if (event.target === el && event.propertyName === 'opacity') finish();
+      };
+      el.addEventListener('transitionend', onEnd);
+      window.setTimeout(finish, duration + 80);
+    });
+  }
+
+  function setPanelAccessibility(el, isHidden) {
+    el.setAttribute('aria-hidden', isHidden ? 'true' : 'false');
+    if (isHidden) {
+      el.setAttribute('inert', '');
+    } else {
+      el.removeAttribute('inert');
+    }
+  }
+
+  function measurePanel(el) {
+    const wasHidden = el.hidden;
+    el.hidden = false;
+    el.style.visibility = 'hidden';
+    el.style.pointerEvents = 'none';
+    const height = el.offsetHeight;
+    el.style.visibility = '';
+    el.style.pointerEvents = '';
+    if (wasHidden) el.hidden = true;
+    return height;
+  }
+
+  function lockViewportHeight(nextPanel) {
+    if (!(viewport instanceof HTMLElement)) return;
+    const current = panels.find((el) => el.classList.contains('fc-panel--active'));
+    const nextHeight = measurePanel(nextPanel);
+    const currentHeight = current ? viewport.offsetHeight : 0;
+    viewport.style.minHeight = `${Math.max(currentHeight, nextHeight)}px`;
+  }
+
+  function releaseViewportHeight() {
+    if (!(viewport instanceof HTMLElement)) return;
+    const active = panels.find((el) => el.classList.contains('fc-panel--active'));
+    viewport.style.minHeight = active ? `${active.offsetHeight}px` : '';
+  }
+
+  function updateProgress(activeQuestionIndex) {
+    if (!progressBar) return;
+
+    progressSteps.forEach((step, index) => {
+      step.classList.remove('fc-progress-step--done', 'fc-progress-step--current');
+      if (activeQuestionIndex >= questionCount) {
+        step.classList.add('fc-progress-step--done');
+      } else if (index < activeQuestionIndex) {
+        step.classList.add('fc-progress-step--done');
+      } else if (index === activeQuestionIndex) {
+        step.classList.add('fc-progress-step--current');
+      }
+    });
+
+    const progressValue =
+      activeQuestionIndex >= questionCount ? questionCount : activeQuestionIndex + 1;
+    progressBar.setAttribute('aria-valuenow', String(progressValue));
+  }
+
+  function setCardResult(tone) {
+    root.classList.remove(
+      'ready-to-date-quiz-card--result-ready',
+      'ready-to-date-quiz-card--result-slow-down'
+    );
+    if (tone === 'ready') {
+      root.classList.add('ready-to-date-quiz-card--result-ready');
+    } else if (tone === 'slow-down') {
+      root.classList.add('ready-to-date-quiz-card--result-slow-down');
+    }
+  }
+
+  function panel(name) {
+    return panels.find((el) => el.dataset.panel === name) ?? null;
+  }
+
+  function announce(message) {
+    if (!live) return;
+    live.textContent = '';
+    window.setTimeout(() => {
+      live.textContent = message;
+    }, 30);
+  }
+
+  function updateQuestion4() {
+    if (question4Heading && question4ByConstraint[selectedConstraint]) {
+      question4Heading.textContent = question4ByConstraint[selectedConstraint];
+    }
+  }
+
+  function showConstraintTips(resultPanelName) {
+    const resultPanel = panel(resultPanelName);
+    if (!resultPanel) return;
+
+    resultPanel.querySelectorAll('[data-constraint-tip]').forEach((el) => {
+      if (!(el instanceof HTMLElement)) return;
+      const isGoSlowFresh =
+        el.hasAttribute('data-go-slow-only') && resultPanelName === 'result-go-slow';
+      const isSlowDownTip =
+        !el.hasAttribute('data-go-slow-only') && resultPanelName === 'result-slow-down';
+      const isMatch = el.dataset.constraintTip === selectedConstraint;
+      el.hidden = !(isMatch && (isGoSlowFresh || isSlowDownTip));
+    });
+  }
+
+  function showCtaForTier(tier) {
+    ctaHeadings.forEach((heading) => {
+      if (!(heading instanceof HTMLElement)) return;
+      heading.hidden = heading.dataset.ctaTier !== tier;
+      if (!heading.hidden) heading.id = 'fc-cta-heading';
+    });
+    if (cta) cta.setAttribute('aria-labelledby', 'fc-cta-heading');
+  }
+
+  async function showPanel(name, focusSelector) {
+    if (transitioning) return;
+    const next = panel(name);
+    const current = panels.find((el) => el.classList.contains('fc-panel--active'));
+    if (!next || next === current) return;
+
+    transitioning = true;
+    root.setAttribute('aria-busy', 'true');
+    lockViewportHeight(next);
+
+    if (current) {
+      setPanelAccessibility(current, true);
+      current.classList.remove('fc-panel--active');
+      current.classList.add('fc-panel--leaving');
+      await waitForOpacityTransition(current);
+      current.classList.remove('fc-panel--leaving');
+      current.hidden = true;
+    }
+
+    next.hidden = false;
+    next.classList.remove('fc-panel--active', 'fc-panel--leaving');
+    setPanelAccessibility(next, false);
+    void next.offsetHeight;
+    next.classList.add('fc-panel--active');
+    await waitForOpacityTransition(next);
+
+    panels.forEach((el) => {
+      if (el !== next) setPanelAccessibility(el, true);
+    });
+    setPanelAccessibility(next, false);
+
+    releaseViewportHeight();
+    transitioning = false;
+    root.removeAttribute('aria-busy');
+
+    const focusTarget = focusSelector
+      ? next.querySelector(focusSelector)
+      : next.querySelector('h2, button, a');
+    if (focusTarget instanceof HTMLElement) focusTarget.focus({ preventScroll: true });
+  }
+
+  async function beginQuestions() {
+    currentIndex = 0;
+    answers.length = 0;
+    updateQuestion4();
+    if (progressBar) progressBar.hidden = false;
+    root.classList.add('ready-to-date-quiz-card--in-quiz');
+    updateProgress(0);
+    await showPanel('question-0', '[data-answer="yes"]');
+    announce(announceQuestions[0]);
+  }
+
+  async function finishQuiz() {
+    const yesCount = answers.filter((value) => value === 'yes').length;
+    updateProgress(questionCount);
+
+    let tier = 'ready';
+    let resultPanel = 'result-ready';
+    let announceMessage = announceResultReady;
+
+    if (yesCount >= 3) {
+      tier = 'slow-down';
+      resultPanel = 'result-slow-down';
+      announceMessage = announceResultSlowDown;
+      setCardResult('slow-down');
+      showConstraintTips('result-slow-down');
+    } else if (yesCount === 2) {
+      tier = 'go-slow';
+      resultPanel = 'result-go-slow';
+      announceMessage = announceResultGoSlow;
+      setCardResult('');
+      showConstraintTips('result-go-slow');
+    } else {
+      setCardResult('ready');
+    }
+
+    await showPanel(resultPanel);
+    announce(announceMessage);
+    showCtaForTier(tier);
+
+    if (cta) {
+      cta.hidden = false;
+      window.requestAnimationFrame(() => cta.classList.add('fc-cta--visible'));
+    }
+  }
+
+  panels.forEach((el) => {
+    const isActive = el.classList.contains('fc-panel--active');
+    setPanelAccessibility(el, !isActive);
+  });
+
+  root.addEventListener('click', async (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+
+    if (target.dataset.action === 'start') {
+      await showPanel('constraint', '[data-constraint]');
+      announce(announcePickWhereAreYou);
+      return;
+    }
+
+    const constraintButton = target.closest('[data-action="constraint"]');
+    if (constraintButton instanceof HTMLElement && !transitioning) {
+      const constraint = constraintButton.dataset.constraint;
+      if (!constraint) return;
+
+      selectedConstraint = constraint;
+
+      constraintButton.classList.add('fc-constraint-card--chosen');
+      if (motionEnabled()) await wait(120);
+      constraintButton.classList.remove('fc-constraint-card--chosen');
+
+      await beginQuestions();
+      announce(announceGotIt);
+      return;
+    }
+
+    const answerButton = target.closest('[data-answer]');
+    if (!(answerButton instanceof HTMLElement) || transitioning) return;
+
+    const activePanel = panels.find((el) => el.classList.contains('fc-panel--active'));
+    if (!activePanel?.dataset.panel?.startsWith('question-')) return;
+
+    const answer = answerButton.dataset.answer;
+    if (!answer || (answer !== 'yes' && answer !== 'no')) return;
+
+    answerButton.classList.add('fc-answer-card--chosen');
+    if (motionEnabled()) await wait(120);
+    answerButton.classList.remove('fc-answer-card--chosen');
+
+    answers.push(answer);
+    currentIndex += 1;
+
+    if (currentIndex >= questionCount) {
+      await finishQuiz();
+      return;
+    }
+
+    updateProgress(currentIndex);
+    await showPanel(`question-${currentIndex}`, '[data-answer="yes"]');
+    announce(announceQuestions[currentIndex]);
+  });
+</script>

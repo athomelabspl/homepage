@@ -8,6 +8,8 @@ interface Props {
   imageHeight?: number;
   imageAlt?: string;
   type?: string;
+  locale?: string;
+  localeAlternates?: string[];
 }
 
 const site = Astro.site?.href.replace(/\/$/, '') ?? 'https://athomelabs.eu';
@@ -24,6 +26,8 @@ const {
   imageHeight,
   imageAlt,
   type = 'website',
+  locale,
+  localeAlternates = [],
 } = Astro.props;
 
 const imageUrl = image
@@ -38,6 +42,12 @@ const imageUrl = image
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={url} />
+{locale && <meta property="og:locale" content={locale} />}
+{
+  localeAlternates.map((alt) => (
+    <meta property="og:locale:alternate" content={alt} />
+  ))
+}
 {
   imageUrl && (
     <>

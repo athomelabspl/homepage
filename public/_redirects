@@ -7,6 +7,10 @@
 /reset-password/*    /breakup-reset/reset-password/:splat    301
 /breakup-reset/reset-password    /breakup-reset/reset-password/    301
 
+# EN landing stays at brand root (never /breakup-reset/en/)
+/breakup-reset/en    /breakup-reset/    301
+/breakup-reset/en/   /breakup-reset/    301
+
 # Blog default locale
 /breakup-reset/blog/    /breakup-reset/blog/en/    301
 /breakup-reset/blog/en/welcome-to-breakup-reset/    /breakup-reset/blog/en/what-to-do-after-a-breakup/    301

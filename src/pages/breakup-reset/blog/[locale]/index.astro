@@ -45,6 +45,11 @@ const topics = BREAKUP_CLUSTERS.map((cluster) => ({
   description="Calm, practical articles on breakup recovery and emotional healing from Breakup Reset."
   lang={locale}
 >
+  {
+    posts.length === 0 && (
+      <meta name="robots" content="noindex, follow" slot="head" />
+    )
+  }
   <link
     rel="alternate"
     type="application/rss+xml"
