@@ -19,6 +19,10 @@ export interface BrandConfig {
     posthogHost: string;
     enabled: boolean;
   };
+  marketing?: {
+    metaPixelId?: string;
+    tiktokPixelId?: string;
+  };
   stores?: {
     ios: { appId?: string; url?: string };
     android: { packageId: string; url?: string };
@@ -63,6 +67,12 @@ export const brands: Record<BrandId, BrandConfig> = {
       posthogProjectKey: import.meta.env.PUBLIC_POSTHOG_BREAKUP_KEY,
       posthogHost,
       enabled: Boolean(import.meta.env.PUBLIC_POSTHOG_BREAKUP_KEY),
+    },
+    marketing: {
+      metaPixelId:
+        import.meta.env.PUBLIC_BREAKUP_META_PIXEL_ID ?? '1577758434133021',
+      tiktokPixelId:
+        import.meta.env.PUBLIC_BREAKUP_TIKTOK_PIXEL_ID ?? 'D9UO3TBC77U55G1DPKS0',
     },
     stores: {
       ios: {

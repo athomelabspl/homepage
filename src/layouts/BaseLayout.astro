@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Canonical from '../components/seo/Canonical.astro';
 import Analytics from '../components/Analytics.astro';
+import MarketingPixels from '../components/MarketingPixels.astro';
 import type { BrandConfig } from '../config/brands';
 
 interface Props {
@@ -65,6 +66,7 @@ const deepLink = brand.stores?.deepLinkScheme;
     }
     <slot name="head" />
     <Analytics brand={brand} disabled={disableAnalytics} />
+    <MarketingPixels brand={brand} disabled={disableAnalytics} />
   </head>
   <body data-brand={brand.id} class={bodyClass}>
     <slot />
