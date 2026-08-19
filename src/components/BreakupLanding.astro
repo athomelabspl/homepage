@@ -15,6 +15,7 @@ import {
 } from '../config/breakup-chrome';
 import { getBreakupLandingCopy } from '../config/breakup-landing';
 import {
+  getBreakupDownloadUrl,
   getBreakupPlayStoreUrl,
   storePlacements,
 } from '../utils/storeLinks';
@@ -28,6 +29,7 @@ const copy = getBreakupLandingCopy(locale);
 const chrome = getBreakupChrome(locale);
 const brand = brands['breakup-reset'];
 const androidUrl = getBreakupPlayStoreUrl(storePlacements.homeHeroAndroid);
+const iosUrl = getBreakupDownloadUrl(storePlacements.homeHeroIos);
 
 const recentPosts = copy.showArticles
   ? (await getCollection('breakup-blog'))
@@ -82,9 +84,13 @@ const ogTitle = `${copy.title} | ${brand.name}`;
       >
         {copy.androidCta}
       </a>
-      <span class="button button-muted" aria-disabled="true"
-        >{copy.iosComingSoon}</span
+      <a
+        href={iosUrl}
+        class="button button-filled button-cta"
+        rel="noopener noreferrer"
       >
+        {copy.iosCta}
+      </a>
     </div>
 
     <div

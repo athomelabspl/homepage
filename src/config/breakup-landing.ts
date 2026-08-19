@@ -25,7 +25,7 @@ export interface LandingCopy {
   heroHeading: string;
   heroSubtitle: string;
   androidCta: string;
-  iosComingSoon: string;
+  iosCta: string;
   carouselLabel: string;
   prevScreen: string;
   nextScreen: string;
@@ -82,7 +82,7 @@ export function getBreakupLandingCopy(locale: LandingLocale): LandingCopy {
       heroSubtitle:
         'Ninguna ruptura se siente igual. Recibe apoyo que te entiende.',
       androidCta: 'Android',
-      iosComingSoon: 'iOS (Próximamente)',
+      iosCta: 'iOS',
       carouselLabel: 'Pantallas de la app Breakup Reset',
       prevScreen: 'Pantalla anterior',
       nextScreen: 'Pantalla siguiente',
@@ -186,7 +186,7 @@ export function getBreakupLandingCopy(locale: LandingLocale): LandingCopy {
       heroSubtitle:
         "Aucune rupture ne se ressemble. Recevez un accompagnement qui vous comprend.",
       androidCta: 'Android',
-      iosComingSoon: 'iOS (Bientôt disponible)',
+      iosCta: 'iOS',
       carouselLabel: "Écrans de l'application Breakup Reset",
       prevScreen: 'Écran précédent',
       nextScreen: 'Écran suivant',
@@ -290,7 +290,7 @@ export function getBreakupLandingCopy(locale: LandingLocale): LandingCopy {
       heroSubtitle:
         'Keine Trennung fühlt sich gleich an. Hol dir Unterstützung, die dich versteht.',
       androidCta: 'Android',
-      iosComingSoon: 'iOS (Bald verfügbar)',
+      iosCta: 'iOS',
       carouselLabel: 'Breakup Reset App-Bildschirme',
       prevScreen: 'Vorheriger Bildschirm',
       nextScreen: 'Nächster Bildschirm',
@@ -394,7 +394,7 @@ export function getBreakupLandingCopy(locale: LandingLocale): LandingCopy {
       heroSubtitle:
         'Każde rozstanie przeżywa się inaczej. Odkryj program wsparcia oparty na Twojej sytuacji.',
       androidCta: 'Android',
-      iosComingSoon: 'iOS (Wkrótce)',
+      iosCta: 'iOS',
       carouselLabel: 'Ekrany aplikacji Breakup Reset',
       prevScreen: 'Poprzedni ekran',
       nextScreen: 'Następny ekran',
@@ -497,7 +497,7 @@ export function getBreakupLandingCopy(locale: LandingLocale): LandingCopy {
       heroSubtitle:
         'Nenhum término é igual ao outro. Receba um apoio que entende você.',
       androidCta: 'Android',
-      iosComingSoon: 'iOS (Em breve)',
+      iosCta: 'iOS',
       carouselLabel: 'Telas do app Breakup Reset',
       prevScreen: 'Tela anterior',
       nextScreen: 'Próxima tela',
@@ -600,7 +600,7 @@ export function getBreakupLandingCopy(locale: LandingLocale): LandingCopy {
     heroSubtitle:
       'No two breakups feel the same. Get support that understands you.',
     androidCta: 'Android',
-    iosComingSoon: 'iOS (Coming Soon)',
+    iosCta: 'iOS',
     carouselLabel: 'Breakup Reset app screens',
     prevScreen: 'Previous screen',
     nextScreen: 'Next screen',

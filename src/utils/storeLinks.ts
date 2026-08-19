@@ -4,6 +4,8 @@ import { brands } from '../config/brands';
 export const storePlacements = {
   homeHeaderDownload: 'home_header_download',
   homeHeroAndroid: 'home_hero_android',
+  homeHeroIos: 'home_hero_ios',
+  homeHeaderIos: 'home_header_ios',
   blogSidebarLaunch: 'blog_sidebar_launch',
   blogDownloadCta: 'blog_download_cta',
   blogPromo: 'blog_promo',
@@ -29,6 +31,14 @@ function isPlayStoreUrl(url: string): boolean {
   }
 }
 
+function isAppStoreUrl(url: string): boolean {
+  try {
+    return new URL(url).hostname.includes('apps.apple.com');
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Attach acquisition tracking to a store / CTA URL.
  * - Play Store: standard UTM params (+ `source` mirrored to utm_content)
@@ -40,7 +50,7 @@ export function withStoreTracking(
 ): string {
   const parsed = new URL(url);
 
-  if (isPlayStoreUrl(url)) {
+  if (isPlayStoreUrl(url) || isAppStoreUrl(url)) {
     parsed.searchParams.set('utm_source', DEFAULT_UTM.utm_source);
     parsed.searchParams.set('utm_medium', DEFAULT_UTM.utm_medium);
     parsed.searchParams.set('utm_campaign', DEFAULT_UTM.utm_campaign);

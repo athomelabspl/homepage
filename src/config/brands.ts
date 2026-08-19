@@ -76,8 +76,8 @@ export const brands: Record<BrandId, BrandConfig> = {
     },
     stores: {
       ios: {
-        appId: import.meta.env.PUBLIC_BREAKUP_IOS_APP_ID,
-        url: import.meta.env.PUBLIC_BREAKUP_IOS_URL,
+        appId: '6782842737',
+        url: 'https://apps.apple.com/pl/app/breakup-reset/id6782842737',
       },
       android: {
         packageId: 'com.breakupreset',

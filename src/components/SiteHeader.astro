@@ -1,6 +1,7 @@
 ---
 import type { BrandConfig, BrandNavItem } from '../config/brands';
 import {
+  getBreakupDownloadUrl,
   getBreakupPlayStoreUrl,
   storePlacements,
 } from '../utils/storeLinks';
@@ -18,6 +19,9 @@ const currentPath = Astro.url.pathname;
 const isBreakupReset = brand.id === 'breakup-reset';
 const androidUrl = isBreakupReset
   ? getBreakupPlayStoreUrl(storePlacements.homeHeaderDownload)
+  : undefined;
+const iosUrl = isBreakupReset
+  ? getBreakupDownloadUrl(storePlacements.homeHeaderIos)
   : undefined;
 ---
 
@@ -51,14 +55,27 @@ const androidUrl = isBreakupReset
       }
     </nav>
     {
-      isBreakupReset && androidUrl && (
-        <a
-          href={androidUrl}
-          class="button button-filled site-header-cta"
-          rel="noopener noreferrer"
-        >
-          {downloadLabel}
-        </a>
+      isBreakupReset && (
+        <div class="header-cta-group">
+          {iosUrl && (
+            <a
+              href={iosUrl}
+              class="button button-filled site-header-cta"
+              rel="noopener noreferrer"
+            >
+              iOS
+            </a>
+          )}
+          {androidUrl && (
+            <a
+              href={androidUrl}
+              class="button button-filled site-header-cta"
+              rel="noopener noreferrer"
+            >
+              Android
+            </a>
+          )}
+        </div>
       )
     }
   </div>
