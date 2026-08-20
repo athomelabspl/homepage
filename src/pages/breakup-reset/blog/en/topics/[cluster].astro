@@ -1,0 +1,95 @@
+---
+import AppLayout from '../../../../../layouts/AppLayout.astro';
+import OpenGraph from '../../../../../components/seo/OpenGraph.astro';
+import { getCollection } from 'astro:content';
+import {
+  BREAKUP_CLUSTERS,
+  CLUSTER_META,
+  type BreakupCluster,
+} from '../../../../../config/breakup-clusters';
+import {
+  getBlogUi,
+  getClusterPosts,
+  postSlug,
+  readingTimeMinutes,
+} from '../../../../../utils/blog';
+
+export function getStaticPaths() {
+  return BREAKUP_CLUSTERS.map((cluster) => ({
+    params: { cluster },
+  }));
+}
+
+const { cluster } = Astro.params as { cluster: BreakupCluster };
+const locale = 'en' as const;
+const meta = CLUSTER_META[cluster];
+const allPosts = await getCollection('breakup-blog');
+const posts = getClusterPosts(allPosts, cluster, locale);
+const pillar = posts.find((p) => p.data.role === 'pillar');
+const rest = posts.filter((p) => p.data.translationKey !== pillar?.data.translationKey);
+const ui = getBlogUi(locale);
+const site = Astro.site?.href.replace(/\/$/, '') ?? 'https://athomelabs.eu';
+const pageUrl = `${site}/breakup-reset/blog/en/topics/${cluster}/`;
+---
+
+<AppLayout title={meta.title} description={meta.description} lang={locale}>
+  <OpenGraph
+    title={meta.title}
+    description={meta.description}
+    url={pageUrl}
+    type="website"
+    slot="head"
+  />
+
+  <div class="topic-hub">
+    <p class="topic-hub-back">
+      <a href={`/breakup-reset/blog/${locale}/`}>{ui.backToBlog}</a>
+    </p>
+    <h1 class="page-title">{meta.title}</h1>
+    <p class="page-intro">{meta.description}</p>
+
+    {
+      meta.quizHref && (
+        <p class="topic-hub-quiz">
+          <a href={meta.quizHref}>{meta.quizLabel}</a>
+        </p>
+      )
+    }
+
+    {
+      posts.length === 0 ? (
+        <p class="muted">No articles in this topic yet.</p>
+      ) : (
+        <div class="topic-hub-list">
+          {pillar && (
+            <article class="topic-hub-card topic-hub-card--pillar">
+              <p class="topic-hub-eyebrow">{ui.startHere}</p>
+              <h2 class="topic-hub-card-title">
+                <a href={`/breakup-reset/blog/${locale}/${postSlug(pillar.id)}/`}>
+                  {pillar.data.title}
+                </a>
+              </h2>
+              <p class="topic-hub-card-desc">{pillar.data.description}</p>
+              <p class="topic-hub-card-meta">
+                {ui.minRead(readingTimeMinutes(pillar.body))}
+              </p>
+            </article>
+          )}
+          {rest.map((post) => (
+            <article class="topic-hub-card">
+              <h2 class="topic-hub-card-title">
+                <a href={`/breakup-reset/blog/${locale}/${postSlug(post.id)}/`}>
+                  {post.data.title}
+                </a>
+              </h2>
+              <p class="topic-hub-card-desc">{post.data.description}</p>
+              <p class="topic-hub-card-meta">
+                {ui.minRead(readingTimeMinutes(post.body))}
+              </p>
+            </article>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</AppLayout>

@@ -5,11 +5,42 @@ import StudioLayout from '../layouts/StudioLayout.astro';
 <StudioLayout
   title="At Home Labs"
   description="Changing the world (a little) by making helpful apps (slowly)."
-  bodyClass="home"
+  bodyClass="studio-home"
 >
-  <p class="tagline">We build tools to help you thrive.</p>
-  <p class="bio">
-    Changing the world (a little) by making helpful apps (slowly).
-  </p>
-  <a href="mailto:athomelabs.studio@gmail.com" class="button">Get in touch</a>
+  <section class="studio-hero" aria-labelledby="studio-hero-heading">
+    <h1 id="studio-hero-heading">We build tools to help you thrive.</h1>
+    <p class="studio-hero-sub">
+      Changing the world (a little) by making helpful apps (slowly).
+    </p>
+    <a
+      href="mailto:athomelabs.studio@gmail.com"
+      class="btn-studio btn-studio--primary"
+    >
+      Get in touch
+    </a>
+  </section>
+
+  <section class="studio-portfolio" id="apps" aria-labelledby="portfolio-heading">
+    <p class="studio-section-label" id="portfolio-heading">Our portfolio</p>
+
+    <article class="app-card" aria-label="Breakup Reset">
+      <img
+        src="/breakup-reset/logos/bamboo-mark.svg"
+        alt="Breakup Reset Logo"
+        class="app-card-icon"
+        width="64"
+        height="64"
+        decoding="async"
+      />
+      <div class="app-card-body">
+        <h2 class="app-card-title">Breakup Reset</h2>
+        <p class="app-card-description">
+          A gentle, structured reset to help you move forward after a breakup.
+        </p>
+        <a href="/breakup-reset/" class="btn-studio btn-studio--primary">
+          Explore Breakup Reset →
+        </a>
+      </div>
+    </article>
+  </section>
 </StudioLayout>

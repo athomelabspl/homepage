@@ -13,6 +13,12 @@
 /breakup-reset/logos/*
   Cache-Control: public, max-age=86400
 
+# Auth handoff (no cache — must forward fresh Supabase tokens)
+/breakup-reset/reset-password/*
+  Cache-Control: no-store
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+
 # Mobile app deep-link verification (iOS Universal Links / Android App Links)
 /.well-known/apple-app-site-association
   Content-Type: application/json

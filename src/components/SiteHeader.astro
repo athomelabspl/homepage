@@ -1,13 +1,28 @@
 ---
-import type { BrandConfig } from '../config/brands';
+import type { BrandConfig, BrandNavItem } from '../config/brands';
+import {
+  getBreakupDownloadUrl,
+  getBreakupPlayStoreUrl,
+  storePlacements,
+} from '../utils/storeLinks';
 
 interface Props {
   brand: BrandConfig;
   homeHref: string;
+  nav?: BrandNavItem[];
+  downloadLabel?: string;
 }
 
-const { brand, homeHref } = Astro.props;
+const { brand, homeHref, nav, downloadLabel = 'Download' } = Astro.props;
+const navItems = nav ?? brand.nav;
 const currentPath = Astro.url.pathname;
+const isBreakupReset = brand.id === 'breakup-reset';
+const androidUrl = isBreakupReset
+  ? getBreakupPlayStoreUrl(storePlacements.homeHeaderDownload)
+  : undefined;
+const iosUrl = isBreakupReset
+  ? getBreakupDownloadUrl(storePlacements.homeHeaderIos)
+  : undefined;
 ---
 
 <header class="site-header">
@@ -26,16 +41,42 @@ const currentPath = Astro.url.pathname;
     }
     <span class="brand-name">{brand.name}</span>
   </a>
-  <nav class="site-nav" aria-label="Main">
+  <div class="site-header-end">
+    <nav class="site-nav" aria-label="Main">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            aria-current={currentPath === item.href ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
     {
-      brand.nav.map((item) => (
-        <a
-          href={item.href}
-          aria-current={currentPath === item.href ? 'page' : undefined}
-        >
-          {item.label}
-        </a>
-      ))
+      isBreakupReset && (
+        <div class="header-cta-group">
+          {iosUrl && (
+            <a
+              href={iosUrl}
+              class="button button-filled site-header-cta"
+              rel="noopener noreferrer"
+            >
+              iOS
+            </a>
+          )}
+          {androidUrl && (
+            <a
+              href={androidUrl}
+              class="button button-filled site-header-cta"
+              rel="noopener noreferrer"
+            >
+              Android
+            </a>
+          )}
+        </div>
+      )
     }
-  </nav>
+  </div>
 </header>

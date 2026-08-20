@@ -1,0 +1,700 @@
+---
+import AppLayout from '../../layouts/AppLayout.astro';
+import Canonical from '../../components/seo/Canonical.astro';
+import OpenGraph from '../../components/seo/OpenGraph.astro';
+import Hreflang from '../../components/seo/Hreflang.astro';
+import FAQPageSchema from '../../components/seo/FAQPageSchema.astro';
+import FAQ from '../../components/mdx/FAQ.astro';
+import PhosphorIcon from '../../components/icons/PhosphorIcon.astro';
+import { brands } from '../../config/brands';
+import { getNoContactQuizCopy, noContactImages } from '../../config/quizzes/no-contact';
+import { OG_LOCALE_MAP, ogLocaleAlternate, type QuizLocale } from '../../config/quizzes/shared';
+import {
+  getBreakupChrome,
+  marketingQuizHreflangPaths,
+} from '../../config/breakup-chrome';
+
+interface Props {
+  locale: QuizLocale;
+}
+
+const { locale } = Astro.props;
+const copy = getNoContactQuizCopy(locale);
+const brand = brands['breakup-reset'];
+const { landingIllustration, resultImages } = noContactImages;
+const chrome = getBreakupChrome(locale);
+
+const slug = 'should-i-do-no-contact-quiz' as const;
+const hreflangPaths = marketingQuizHreflangPaths(slug);
+const localizedChrome = locale === 'en' ? undefined : chrome;
+
+const webAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: copy.schemaName,
+  url: copy.pageUrl,
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  browserRequirements: 'Requires JavaScript',
+  description: copy.schemaDescription,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  author: {
+    '@type': 'Organization',
+    name: brand.name,
+    url: 'https://athomelabs.eu/breakup-reset/',
+  },
+};
+
+const questionCount = copy.questionsPathA.length;
+const announceQuestionsA = copy.questionsPathA.map((_, index) =>
+  copy.announce.question(index + 1, questionCount)
+);
+const announceQuestionsB = copy.questionsPathB.map((_, index) =>
+  copy.announce.question(index + 1, questionCount)
+);
+---
+
+<AppLayout
+  title={copy.title}
+  description={copy.description}
+  bodyClass="page no-contact-quiz-page"
+  showSmartBanner
+  lang={locale}
+  nav={localizedChrome?.nav}
+  homeHref={localizedChrome?.homeHref}
+  downloadLabel={localizedChrome?.downloadLabel}
+>
+  <Canonical slot="head" />
+  <Hreflang paths={hreflangPaths} slot="head" />
+  <OpenGraph
+    slot="head"
+    title={copy.ogTitle}
+    description={copy.description}
+    url={copy.pageUrl}
+    image={copy.ogImage.src}
+    imageWidth={copy.ogImage.width}
+    imageHeight={copy.ogImage.height}
+    imageAlt={copy.ogImage.alt}
+    locale={OG_LOCALE_MAP[locale]}
+    localeAlternates={ogLocaleAlternate(locale)}
+  />
+  <script type="application/ld+json" set:html={JSON.stringify(webAppSchema)} slot="head" />
+  <FAQPageSchema items={copy.faqItems} slot="head" />
+
+  <article class="no-contact-quiz" aria-labelledby="ncq-title">
+    <header class="no-contact-quiz-header">
+      <h1 id="ncq-title" class="no-contact-quiz-title">
+        {copy.heading}
+      </h1>
+    </header>
+
+    <div
+      class="fc-progress-bar"
+      id="fc-progress-bar"
+      role="progressbar"
+      aria-valuemin={0}
+      aria-valuemax={questionCount}
+      aria-valuenow={0}
+      aria-label={copy.progress.ariaLabel}
+      hidden
+    >
+      <ol class="fc-progress-steps">
+        {
+          Array.from({ length: questionCount }, (_, index) => (
+            <li class="fc-progress-step" data-step={index}>
+              <span class="fc-progress-step-marker" aria-hidden="true" />
+              <span class="fc-progress-step-label">{copy.progress.stepLabel(index + 1)}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+
+    <div
+      class="no-contact-quiz-card"
+      id="no-contact-quiz"
+      data-download-url={copy.downloadUrl}
+    >
+      <div class="fc-panels-viewport">
+        <section
+          class="fc-panel fc-panel--active"
+          data-panel="landing"
+          aria-labelledby="ncq-landing-heading"
+        >
+          <h2 id="ncq-landing-heading" class="fc-panel-heading">
+            {copy.landing.heading}
+          </h2>
+          <img
+            class="fc-landing-illustration"
+            src={landingIllustration.src}
+            alt={copy.landing.illustrationAlt}
+            width={landingIllustration.width}
+            height={landingIllustration.height}
+            loading="eager"
+            decoding="async"
+          />
+          <p class="fc-panel-copy">
+            {copy.landing.copy}
+          </p>
+          <p class="fc-panel-copy fc-panel-copy--follow">
+            {copy.landing.followCopy}
+          </p>
+          <button type="button" class="fc-btn fc-btn--primary" data-action="start">
+            {copy.landing.startButton}
+          </button>
+        </section>
+
+        <section
+          class="fc-panel"
+          data-panel="constraint"
+          aria-labelledby="ncq-constraint-heading"
+          hidden
+        >
+          <p class="fc-progress fc-progress--eyebrow">{copy.constraintPanel.eyebrow}</p>
+          <h2 id="ncq-constraint-heading" class="fc-panel-heading">
+            {copy.constraintPanel.heading}
+          </h2>
+          <p class="fc-panel-copy fc-panel-copy--constraint">
+            {copy.constraintPanel.copy}
+          </p>
+          <div
+            class="fc-constraint-list"
+            role="group"
+            aria-label={copy.constraintPanel.heading}
+          >
+            {
+              copy.constraints.map((item) => (
+                <button
+                  type="button"
+                  class="fc-constraint-card"
+                  data-action="constraint"
+                  data-constraint={item.id}
+                >
+                  {item.label}
+                </button>
+              ))
+            }
+          </div>
+          <p class="fc-panel-copy fc-panel-copy--helper">
+            {copy.constraintPanel.helper}
+          </p>
+        </section>
+
+        {
+          copy.questionsPathA.map((text, index) => (
+            <section
+              class="fc-panel"
+              data-panel={`question-a-${index}`}
+              data-quiz-path="a"
+              aria-labelledby={`ncq-a-${index}-heading`}
+              hidden
+            >
+              <p class="fc-progress">{copy.questionOf(index + 1, questionCount)}</p>
+              <h2 id={`ncq-a-${index}-heading`} class="fc-panel-heading">
+                {text}
+              </h2>
+              <div class="fc-answers" role="group" aria-label={copy.answers.groupLabel(index + 1)}>
+                <button type="button" class="fc-answer-card" data-answer="yes">
+                  <PhosphorIcon name="heart-break" class="fc-answer-icon" />
+                  <span class="fc-answer-label">{copy.answers.yes}</span>
+                </button>
+                <button type="button" class="fc-answer-card" data-answer="no">
+                  <PhosphorIcon name="shield-check" class="fc-answer-icon" />
+                  <span class="fc-answer-label">{copy.answers.no}</span>
+                </button>
+              </div>
+            </section>
+          ))
+        }
+
+        {
+          copy.questionsPathB.map((text, index) => (
+            <section
+              class="fc-panel"
+              data-panel={`question-b-${index}`}
+              data-quiz-path="b"
+              aria-labelledby={`ncq-b-${index}-heading`}
+              hidden
+            >
+              <p class="fc-progress">{copy.questionOf(index + 1, questionCount)}</p>
+              <h2 id={`ncq-b-${index}-heading`} class="fc-panel-heading">
+                {text}
+              </h2>
+              <div class="fc-answers" role="group" aria-label={copy.answers.groupLabel(index + 1)}>
+                <button type="button" class="fc-answer-card" data-answer="yes">
+                  <PhosphorIcon name="warning-circle" class="fc-answer-icon" />
+                  <span class="fc-answer-label">{copy.answers.yes}</span>
+                </button>
+                <button type="button" class="fc-answer-card" data-answer="no">
+                  <PhosphorIcon name="check-circle" class="fc-answer-icon" />
+                  <span class="fc-answer-label">{copy.answers.no}</span>
+                </button>
+              </div>
+            </section>
+          ))
+        }
+
+        <section
+          class="fc-panel"
+          data-panel="result-a-more"
+          aria-labelledby="ncq-a-more-heading"
+          hidden
+        >
+          <img
+            class="fc-result-photo"
+            src={resultImages.moreDistance.src}
+            srcset={`${resultImages.moreDistance.src} ${resultImages.moreDistance.intrinsicWidth}w`}
+            sizes="100vw"
+            alt={copy.results.aMore.imageAlt}
+            width={resultImages.moreDistance.width}
+            height={resultImages.moreDistance.height}
+            loading="lazy"
+            decoding="async"
+          />
+          <h2 id="ncq-a-more-heading" class="fc-panel-heading">
+            {copy.results.aMore.heading}
+          </h2>
+          {copy.results.aMore.paragraphs.map((paragraph) => <p class="fc-panel-copy">{paragraph}</p>)}
+        </section>
+
+        <section
+          class="fc-panel"
+          data-panel="result-a-ok"
+          aria-labelledby="ncq-a-ok-heading"
+          hidden
+        >
+          <img
+            class="fc-result-photo"
+            src={resultImages.ok.src}
+            srcset={`${resultImages.ok.src} ${resultImages.ok.intrinsicWidth}w`}
+            sizes="100vw"
+            alt={copy.results.aOk.imageAlt}
+            width={resultImages.ok.width}
+            height={resultImages.ok.height}
+            loading="lazy"
+            decoding="async"
+          />
+          <h2 id="ncq-a-ok-heading" class="fc-panel-heading">
+            {copy.results.aOk.heading}
+          </h2>
+          {copy.results.aOk.paragraphs.map((paragraph) => <p class="fc-panel-copy">{paragraph}</p>)}
+          <p class="fc-panel-copy">
+            {copy.results.aOk.friendQuizLink.before}
+            <a href={copy.results.aOk.friendQuizLink.href}>
+              {copy.results.aOk.friendQuizLink.linkText}
+            </a>
+            {copy.results.aOk.friendQuizLink.after}
+          </p>
+        </section>
+
+        <section
+          class="fc-panel"
+          data-panel="result-b-tighter"
+          aria-labelledby="ncq-b-tighter-heading"
+          hidden
+        >
+          <img
+            class="fc-result-photo"
+            src={resultImages.moreDistance.src}
+            srcset={`${resultImages.moreDistance.src} ${resultImages.moreDistance.intrinsicWidth}w`}
+            sizes="100vw"
+            alt={copy.results.bTighter.imageAlt}
+            width={resultImages.moreDistance.width}
+            height={resultImages.moreDistance.height}
+            loading="lazy"
+            decoding="async"
+          />
+          <h2 id="ncq-b-tighter-heading" class="fc-panel-heading">
+            {copy.results.bTighter.heading}
+          </h2>
+          {
+            Object.entries(copy.constraintTips).map(([id, tip]) => (
+              <p class="fc-panel-copy fc-constraint-tip" data-constraint-tip={id} hidden>
+                {tip}
+              </p>
+            ))
+          }
+          {copy.results.bTighter.closingParagraphs.map((paragraph) => <p class="fc-panel-copy">{paragraph}</p>)}
+        </section>
+
+        <section
+          class="fc-panel"
+          data-panel="result-b-ok"
+          aria-labelledby="ncq-b-ok-heading"
+          hidden
+        >
+          <img
+            class="fc-result-photo"
+            src={resultImages.ok.src}
+            srcset={`${resultImages.ok.src} ${resultImages.ok.intrinsicWidth}w`}
+            sizes="100vw"
+            alt={copy.results.bOk.imageAlt}
+            width={resultImages.ok.width}
+            height={resultImages.ok.height}
+            loading="lazy"
+            decoding="async"
+          />
+          <h2 id="ncq-b-ok-heading" class="fc-panel-heading">
+            {copy.results.bOk.heading}
+          </h2>
+          {copy.results.bOk.paragraphs.map((paragraph) => <p class="fc-panel-copy">{paragraph}</p>)}
+        </section>
+      </div>
+
+      <section class="fc-cta" id="fc-cta" hidden aria-labelledby="fc-cta-heading">
+        <h2 id="fc-cta-heading" class="fc-cta-heading" data-cta-path="a" hidden>
+          {copy.cta.headingPathA}
+        </h2>
+        <h2 class="fc-cta-heading" data-cta-path="b" hidden>
+          {copy.cta.headingPathB}
+        </h2>
+        <p class="fc-cta-copy">
+          {copy.cta.copy}
+        </p>
+        <a
+          href={copy.downloadUrl}
+          class="fc-btn fc-btn--primary fc-btn--cta"
+          id="fc-download"
+        >
+          {copy.cta.button}
+        </a>
+      </section>
+
+      <div class="fc-live" aria-live="polite" aria-atomic="true" hidden></div>
+    </div>
+
+    <nav class="fc-related" aria-labelledby="ncq-related-heading">
+      <h2 id="ncq-related-heading" class="fc-related-heading">{copy.related.heading}</h2>
+      <ul class="fc-related-list">
+        {
+          copy.related.items.map((item) => (
+            <li>
+              <a class="fc-related-link" href={item.href}>
+                {item.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="fc-related-back">
+        <a href={copy.related.footerHref}>{copy.related.footerLabel}</a>
+      </p>
+    </nav>
+
+    <FAQ
+      items={copy.faqItems}
+      heading={chrome.faqHeading}
+    />
+  </article>
+</AppLayout>
+
+<script
+  define:vars={{
+    questionCount,
+    announceQuestionsA,
+    announceQuestionsB,
+    announcePickConstraint: copy.announce.pickConstraint,
+    announceGotIt: copy.announce.gotItFourQuestions,
+    announceResultAMore: copy.announce.resultAMore,
+    announceResultAOk: copy.announce.resultAOk,
+    announceResultBTighter: copy.announce.resultBTighter,
+    announceResultBOk: copy.announce.resultBOk,
+  }}
+>
+  const root = document.getElementById('no-contact-quiz');
+  if (!root) throw new Error('No contact quiz root not found');
+
+  const viewport = root.querySelector('.fc-panels-viewport');
+  const panels = Array.from(root.querySelectorAll('.fc-panel'));
+  const progressBar = document.getElementById('fc-progress-bar');
+  const progressSteps = progressBar
+    ? Array.from(progressBar.querySelectorAll('.fc-progress-step'))
+    : [];
+  const cta = document.getElementById('fc-cta');
+  const ctaHeadings = cta ? Array.from(cta.querySelectorAll('[data-cta-path]')) : [];
+  const live = root.querySelector('.fc-live');
+  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const answers = [];
+  let selectedPath = 'a';
+  let selectedConstraint = 'none';
+  let currentIndex = -1;
+  let transitioning = false;
+
+  function motionEnabled() {
+    return !motionQuery.matches;
+  }
+
+  function motionDuration() {
+    if (!motionEnabled()) return 0;
+    const value = getComputedStyle(root).getPropertyValue('--fc-motion-duration').trim();
+    return Number.parseInt(value, 10) || 200;
+  }
+
+  function wait(ms) {
+    return new Promise((resolve) => window.setTimeout(resolve, ms));
+  }
+
+  function waitForOpacityTransition(el) {
+    const duration = motionDuration();
+    if (duration === 0) return Promise.resolve();
+
+    return new Promise((resolve) => {
+      let settled = false;
+      const finish = () => {
+        if (settled) return;
+        settled = true;
+        el.removeEventListener('transitionend', onEnd);
+        resolve();
+      };
+      const onEnd = (event) => {
+        if (event.target === el && event.propertyName === 'opacity') finish();
+      };
+      el.addEventListener('transitionend', onEnd);
+      window.setTimeout(finish, duration + 80);
+    });
+  }
+
+  function setPanelAccessibility(el, isHidden) {
+    el.setAttribute('aria-hidden', isHidden ? 'true' : 'false');
+    if (isHidden) {
+      el.setAttribute('inert', '');
+    } else {
+      el.removeAttribute('inert');
+    }
+  }
+
+  function measurePanel(el) {
+    const wasHidden = el.hidden;
+    el.hidden = false;
+    el.style.visibility = 'hidden';
+    el.style.pointerEvents = 'none';
+    const height = el.offsetHeight;
+    el.style.visibility = '';
+    el.style.pointerEvents = '';
+    if (wasHidden) el.hidden = true;
+    return height;
+  }
+
+  function lockViewportHeight(nextPanel) {
+    if (!(viewport instanceof HTMLElement)) return;
+    const current = panels.find((el) => el.classList.contains('fc-panel--active'));
+    const nextHeight = measurePanel(nextPanel);
+    const currentHeight = current ? viewport.offsetHeight : 0;
+    viewport.style.minHeight = `${Math.max(currentHeight, nextHeight)}px`;
+  }
+
+  function releaseViewportHeight() {
+    if (!(viewport instanceof HTMLElement)) return;
+    const active = panels.find((el) => el.classList.contains('fc-panel--active'));
+    viewport.style.minHeight = active ? `${active.offsetHeight}px` : '';
+  }
+
+  function updateProgress(activeQuestionIndex) {
+    if (!progressBar) return;
+
+    progressSteps.forEach((step, index) => {
+      step.classList.remove('fc-progress-step--done', 'fc-progress-step--current');
+      if (activeQuestionIndex >= questionCount) {
+        step.classList.add('fc-progress-step--done');
+      } else if (index < activeQuestionIndex) {
+        step.classList.add('fc-progress-step--done');
+      } else if (index === activeQuestionIndex) {
+        step.classList.add('fc-progress-step--current');
+      }
+    });
+
+    const progressValue =
+      activeQuestionIndex >= questionCount ? questionCount : activeQuestionIndex + 1;
+    progressBar.setAttribute('aria-valuenow', String(progressValue));
+  }
+
+  function setCardResult(tone) {
+    root.classList.remove(
+      'no-contact-quiz-card--result-ok',
+      'no-contact-quiz-card--result-more'
+    );
+    if (tone === 'ok') {
+      root.classList.add('no-contact-quiz-card--result-ok');
+    } else if (tone === 'more') {
+      root.classList.add('no-contact-quiz-card--result-more');
+    }
+  }
+
+  function panel(name) {
+    return panels.find((el) => el.dataset.panel === name) ?? null;
+  }
+
+  function announce(message) {
+    if (!live) return;
+    live.textContent = '';
+    window.setTimeout(() => {
+      live.textContent = message;
+    }, 30);
+  }
+
+  function showConstraintTip() {
+    const resultPanel = panel('result-b-tighter');
+    if (!resultPanel) return;
+    resultPanel.querySelectorAll('[data-constraint-tip]').forEach((el) => {
+      if (!(el instanceof HTMLElement)) return;
+      const isMatch = el.dataset.constraintTip === selectedConstraint;
+      el.hidden = !isMatch;
+    });
+  }
+
+  function showCtaForPath(path) {
+    ctaHeadings.forEach((heading) => {
+      if (!(heading instanceof HTMLElement)) return;
+      heading.hidden = heading.dataset.ctaPath !== path;
+      if (!heading.hidden) heading.id = 'fc-cta-heading';
+    });
+    if (cta) cta.setAttribute('aria-labelledby', 'fc-cta-heading');
+  }
+
+  async function showPanel(name, focusSelector) {
+    if (transitioning) return;
+    const next = panel(name);
+    const current = panels.find((el) => el.classList.contains('fc-panel--active'));
+    if (!next || next === current) return;
+
+    transitioning = true;
+    root.setAttribute('aria-busy', 'true');
+    lockViewportHeight(next);
+
+    if (current) {
+      setPanelAccessibility(current, true);
+      current.classList.remove('fc-panel--active');
+      current.classList.add('fc-panel--leaving');
+      await waitForOpacityTransition(current);
+      current.classList.remove('fc-panel--leaving');
+      current.hidden = true;
+    }
+
+    next.hidden = false;
+    next.classList.remove('fc-panel--active', 'fc-panel--leaving');
+    setPanelAccessibility(next, false);
+    void next.offsetHeight;
+    next.classList.add('fc-panel--active');
+    await waitForOpacityTransition(next);
+
+    panels.forEach((el) => {
+      if (el !== next) setPanelAccessibility(el, true);
+    });
+    setPanelAccessibility(next, false);
+
+    releaseViewportHeight();
+    transitioning = false;
+    root.removeAttribute('aria-busy');
+
+    const focusTarget = focusSelector
+      ? next.querySelector(focusSelector)
+      : next.querySelector('h2, button, a');
+    if (focusTarget instanceof HTMLElement) focusTarget.focus({ preventScroll: true });
+  }
+
+  async function beginQuestions() {
+    currentIndex = 0;
+    answers.length = 0;
+    if (progressBar) progressBar.hidden = false;
+    root.classList.add('no-contact-quiz-card--in-quiz');
+    updateProgress(0);
+    await showPanel(`question-${selectedPath}-0`, '[data-answer="yes"]');
+    announce(selectedPath === 'a' ? announceQuestionsA[0] : announceQuestionsB[0]);
+  }
+
+  async function finishQuiz() {
+    const needsMoreDistance = answers.some((value) => value === 'yes');
+    updateProgress(questionCount);
+
+    if (selectedPath === 'a') {
+      if (needsMoreDistance) {
+        setCardResult('more');
+        await showPanel('result-a-more');
+        announce(announceResultAMore);
+      } else {
+        setCardResult('ok');
+        await showPanel('result-a-ok');
+        announce(announceResultAOk);
+      }
+    } else if (needsMoreDistance) {
+      showConstraintTip();
+      setCardResult('more');
+      await showPanel('result-b-tighter');
+      announce(announceResultBTighter);
+    } else {
+      setCardResult('ok');
+      await showPanel('result-b-ok');
+      announce(announceResultBOk);
+    }
+
+    showCtaForPath(selectedPath);
+    if (cta) {
+      cta.hidden = false;
+      window.requestAnimationFrame(() => cta.classList.add('fc-cta--visible'));
+    }
+  }
+
+  panels.forEach((el) => {
+    const isActive = el.classList.contains('fc-panel--active');
+    setPanelAccessibility(el, !isActive);
+  });
+
+  root.addEventListener('click', async (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+
+    if (target.dataset.action === 'start') {
+      await showPanel('constraint', '[data-constraint]');
+      announce(announcePickConstraint);
+      return;
+    }
+
+    const constraintButton = target.closest('[data-action="constraint"]');
+    if (constraintButton instanceof HTMLElement && !transitioning) {
+      const constraint = constraintButton.dataset.constraint;
+      if (!constraint) return;
+
+      selectedConstraint = constraint;
+      selectedPath = constraint === 'none' ? 'a' : 'b';
+
+      constraintButton.classList.add('fc-constraint-card--chosen');
+      if (motionEnabled()) await wait(120);
+      constraintButton.classList.remove('fc-constraint-card--chosen');
+
+      await beginQuestions();
+      announce(announceGotIt);
+      return;
+    }
+
+    const answerButton = target.closest('[data-answer]');
+    if (!(answerButton instanceof HTMLElement) || transitioning) return;
+
+    const activePanel = panels.find((el) => el.classList.contains('fc-panel--active'));
+    if (!activePanel?.dataset.quizPath || activePanel.dataset.quizPath !== selectedPath) {
+      return;
+    }
+
+    const answer = answerButton.dataset.answer;
+    if (!answer || (answer !== 'yes' && answer !== 'no')) return;
+
+    answerButton.classList.add('fc-answer-card--chosen');
+    if (motionEnabled()) await wait(120);
+    answerButton.classList.remove('fc-answer-card--chosen');
+
+    answers.push(answer);
+    currentIndex += 1;
+
+    if (currentIndex >= questionCount) {
+      await finishQuiz();
+      return;
+    }
+
+    updateProgress(currentIndex);
+    await showPanel(`question-${selectedPath}-${currentIndex}`, '[data-answer="yes"]');
+    announce(selectedPath === 'a' ? announceQuestionsA[currentIndex] : announceQuestionsB[currentIndex]);
+  });
+</script>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" fill="none" aria-hidden="true">
+  <g
+    stroke="#1F5535"
+    stroke-width="9"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <!-- Post -->
+    <path d="M52 40v108" />
+    <!-- Base plate -->
+    <path d="M36 148h32" stroke-width="8" />
+    <!-- Boom arm -->
+    <rect x="52" y="46" width="124" height="28" rx="10" />
+    <!-- Stripes -->
+    <path
+      d="M72 50l16 20M92 50l16 20M112 50l16 20M132 50l16 20"
+      stroke-width="5.5"
+    />
+    <!-- Winding S-path rising to the right -->
+    <path
+      d="M40 210
+         C78 210 92 178 128 178
+         C168 178 176 214 220 214
+         C258 214 272 186 272 158
+         C272 122 244 108 214 108"
+      stroke-width="11"
+    />
+  </g>
+</svg>

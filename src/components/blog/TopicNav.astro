@@ -1,0 +1,50 @@
+---
+import type { Locale } from '../../config/locales';
+import { getBlogUi, postSlug } from '../../utils/blog';
+import type { getTopicNav } from '../../utils/blog';
+
+interface Props {
+  locale: Locale;
+  topicNav: ReturnType<typeof getTopicNav>;
+}
+
+const { locale, topicNav } = Astro.props;
+const ui = getBlogUi(locale);
+const hasLinks = topicNav.pillar || topicNav.siblings.length > 0;
+---
+
+{
+  hasLinks && (
+    <section class="topic-nav related-posts--sidebar">
+      <h2 class="related-posts-heading">{ui.inThisTopic}</h2>
+      <p class="topic-nav-hub">
+        <a href={topicNav.hubHref}>{topicNav.hubTitle}</a>
+      </p>
+      <ul class="related-posts-list topic-nav-list">
+        {topicNav.pillar && (
+          <li>
+            <a
+              class="topic-nav-link topic-nav-link--pillar"
+              href={`/breakup-reset/blog/${locale}/${postSlug(topicNav.pillar.id)}/`}
+            >
+              {topicNav.pillar.data.title}
+            </a>
+          </li>
+        )}
+        {topicNav.siblings
+          .filter((p) => p.data.translationKey !== topicNav.pillar?.data.translationKey)
+          .slice(0, 5)
+          .map((post) => (
+            <li>
+              <a
+                class="topic-nav-link"
+                href={`/breakup-reset/blog/${locale}/${postSlug(post.id)}/`}
+              >
+                {post.data.title}
+              </a>
+            </li>
+          ))}
+      </ul>
+    </section>
+  )
+}

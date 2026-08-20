@@ -1,5 +1,6 @@
 @import './tokens/studio.css';
 @import './tokens/breakup-reset.css';
+@import './studio.css';
 @import './breakup-reset.css';
 
 * {

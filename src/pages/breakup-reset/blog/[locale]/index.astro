@@ -4,14 +4,23 @@ import BlogPostCard from '../../../../components/blog/BlogPostCard.astro';
 import LaunchBanner from '../../../../components/LaunchBanner.astro';
 import { getCollection } from 'astro:content';
 import { LOCALES, type Locale } from '../../../../config/locales';
-import { FEATURED_TRANSLATION_KEY } from '../../../../utils/blog';
-import { brands } from '../../../../config/brands';
+import { FEATURED_TRANSLATION_KEY, getBlogUi } from '../../../../utils/blog';
+import {
+  BREAKUP_CLUSTERS,
+  CLUSTER_META,
+  topicHubPath,
+} from '../../../../config/breakup-clusters';
+import {
+  getBreakupDownloadUrl,
+  storePlacements,
+} from '../../../../utils/storeLinks';
 
 export function getStaticPaths() {
   return LOCALES.map((locale) => ({ params: { locale } }));
 }
 
 const { locale } = Astro.params as { locale: Locale };
+const ui = getBlogUi(locale);
 const posts = (await getCollection('breakup-blog'))
   .filter((p) => p.data.locale === locale)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
@@ -23,18 +32,24 @@ const rest = posts.filter(
   (p) => p.data.translationKey !== FEATURED_TRANSLATION_KEY
 );
 
-const brand = brands['breakup-reset'];
-const androidUrl =
-  brand.stores?.android?.url ??
-  `https://play.google.com/store/apps/details?id=${brand.stores?.android?.packageId}`;
-const iosUrl = brand.stores?.ios?.url;
-const downloadUrl = iosUrl ?? androidUrl;
+const downloadUrl = getBreakupDownloadUrl(storePlacements.blogSidebarLaunch);
+const topics = BREAKUP_CLUSTERS.map((cluster) => ({
+  cluster,
+  ...CLUSTER_META[cluster],
+  href: topicHubPath(cluster, locale),
+}));
 ---
 
 <AppLayout
   title="Blog"
   description="Calm, practical articles on breakup recovery and emotional healing from Breakup Reset."
+  lang={locale}
 >
+  {
+    posts.length === 0 && (
+      <meta name="robots" content="noindex, follow" slot="head" />
+    )
+  }
   <link
     rel="alternate"
     type="application/rss+xml"
@@ -47,6 +62,21 @@ const downloadUrl = iosUrl ?? androidUrl;
     <div class="blog-index-main">
       <h1 class="page-title">Blog</h1>
       <p class="page-intro">Calm, practical guidance for your healing journey.</p>
+
+      {
+        locale === 'en' && (
+          <nav class="topic-browse" aria-label={ui.browseTopics}>
+            <h2 class="topic-browse-heading">{ui.browseTopics}</h2>
+            <ul class="topic-browse-list">
+              {topics.map((topic) => (
+                <li>
+                  <a href={topic.href}>{topic.title}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )
+      }
 
       {
         posts.length === 0 ? (

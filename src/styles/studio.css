@@ -1,0 +1,212 @@
+/* At Home Labs studio zone — architectural, sharp, spacious */
+
+[data-brand='studio'] .site-header-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+[data-brand='studio'] .site-nav a {
+  padding: 0.25rem 0;
+  border-radius: 0;
+  background: transparent;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+[data-brand='studio'] .site-nav a:hover,
+[data-brand='studio'] .site-nav a[aria-current='page'] {
+  color: var(--text);
+  background: transparent;
+}
+
+/* Single-page home shell — own column, no legacy body.home centering */
+body.studio-home .site-body {
+  max-width: 960px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+body.studio-home .site-header,
+body.studio-home .site-footer {
+  max-width: 960px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+body.studio-home main {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  align-items: stretch;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+/* Hero — editorial left plumb line */
+[data-brand='studio'] .studio-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+  padding: 15vh 0;
+}
+
+[data-brand='studio'] .studio-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 7vw, 4.25rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin: 0 0 1.5rem 0;
+  max-width: 14ch;
+  text-align: left;
+}
+
+[data-brand='studio'] .studio-hero-sub {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin: 0 0 2.5rem 0;
+  max-width: 36rem;
+  text-align: left;
+}
+
+/* Sharp studio buttons */
+[data-brand='studio'] .btn-studio {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-decoration: none;
+  border-radius: 0;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+[data-brand='studio'] .btn-studio--primary {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+[data-brand='studio'] .btn-studio--primary:hover {
+  background: transparent;
+  color: var(--text);
+}
+
+[data-brand='studio'] .btn-studio--secondary {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+[data-brand='studio'] .btn-studio--secondary:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Portfolio */
+[data-brand='studio'] .studio-portfolio {
+  width: 100%;
+  padding: 0 0 12vh;
+  text-align: left;
+}
+
+[data-brand='studio'] .studio-section-label {
+  margin: 0 0 1.75rem;
+  text-align: left;
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+[data-brand='studio'] .studio-portfolio .app-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2rem 2.5rem;
+  align-items: start;
+  justify-items: start;
+  width: 100%;
+  margin: 0;
+  padding: 3rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  text-align: left;
+}
+
+[data-brand='studio'] .app-card-icon {
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 0;
+}
+
+[data-brand='studio'] .app-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 1rem;
+  min-width: 0;
+}
+
+[data-brand='studio'] .app-card-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--text);
+  text-align: left;
+}
+
+[data-brand='studio'] .app-card-description {
+  margin: 0;
+  max-width: 36rem;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+@media (max-width: 720px) {
+  [data-brand='studio'] .studio-portfolio .app-card {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+    gap: 1.25rem;
+  }
+
+  [data-brand='studio'] .app-card-icon {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* About page alignment with studio buttons */
+[data-brand='studio'] body.page main .btn-studio {
+  margin-top: 0.5rem;
+}

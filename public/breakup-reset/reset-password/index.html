@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Breakup Reset — Password reset</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        background: #f5f5dc;
+        color: #1c2b1a;
+        margin: 0;
+        padding: 32px 16px;
+        text-align: center;
+      }
+      main {
+        max-width: 420px;
+        margin: 0 auto;
+        background: #fdf5e6;
+        border: 1px solid #d9d2bf;
+        border-radius: 12px;
+        padding: 24px 20px;
+      }
+      h1 { font-size: 1.25rem; margin: 0 0 12px; }
+      p { font-size: 0.95rem; line-height: 1.5; margin: 0 0 12px; }
+      a { color: #234a3d; font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Opening Breakup Reset…</h1>
+      <p id="status">If nothing happens, open this page on your phone where the app is installed.</p>
+      <p id="manual" hidden>
+        <a id="app-link" href="#">Tap here to open the app</a>
+      </p>
+    </main>
+    <script>
+      (function () {
+        var search = window.location.search || '';
+        var hash = window.location.hash || '';
+        var appUrl = 'breakupreset://reset-password' + search + hash;
+        var link = document.getElementById('app-link');
+        if (link) link.href = appUrl;
+        window.location.replace(appUrl);
+        window.setTimeout(function () {
+          var manual = document.getElementById('manual');
+          var status = document.getElementById('status');
+          if (manual) manual.hidden = false;
+          if (status) {
+            status.textContent =
+              'Still here? Tap the link below on your phone, or request a new reset email from the app.';
+          }
+        }, 2000);
+      })();
+    </script>
+  </body>
+</html>

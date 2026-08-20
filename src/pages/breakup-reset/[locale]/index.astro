@@ -1,0 +1,15 @@
+---
+import BreakupLanding from '../../../components/BreakupLanding.astro';
+import {
+  LANDING_LOCALES,
+  type LandingLocale,
+} from '../../../config/breakup-chrome';
+
+export function getStaticPaths() {
+  return LANDING_LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as LandingLocale;
+---
+
+<BreakupLanding locale={locale} />
