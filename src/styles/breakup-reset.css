@@ -1446,10 +1446,6 @@ body.breakup-home main {
   align-self: flex-start;
 }
 
-[data-brand='breakup-reset'] .breakup-promo-action .button {
-  border-radius: 999px;
-}
-
 [data-brand='breakup-reset'] .breakup-promo-buttons {
   display: flex;
   flex-wrap: wrap;
