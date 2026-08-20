@@ -1085,6 +1085,18 @@ body.breakup-home main {
   text-align: left;
 }
 
+[data-brand='breakup-reset'] .breakup-promo-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+[data-brand='breakup-reset'] .breakup-promo-buttons .button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 [data-brand='breakup-reset'] .breakup-promo-badge {
   display: inline-block;
   margin: 0;
