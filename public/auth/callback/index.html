@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
-    <title>Breakup Reset — Password reset</title>
+    <title>Breakup Reset — Email confirmed</title>
     <style>
       body {
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -22,15 +22,15 @@
         border-radius: 12px;
         padding: 24px 20px;
       }
-      h1 { font-size: 1.25rem; margin: 0 0 12px; }
+      h1 { font-size: 1.25rem; margin: 0 0 12px; color: #234a3d; }
       p { font-size: 0.95rem; line-height: 1.5; margin: 0 0 12px; }
       a { color: #234a3d; font-weight: 600; }
     </style>
   </head>
   <body>
     <main>
-      <h1>Opening Breakup Reset…</h1>
-      <p id="status">If nothing happens, open this page on your phone where the app is installed.</p>
+      <h1>Email confirmed ✓</h1>
+      <p id="status">Opening Breakup Reset…</p>
       <p id="manual" hidden>
         <a id="app-link" href="#">Tap here to open the app</a>
       </p>
@@ -39,7 +39,7 @@
       (function () {
         var search = window.location.search || '';
         var hash = window.location.hash || '';
-        var appUrl = 'breakupreset://reset-password' + search + hash;
+        var appUrl = 'breakupreset://auth/callback' + search + hash;
         var link = document.getElementById('app-link');
         if (link) link.href = appUrl;
         window.location.replace(appUrl);
@@ -49,7 +49,8 @@
           if (manual) manual.hidden = false;
           if (status) {
             status.textContent =
-              'Still here? Tap the link below on your phone, or request a new reset email from the app.';
+              'Your email is confirmed. Open Breakup Reset on the device where you ' +
+              'created your account, or sign in there with your email and password.';
           }
         }, 2000);
       })();
