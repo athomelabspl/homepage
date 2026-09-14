@@ -1,0 +1,44 @@
+---
+import ByHeartAppLayout from '../../../layouts/ByHeartAppLayout.astro';
+import ByHeartBlogCard from '../../../components/blog/ByHeartBlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('by-heart-blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const fontLink =
+  'https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Work+Sans:wght@400;500;600&display=swap';
+---
+
+<ByHeartAppLayout
+  title="Blog"
+  description="Short, practical writing on relationships, communication, and habits that last, from By Heart."
+  bodyClass="page"
+>
+  <link rel="stylesheet" href={fontLink} slot="head" />
+
+  <div class="byh-blog-header">
+    <div class="byh-eyebrow">Blog</div>
+    <h1>Notes on staying close</h1>
+    <p>Short, practical writing on relationships, communication, and habits that last.</p>
+  </div>
+
+  {
+    posts.length === 0 ? (
+      <p class="byh-blog-empty">No articles yet. Check back soon.</p>
+    ) : (
+      <div class="byh-blog-grid">
+        {posts.map((post) => (
+          <ByHeartBlogCard
+            id={post.id}
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            body={post.body}
+          />
+        ))}
+      </div>
+    )
+  }
+</ByHeartAppLayout>

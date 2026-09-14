@@ -1,0 +1,31 @@
+---
+import { readingTimeMinutes, postSlug } from '../../utils/blog';
+import { formatByHeartBlogDate } from '../../utils/byHeartBlog';
+
+interface Props {
+  id: string;
+  title: string;
+  description: string;
+  pubDate: Date;
+  body?: string;
+}
+
+const { id, title, description, pubDate, body } = Astro.props;
+const href = `/by-heart/blog/${postSlug(id)}/`;
+const minutes = readingTimeMinutes(body);
+---
+
+<article class="byh-blog-card">
+  <a class="byh-blog-card-cover" href={href} tabindex="-1" aria-hidden="true">
+    <span class="byh-blog-card-cover-label">Article image</span>
+  </a>
+  <p class="byh-blog-card-meta">
+    <time datetime={pubDate.toISOString()}>{formatByHeartBlogDate(pubDate)}</time>
+    <span aria-hidden="true"> · </span>
+    <span>{minutes} min read</span>
+  </p>
+  <h2 class="byh-blog-card-title">
+    <a href={href}>{title}</a>
+  </h2>
+  <p class="byh-blog-card-dek">{description}</p>
+</article>

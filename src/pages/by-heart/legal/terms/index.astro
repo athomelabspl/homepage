@@ -1,0 +1,30 @@
+---
+import ByHeartAppLayout from '../../../../layouts/ByHeartAppLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+import { renderMarkdown } from '../../../../utils/markdown';
+import { BYHEART_LEGAL_FILE_MAP } from '../../../../config/byHeartLegal';
+
+const filePath = path.join(
+  process.cwd(),
+  '.policy-sync/by-heart',
+  BYHEART_LEGAL_FILE_MAP.terms,
+);
+const html = renderMarkdown(fs.readFileSync(filePath, 'utf-8'));
+const title = 'Terms of Service';
+const fontLink =
+  'https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Work+Sans:wght@400;500;600&display=swap';
+---
+
+<ByHeartAppLayout
+  title={title}
+  description={`${title} for By Heart.`}
+  disableAnalytics
+>
+  <link rel="stylesheet" href={fontLink} slot="head" />
+  <div class="byh-legal-wrap">
+    <h1 class="page-title page-title--legal">{title}</h1>
+    <div class="byh-legal-updated">Last updated September 1, 2026</div>
+    <div class="legal-content" set:html={html} />
+  </div>
+</ByHeartAppLayout>

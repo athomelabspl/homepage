@@ -1,4 +1,4 @@
-export type BrandId = 'studio' | 'breakup-reset';
+export type BrandId = 'studio' | 'breakup-reset' | 'by-heart';
 
 export interface BrandNavItem {
   label: string;
@@ -89,11 +89,38 @@ export const brands: Record<BrandId, BrandConfig> = {
     },
     smartAppBanner: true,
   },
+  'by-heart': {
+    id: 'by-heart',
+    basePath: '/by-heart/',
+    name: 'By Heart',
+    logo: '/by-heart/logo.svg',
+    tokens: 'by-heart',
+    tagline: 'Turn attention into a daily habit.',
+    description:
+      'A private, single-player app that helps you show up for the person you love — one small, specific thing at a time.',
+    nav: [
+      { label: 'Home', href: '/by-heart/' },
+      { label: 'Blog', href: '/by-heart/blog/' },
+      { label: 'Privacy', href: '/by-heart/legal/privacy/' },
+      { label: 'Terms', href: '/by-heart/legal/terms/' },
+    ],
+    analytics: {
+      posthogProjectKey: import.meta.env.PUBLIC_POSTHOG_BYHEART_KEY,
+      posthogHost,
+      enabled: Boolean(import.meta.env.PUBLIC_POSTHOG_BYHEART_KEY),
+    },
+    // marketing and stores intentionally omitted for v1 — no paid-acquisition
+    // plan or store records exist yet. Every consumer already guards with
+    // `brand.marketing?.` / `brand.stores?.`, so this is safe to add later.
+  },
 };
 
 export function getBrandFromPath(pathname: string): BrandConfig {
   if (pathname.startsWith('/breakup-reset')) {
     return brands['breakup-reset'];
+  }
+  if (pathname.startsWith('/by-heart')) {
+    return brands['by-heart'];
   }
   return brands.studio;
 }

@@ -1,0 +1,523 @@
+/* By Heart — landing + legal page styles. Scoped under [data-brand='by-heart']
+   so nothing here can leak onto studio or breakup-reset. */
+
+[data-brand='by-heart'] .site-header {
+  max-width: none;
+}
+
+[data-brand='by-heart'] .site-chrome {
+  padding-left: var(--layout-gutter);
+  padding-right: var(--layout-gutter);
+}
+
+[data-brand='by-heart'] .brand-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  letter-spacing: 0.01em;
+}
+
+[data-brand='by-heart'] .site-nav a {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--text);
+  padding: 0;
+  border-radius: 0;
+}
+
+[data-brand='by-heart'] .site-nav a:hover,
+[data-brand='by-heart'] .site-nav a[aria-current='page'] {
+  color: var(--accent);
+  background: transparent;
+}
+
+body[data-brand='by-heart'].home .site-body,
+body[data-brand='by-heart'].page .site-body {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+body[data-brand='by-heart'].home main,
+body[data-brand='by-heart'].page main {
+  max-width: none;
+  width: 100%;
+  align-items: stretch;
+  justify-content: flex-start;
+  text-align: left;
+  margin: 0;
+}
+
+[data-brand='by-heart'] .site-footer {
+  max-width: none;
+  padding-left: var(--layout-gutter);
+  padding-right: var(--layout-gutter);
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+  margin-top: 0;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: rgba(28, 26, 23, 0.5);
+}
+
+/* ---------- Hero ---------- */
+
+.byh-hero {
+  position: relative;
+  padding: 5.5rem var(--layout-gutter) 6rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.byh-hero-glow {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(900px, 140vw);
+  height: 500px;
+  background: radial-gradient(circle, rgba(15, 174, 157, 0.16), transparent 65%);
+  pointer-events: none;
+}
+
+.byh-hero-inner {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.byh-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1.125rem;
+}
+
+.byh-hero h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.25rem, 5vw, 3.375rem);
+  line-height: 1.12;
+  color: var(--text);
+  margin: 0 0 1.25rem;
+  letter-spacing: normal;
+  text-wrap: pretty;
+}
+
+.byh-hero p {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: rgba(28, 26, 23, 0.62);
+  margin: 0 0 2rem;
+}
+
+.byh-store-row {
+  display: flex;
+  gap: 0.875rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 4rem;
+}
+
+.byh-store-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-decoration: none;
+  padding: 0.875rem 1.625rem;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.byh-store-button--filled {
+  background: var(--text);
+  color: #fff;
+}
+
+.byh-store-button--outline {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid rgba(28, 26, 23, 0.18);
+}
+
+.byh-store-button--light {
+  background: #fff;
+  color: var(--text);
+}
+
+.byh-store-button--light-outline {
+  background: transparent;
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+}
+
+.byh-phones {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0;
+}
+
+.byh-phone {
+  width: 230px;
+  flex-shrink: 0;
+  transform: translateY(40px) rotate(-6deg);
+  opacity: 0.9;
+}
+
+.byh-phone--center {
+  width: 250px;
+  transform: none;
+  opacity: 1;
+  z-index: 2;
+  margin: 0 -6px;
+}
+
+.byh-phone--right {
+  transform: translateY(40px) rotate(6deg);
+}
+
+.byh-phone-frame {
+  border-radius: 34px;
+  border: 6px solid var(--text);
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 30px 50px rgba(28, 26, 23, 0.22);
+  aspect-ratio: 230 / 460;
+}
+
+.byh-phone--center .byh-phone-frame {
+  border-radius: 38px;
+  border-width: 7px;
+  box-shadow: 0 40px 70px rgba(28, 26, 23, 0.28);
+}
+
+@media (max-width: 640px) {
+  .byh-phone {
+    display: none;
+  }
+  .byh-phone--center {
+    display: block;
+    width: min(230px, 60vw);
+  }
+}
+
+/* ---------- Feature grid ---------- */
+
+.byh-features {
+  padding: 0 var(--layout-gutter) 6rem;
+}
+
+.byh-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+  .byh-feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.byh-feature-card {
+  background: var(--surface);
+  border-radius: 18px;
+  padding: 2rem 1.75rem;
+}
+
+.byh-feature-icon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 1rem;
+}
+
+.byh-feature-card h3 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  color: var(--text);
+  margin: 0 0 0.5rem;
+}
+
+.byh-feature-card p {
+  font-family: var(--font-body);
+  font-size: 0.90625rem;
+  line-height: 1.6;
+  color: rgba(28, 26, 23, 0.6);
+  margin: 0;
+}
+
+/* ---------- CTA band ---------- */
+
+.byh-cta-band {
+  background: var(--text);
+  padding: 5rem var(--layout-gutter);
+  text-align: center;
+}
+
+.byh-cta-band h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 2.125rem;
+  color: #fff;
+  margin: 0 0 0.875rem;
+}
+
+.byh-cta-band p {
+  font-family: var(--font-body);
+  font-size: 0.96875rem;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 440px;
+  margin: 0 auto 1.875rem;
+}
+
+/* ---------- Legal pages ---------- */
+
+[data-brand='by-heart'] .page-title--legal {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 2.125rem;
+  line-height: 1.25;
+  color: var(--text);
+  margin: 0 0 0.625rem;
+}
+
+[data-brand='by-heart'] .byh-legal-wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 4rem var(--layout-gutter) 6rem;
+}
+
+[data-brand='by-heart'] .byh-legal-updated {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  color: rgba(28, 26, 23, 0.45);
+  margin-bottom: 2.75rem;
+}
+
+[data-brand='by-heart'] .legal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+[data-brand='by-heart'] .legal-content :is(h1, h2, h3) {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.1875rem;
+  line-height: 1.3;
+  color: var(--text);
+  margin: 0 0 0.625rem;
+  letter-spacing: normal;
+}
+
+[data-brand='by-heart'] .legal-content p {
+  font-family: var(--font-body);
+  font-size: 0.96875rem;
+  line-height: 1.7;
+  color: rgba(28, 26, 23, 0.68);
+  margin: 0 0 0.75rem;
+}
+
+[data-brand='by-heart'] .legal-content p:last-child {
+  margin-bottom: 0;
+}
+
+[data-brand='by-heart'] .legal-content a {
+  color: var(--accent);
+}
+
+/* ---------- Blog index ---------- */
+
+.byh-blog-header {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 4rem var(--layout-gutter) 1.25rem;
+  text-align: center;
+}
+
+.byh-blog-header h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 2.625rem;
+  line-height: 1.2;
+  color: var(--text);
+  margin: 0 0 1rem;
+  letter-spacing: normal;
+}
+
+.byh-blog-header p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(28, 26, 23, 0.62);
+  margin: 0;
+}
+
+.byh-blog-empty {
+  text-align: center;
+  font-family: var(--font-body);
+  color: rgba(28, 26, 23, 0.6);
+  padding: 2rem var(--layout-gutter) 6rem;
+}
+
+.byh-blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.25rem var(--layout-gutter) 6rem;
+}
+
+@media (max-width: 900px) {
+  .byh-blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .byh-blog-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.byh-blog-card-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 180px;
+  border-radius: 14px;
+  margin-bottom: 1rem;
+  background: var(--surface);
+}
+
+.byh-blog-card-cover-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: rgba(28, 26, 23, 0.35);
+}
+
+.byh-blog-card-meta {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: rgba(28, 26, 23, 0.45);
+  margin: 0 0 0.5rem;
+}
+
+.byh-blog-card-title {
+  margin: 0 0 0.5rem;
+}
+
+.byh-blog-card-title a {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  line-height: 1.35;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.byh-blog-card-title a:hover {
+  color: var(--accent);
+}
+
+.byh-blog-card-dek {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: rgba(28, 26, 23, 0.6);
+  margin: 0;
+}
+
+/* ---------- Blog article ---------- */
+
+.byh-article-header {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 4rem var(--layout-gutter) 0;
+  text-align: center;
+}
+
+.byh-article-header h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 2.375rem;
+  line-height: 1.25;
+  color: var(--text);
+  margin: 0 0 0.875rem;
+  letter-spacing: normal;
+}
+
+.byh-article-meta {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: rgba(28, 26, 23, 0.45);
+  margin: 0;
+}
+
+.byh-article-body {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2.5rem var(--layout-gutter) 0;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: rgba(28, 26, 23, 0.72);
+}
+
+.byh-article-body p {
+  margin: 0 0 1.25rem;
+}
+
+.byh-article-body h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.375rem;
+  line-height: 1.35;
+  color: var(--text);
+  letter-spacing: normal;
+  margin: 2rem 0 0.875rem;
+}
+
+.byh-article-body h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1875rem;
+  color: var(--text);
+  letter-spacing: normal;
+  margin: 1.75rem 0 0.75rem;
+}
+
+.byh-article-back {
+  display: block;
+  max-width: 680px;
+  margin: 1rem auto 6rem;
+  padding: 0 var(--layout-gutter);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.byh-article-back:hover {
+  color: var(--accent-hover);
+}

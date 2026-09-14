@@ -1,0 +1,43 @@
+---
+import ByHeartAppLayout from '../../../layouts/ByHeartAppLayout.astro';
+import { getCollection, render } from 'astro:content';
+import { readingTimeMinutes, postSlug } from '../../../utils/blog';
+import { formatByHeartBlogDate } from '../../../utils/byHeartBlog';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('by-heart-blog');
+  return posts.map((post) => ({
+    params: { slug: postSlug(post.id) },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const minutes = readingTimeMinutes(post.body);
+
+const fontLink =
+  'https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Work+Sans:wght@400;500;600&display=swap';
+---
+
+<ByHeartAppLayout title={post.data.title} description={post.data.description} bodyClass="page">
+  <link rel="stylesheet" href={fontLink} slot="head" />
+
+  <article class="byh-article">
+    <div class="byh-article-header">
+      <div class="byh-eyebrow">Blog</div>
+      <h1>{post.data.title}</h1>
+      <p class="byh-article-meta">
+        <time datetime={post.data.pubDate.toISOString()}>
+          {formatByHeartBlogDate(post.data.pubDate)}
+        </time>
+        <span aria-hidden="true"> · </span>
+        <span>{minutes} min read</span>
+      </p>
+    </div>
+    <div class="byh-article-body">
+      <Content />
+    </div>
+    <a class="byh-article-back" href="/by-heart/blog/">← Back to blog</a>
+  </article>
+</ByHeartAppLayout>

@@ -34,6 +34,16 @@ const breakupBlog = defineCollection({
   }),
 });
 
+const byHeartBlog = defineCollection({
+  loader: glob({ pattern: '*.{md,mdx}', base: './src/content/by-heart-blog' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+  }),
+});
+
 export const collections = {
   'breakup-blog': breakupBlog,
+  'by-heart-blog': byHeartBlog,
 };

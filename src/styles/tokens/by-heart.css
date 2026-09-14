@@ -1,0 +1,15 @@
+[data-brand='by-heart'] {
+  --bg: #fbfaf7;
+  --bg-chrome: #fbfaf7;
+  --surface: #edeae4;
+  --layout-gutter: clamp(1.25rem, 5vw, 3rem);
+  --text: #1c1a17;
+  --text-muted: rgba(28, 26, 23, 0.6);
+  --accent: #0fae9d;
+  --accent-rgb: 15, 174, 157;
+  --accent-hover: #0c8c7e;
+  --warm: #ff8a65;
+  --border: rgba(28, 26, 23, 0.08);
+  --font-body: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Lora', Georgia, serif;
+}
