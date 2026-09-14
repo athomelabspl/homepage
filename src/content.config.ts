@@ -43,6 +43,7 @@ const byHeartBlog = defineCollection({
     category: z.string().default('Habits & attention'),
     author: z.string().default('By Heart Team'),
     faq: z.array(faqSchema).optional(),
+    cover: coverSchema.optional(),
   }),
 });
 

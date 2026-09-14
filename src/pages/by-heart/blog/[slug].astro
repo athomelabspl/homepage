@@ -5,6 +5,8 @@ import ByHeartBlogPostingSchema from '../../../components/seo/ByHeartBlogPosting
 import FAQPageSchema from '../../../components/seo/FAQPageSchema.astro';
 import FAQ from '../../../components/mdx/FAQ.astro';
 import AISummary from '../../../components/mdx/AISummary.astro';
+import BlogCover from '../../../components/blog/BlogCover.astro';
+import BlogFigure from '../../../components/blog/BlogFigure.astro';
 import { getCollection, render } from 'astro:content';
 import { readingTimeMinutes, postSlug } from '../../../utils/blog';
 import { formatByHeartBlogDate } from '../../../utils/byHeartBlog';
@@ -36,6 +38,8 @@ const fontLink =
     title={post.data.title}
     description={post.data.description}
     url={pageUrl}
+    image={post.data.cover?.src}
+    imageAlt={post.data.cover?.alt}
     type="article"
     slot="head"
   />
@@ -76,12 +80,18 @@ const fontLink =
         </div>
       </header>
 
-      <div class="byh-article-hero" role="img" aria-label="Article image">
-        <span>Article image</span>
-      </div>
+      {
+        post.data.cover ? (
+          <BlogCover cover={post.data.cover} />
+        ) : (
+          <div class="byh-article-hero" role="img" aria-label="Article image">
+            <span>Article image</span>
+          </div>
+        )
+      }
 
       <div class="byh-article-body">
-        <Content components={{ AISummary }} />
+        <Content components={{ AISummary, BlogFigure }} />
       </div>
 
       {

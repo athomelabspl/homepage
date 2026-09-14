@@ -592,6 +592,55 @@ body[data-brand='by-heart'].page main {
   color: rgba(28, 26, 23, 0.35);
 }
 
+/* Real photography, once a post has a cover/figure — reuses the generic
+   BlogCover.astro / BlogFigure.astro components (also used by Breakup Reset)
+   but restyled here to By Heart's radius/type instead of editing those. */
+
+.byh-article-page .blog-cover {
+  margin: 2rem 0 0.5rem;
+}
+
+.byh-article-page .blog-cover-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.byh-article-page .blog-figure {
+  margin: 2rem 0;
+}
+
+.byh-article-page .blog-figure-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.byh-article-page .blog-photo-credit {
+  margin-top: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  color: rgba(28, 26, 23, 0.4);
+  text-align: right;
+}
+
+.byh-article-page .blog-photo-credit a {
+  color: rgba(28, 26, 23, 0.4);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.byh-article-page .blog-photo-credit a:hover {
+  color: var(--accent);
+}
+
 .byh-article-body {
   font-family: var(--font-body);
   font-size: 1.0625rem;
