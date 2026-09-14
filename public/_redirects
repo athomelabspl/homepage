@@ -3,6 +3,7 @@
 /apps/   /    301
 
 # Breakup Reset - auth handoff (legacy root paths → app zone)
+/auth/callback    /auth/callback/    301
 /reset-password    /breakup-reset/reset-password/    301
 /reset-password/*    /breakup-reset/reset-password/:splat    301
 /breakup-reset/reset-password    /breakup-reset/reset-password/    301
