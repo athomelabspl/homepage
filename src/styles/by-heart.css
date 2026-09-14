@@ -247,6 +247,7 @@ body[data-brand='by-heart'].page main {
 .byh-features-header h2 {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.25;
   margin: 0.5rem 0 0;
 }
 
@@ -272,6 +273,15 @@ body[data-brand='by-heart'].page main {
 
 .byh-feature-card--wide {
   grid-column: 1 / -1;
+  width: 100%;
+  max-width: calc((100% - 1.75rem) / 2);
+  margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+  .byh-feature-card--wide {
+    max-width: none;
+  }
 }
 
 .byh-feature-icon {
@@ -599,6 +609,7 @@ body[data-brand='by-heart'].page main {
   height: 34px;
   border-radius: 100px;
   background: rgba(28, 26, 23, 0.1);
+  object-fit: cover;
   flex-shrink: 0;
 }
 
