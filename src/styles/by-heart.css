@@ -238,11 +238,23 @@ body[data-brand='by-heart'].page main {
   padding: 0 var(--layout-gutter) 6rem;
 }
 
+.byh-features-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 2.5rem;
+}
+
+.byh-features-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin: 0.5rem 0 0;
+}
+
 .byh-feature-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.75rem;
-  max-width: 1200px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
@@ -256,6 +268,10 @@ body[data-brand='by-heart'].page main {
   background: var(--surface);
   border-radius: 18px;
   padding: 2rem 1.75rem;
+}
+
+.byh-feature-card--wide {
+  grid-column: 1 / -1;
 }
 
 .byh-feature-icon {
@@ -498,14 +514,14 @@ body[data-brand='by-heart'].page main {
 }
 
 .byh-blog-card-title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  line-height: 1.3;
   margin: 0 0 0.5rem;
 }
 
 .byh-blog-card-title a {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 1.0625rem;
-  line-height: 1.2;
   color: var(--text);
   text-decoration: none;
 }

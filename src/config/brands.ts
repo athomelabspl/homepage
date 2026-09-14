@@ -97,7 +97,7 @@ export const brands: Record<BrandId, BrandConfig> = {
     tokens: 'by-heart',
     tagline: 'Turn attention into a daily habit.',
     description:
-      'A private, single-player app that helps you show up for the person you love — one small, specific thing at a time.',
+      'A private, single-player app that helps you show up for the person you love — with ideas worth trying, things worth learning about them, and small insights along the way.',
     nav: [
       { label: 'Home', href: '/by-heart/' },
       { label: 'Blog', href: '/by-heart/blog/' },
