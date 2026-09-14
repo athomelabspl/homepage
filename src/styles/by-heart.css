@@ -691,3 +691,90 @@ body[data-brand='by-heart'].page main {
     align-items: flex-start;
   }
 }
+
+/* ---------- Blog article: AI summary ("Key takeaways") ----------
+   Reuses the generic .ai-summary block from components/mdx/AISummary.astro
+   (also used by Breakup Reset); this only restyles it under the article body
+   scope so Breakup Reset's own card look is untouched. */
+
+.byh-article-body .ai-summary {
+  border: none;
+  border-radius: 14px;
+  background: var(--surface);
+  padding: 1.5rem 1.75rem;
+}
+
+.byh-article-body .ai-summary h2 {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: rgba(28, 26, 23, 0.5);
+}
+
+.byh-article-body .ai-summary li {
+  color: rgba(28, 26, 23, 0.72);
+}
+
+/* ---------- Blog article: FAQ ----------
+   Reuses the generic .faq-section/.faq-item/.faq-question/.faq-answer
+   structure from components/mdx/FAQ.astro (also used by Breakup Reset) but
+   restyled here under the .byh-faq wrapper class, so none of this touches
+   Breakup Reset's own look. */
+
+.byh-faq {
+  margin: 2.5rem 0 0;
+}
+
+.byh-faq .section-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--text);
+  letter-spacing: normal;
+  margin: 0 0 1.5rem;
+}
+
+.byh-faq {
+  border-bottom: 1px solid rgba(28, 26, 23, 0.08);
+}
+
+.byh-faq .faq-item {
+  margin: 0;
+  border-top: 1px solid rgba(28, 26, 23, 0.08);
+}
+
+.byh-faq .faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.byh-faq .faq-question::after {
+  content: '+';
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: rgba(28, 26, 23, 0.4);
+  transition: transform 0.15s ease;
+}
+
+.byh-faq details[open] .faq-question::after {
+  transform: rotate(45deg);
+}
+
+.byh-faq .faq-answer p {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: rgba(28, 26, 23, 0.62);
+  margin: 0 0 1.25rem;
+}

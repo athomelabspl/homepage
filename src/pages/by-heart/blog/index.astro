@@ -1,6 +1,7 @@
 ---
 import ByHeartAppLayout from '../../../layouts/ByHeartAppLayout.astro';
 import ByHeartBlogCard from '../../../components/blog/ByHeartBlogCard.astro';
+import ByHeartOpenGraph from '../../../components/seo/ByHeartOpenGraph.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('by-heart-blog')).sort(
@@ -17,6 +18,11 @@ const fontLink =
   bodyClass="page"
 >
   <link rel="stylesheet" href={fontLink} slot="head" />
+  <ByHeartOpenGraph
+    title="Blog"
+    description="Short, practical writing on relationships, communication, and habits that last, from By Heart."
+    slot="head"
+  />
 
   <div class="byh-blog-header">
     <div class="byh-eyebrow">Blog</div>

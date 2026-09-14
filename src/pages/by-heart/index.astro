@@ -1,6 +1,7 @@
 ---
 import ByHeartAppLayout from '../../layouts/ByHeartAppLayout.astro';
 import ByHeartBlogCard from '../../components/blog/ByHeartBlogCard.astro';
+import ByHeartOpenGraph from '../../components/seo/ByHeartOpenGraph.astro';
 import { getCollection } from 'astro:content';
 
 const recentPosts = (await getCollection('by-heart-blog'))
@@ -17,6 +18,11 @@ const fontLink =
   bodyClass="home"
 >
   <link rel="stylesheet" href={fontLink} slot="head" />
+  <ByHeartOpenGraph
+    title="By Heart"
+    description="By Heart turns attention into a daily habit. A private, single-player app that learns what your partner needs, then gives you one small, specific thing to do today."
+    slot="head"
+  />
 
   <section class="byh-hero">
     <div class="byh-hero-glow"></div>

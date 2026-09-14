@@ -1,0 +1,61 @@
+---
+// Same shape as components/seo/BlogPostingSchema.astro, which is used
+// exclusively by Breakup Reset pages and hardcodes its author/publisher name,
+// URL, and logo to that brand — a By Heart-branded twin instead of editing a
+// file breakup-reset relies on.
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: Date | string;
+  dateModified?: Date | string;
+}
+
+const site = Astro.site?.href.replace(/\/$/, '') ?? 'https://athomelabs.eu';
+
+const { title, description, url, datePublished, dateModified } = Astro.props;
+
+const published =
+  datePublished instanceof Date ? datePublished.toISOString() : new Date(datePublished).toISOString();
+const modified = dateModified
+  ? dateModified instanceof Date
+    ? dateModified.toISOString()
+    : new Date(dateModified).toISOString()
+  : published;
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description,
+    datePublished: published,
+    dateModified: modified,
+    inLanguage: 'en',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': url,
+    },
+    isPartOf: {
+      '@type': 'Blog',
+      name: 'By Heart Blog',
+      url: `${site}/by-heart/blog/`,
+    },
+    author: {
+      '@type': 'Organization',
+      name: 'By Heart',
+      url: `${site}/by-heart/`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'By Heart',
+      url: `${site}/by-heart/`,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${site}/by-heart/logo.svg`,
+      },
+    },
+  })}
+/>

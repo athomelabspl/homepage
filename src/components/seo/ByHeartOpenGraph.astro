@@ -1,0 +1,42 @@
+---
+// Same shape as components/seo/OpenGraph.astro, which is used exclusively by
+// Breakup Reset pages and hardcodes `og:site_name` to "Breakup Reset" — a
+// small By Heart-branded twin instead of editing a file breakup-reset relies on.
+interface Props {
+  title: string;
+  description: string;
+  url?: string;
+  image?: string;
+  imageAlt?: string;
+  type?: string;
+}
+
+const site = Astro.site?.href.replace(/\/$/, '') ?? 'https://athomelabs.eu';
+const pathname = Astro.url.pathname.endsWith('/')
+  ? Astro.url.pathname
+  : `${Astro.url.pathname}/`;
+
+const {
+  title,
+  description,
+  url = `${site}${pathname}`,
+  image = '/by-heart/logo.svg',
+  imageAlt = 'By Heart',
+  type = 'website',
+} = Astro.props;
+
+const imageUrl = image.startsWith('http') ? image : `${site}${image}`;
+---
+
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content="By Heart" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:alt" content={imageAlt} />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:image:alt" content={imageAlt} />
