@@ -2,22 +2,32 @@
 import { readingTimeMinutes, postSlug } from '../../utils/blog';
 import { formatByHeartBlogDate } from '../../utils/byHeartBlog';
 
+interface Cover {
+  src: string;
+  alt: string;
+}
+
 interface Props {
   id: string;
   title: string;
   description: string;
   pubDate: Date;
   body?: string;
+  cover?: Cover;
 }
 
-const { id, title, description, pubDate, body } = Astro.props;
+const { id, title, description, pubDate, body, cover } = Astro.props;
 const href = `/by-heart/blog/${postSlug(id)}/`;
 const minutes = readingTimeMinutes(body);
 ---
 
 <article class="byh-blog-card">
   <a class="byh-blog-card-cover" href={href} tabindex="-1" aria-hidden="true">
-    <span class="byh-blog-card-cover-label">Article image</span>
+    {cover ? (
+      <img class="byh-blog-card-cover-img" src={cover.src} alt="" loading="lazy" />
+    ) : (
+      <span class="byh-blog-card-cover-label">Article image</span>
+    )}
   </a>
   <p class="byh-blog-card-meta">
     <time datetime={pubDate.toISOString()}>{formatByHeartBlogDate(pubDate)}</time>

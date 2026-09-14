@@ -18,18 +18,22 @@ By Heart is a private, single-player app. One person uses it — your partner do
 - authentication data: password (in non-plain form), or, if you sign in with Google or Apple, the identifier and profile data those providers share under OAuth/Sign in with Apple
 - session data (e.g., timestamps; infrastructure logs may include technical information such as IP address and user agent)
 
-**Where we store it**: on the server side, with Supabase Auth. By Heart uses Supabase **only** for authentication — no profile, vault, or daily-log content is sent to our servers.
+**Where we store it**: on the server side, with Supabase Auth. Beyond authentication, Supabase also stores your **progress** within the app (§2.2a below) — it does not store your profile, vault, or daily-log content, which stays on your device only (§2.2).
 
-### 2.2 Your profile, vault, and daily logs (local only)
+### 2.2 Your profile, vault, and daily logs (local only, device-backed-up)
 
-Everything else you enter in the app is stored **locally on your device**, in a local database (SQLite), and is not transmitted to our servers as of the date of this policy. Depending on what you use, this includes:
+Everything about you and your partner is stored **only on your device**, in a local database (SQLite), and is never transmitted to our servers. This includes:
 
-- what you tell the app about your partner: preferences, what tends to help or make things worse, notable dates (birthday, anniversary), gift/date ideas, and similar notes (the "vault")
+- your name, your partner's name, and other profile details, including what you tell the app about your partner: preferences, what tends to help or make things worse, notable dates (birthday, anniversary), gift/date ideas, and similar notes (the "vault")
 - your daily check-ins (how things feel that day)
-- suggested and completed daily actions, and any custom actions or quests you create
+- any photos you attach to a vault entry or a memory
 - app settings, such as whether App Lock or Discrete Mode is enabled
 
-Because this data lives only on your device, we cannot access, back up, or recover it on your behalf — if you lose your device or delete the app without exporting your data, it is gone. Deleting your account (see §4) also deletes this local data from the device you delete it on.
+We cannot access this data, and it is never uploaded to our servers or seen by us in any form. Instead, it is protected the same way any other data on your phone is: through your device's own backup system (iCloud Backup on iOS, or your Android device's backup to your Google account), if you have that enabled. If you lose your device, delete the app, or move to a new device without that backup enabled, this data cannot be recovered — by you or by us. Deleting your account (see §4) also deletes this local data from the device you delete it on.
+
+### 2.2a What is different: your progress
+
+A separate, smaller set of information — which daily actions you've completed, which multi-day plans ("Game Plans") you have running and their status, calendar events you've added, and which suggestions you've passed on — **does** sync to our backend, so that this part of the app stays consistent if you use it on more than one device. This is deliberately narrower than §2.2: it is bookkeeping about your activity in the app, not the content of what you wrote about your partner.
 
 ### 2.3 Analytics data
 
@@ -57,7 +61,8 @@ We process data for the following purposes:
 ## 4. Data retention and deletion
 
 - **Account data** (Supabase): kept for as long as your account exists.
-- **Local data** (profile, vault, daily logs): kept on your device for as long as the app is installed and you have not deleted your account.
+- **Progress data** (Supabase — see §2.2a): kept for as long as your account exists.
+- **Local data** (profile, vault, daily logs, photos): kept on your device for as long as the app is installed and you have not deleted your account.
 
 You can delete your account at any time from the app's Account screen. Deleting your account:
 
@@ -70,7 +75,7 @@ If you request deletion by e-mail instead of through the app, we will delete you
 
 ## 5. Who we share data with
 
-- **Supabase** (authentication and backend hosting): processes your account and session data.
+- **Supabase** (authentication and backend hosting): processes your account and session data, and your progress data (§2.2a).
 - **PostHog** (product analytics): processes analytics event data, as described in §2.3.
 - **Apple / Google**: process Sign in with Apple / Google sign-in data if you use those options, and handle app distribution through the App Store / Google Play.
 - **Authorized persons** acting on behalf of the Controller may access data to the extent necessary to operate and maintain the app.
@@ -99,7 +104,7 @@ The app is not directed at children and requires users to be at least 18 years o
 
 ## 9. Changes to this policy
 
-We may update this policy as the app changes — for example, before introducing purchases, cloud sync of your vault and logs, or a new analytics provider. We will update the "Last updated" date when we do.
+We may update this policy as the app changes — for example, before introducing purchases or a new analytics provider. We will update the "Last updated" date when we do.
 
 ---
 
