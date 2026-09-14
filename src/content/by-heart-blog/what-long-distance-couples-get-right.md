@@ -2,6 +2,7 @@
 title: "What long-distance couples get right"
 description: "Distance forces intentionality. Nearby couples can borrow the same habits."
 pubDate: 2026-07-23
+category: "Attention & distance"
 ---
 
 Long-distance couples don't have the option of being thoughtless by accident. There's no shared couch to sit on in comfortable silence, no assumption that being in the same room counts as spending time together. Every conversation is a choice someone made to have it. That constraint, annoying as it is, produces some habits that couples living in the same apartment would benefit from stealing.
@@ -11,6 +12,8 @@ Long-distance couples don't have the option of being thoughtless by accident. Th
 When you can't rely on proximity, you rely on remembering things — what your partner has going on this week, what they were stressed about last time you talked, what they'd actually want to hear about today. None of that happens automatically over a video call the way it might happen automatically over breakfast. It has to be tracked, even informally, in someone's head or somewhere else.
 
 Couples in the same city can get away with skipping that step for years, because being physically present feels like enough. It often isn't. Two people in the same house can go a full evening without really checking in on each other's day, in a way that would end a long-distance call in about ninety seconds.
+
+> It's evidence that you were paying attention when it would have been easier not to.
 
 ## The habit, not the distance, is the point
 

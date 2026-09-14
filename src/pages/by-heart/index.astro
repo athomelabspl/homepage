@@ -1,5 +1,11 @@
 ---
 import ByHeartAppLayout from '../../layouts/ByHeartAppLayout.astro';
+import ByHeartBlogCard from '../../components/blog/ByHeartBlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const recentPosts = (await getCollection('by-heart-blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 
 const fontLink =
   'https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Work+Sans:wght@400;500;600;700&display=swap';
@@ -92,6 +98,28 @@ const fontLink =
       </div>
     </div>
   </section>
+
+  {
+    recentPosts.length > 0 && (
+      <section class="byh-home-blog">
+        <div class="byh-home-blog-header">
+          <h2>From the blog</h2>
+          <a href="/by-heart/blog/">Read the blog</a>
+        </div>
+        <div class="byh-blog-grid byh-blog-grid--home">
+          {recentPosts.map((post) => (
+            <ByHeartBlogCard
+              id={post.id}
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              body={post.body}
+            />
+          ))}
+        </div>
+      </section>
+    )
+  }
 
   <section class="byh-cta-band">
     <h2>Start today.</h2>

@@ -17,27 +17,52 @@ const { Content } = await render(post);
 const minutes = readingTimeMinutes(post.body);
 
 const fontLink =
-  'https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Work+Sans:wght@400;500;600&display=swap';
+  'https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,500&family=Work+Sans:wght@400;500;600;700&display=swap';
 ---
 
 <ByHeartAppLayout title={post.data.title} description={post.data.description} bodyClass="page">
   <link rel="stylesheet" href={fontLink} slot="head" />
 
-  <article class="byh-article">
-    <div class="byh-article-header">
-      <div class="byh-eyebrow">Blog</div>
-      <h1>{post.data.title}</h1>
-      <p class="byh-article-meta">
-        <time datetime={post.data.pubDate.toISOString()}>
-          {formatByHeartBlogDate(post.data.pubDate)}
-        </time>
-        <span aria-hidden="true"> · </span>
-        <span>{minutes} min read</span>
-      </p>
-    </div>
-    <div class="byh-article-body">
-      <Content />
-    </div>
-    <a class="byh-article-back" href="/by-heart/blog/">← Back to blog</a>
-  </article>
+  <div class="byh-article-page">
+    <a class="byh-back-link" href="/by-heart/blog/">
+      <svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+        <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z" />
+      </svg>
+      Blog
+    </a>
+
+    <article class="byh-article">
+      <header class="byh-article-header">
+        <div class="byh-eyebrow">{post.data.category}</div>
+        <h1>{post.data.title}</h1>
+        <p class="byh-article-dek">{post.data.description}</p>
+        <div class="byh-byline">
+          <div class="byh-byline-avatar" aria-hidden="true"></div>
+          <div class="byh-byline-text">
+            <div class="byh-byline-name">{post.data.author}</div>
+            <div class="byh-byline-meta">
+              <time datetime={post.data.pubDate.toISOString()}>
+                {formatByHeartBlogDate(post.data.pubDate)}
+              </time>
+              <span aria-hidden="true"> · </span>
+              <span>{minutes} min read</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="byh-article-hero" role="img" aria-label="Article image">
+        <span>Article image</span>
+      </div>
+
+      <div class="byh-article-body">
+        <Content />
+      </div>
+
+      <div class="byh-article-cta">
+        <p>Try By Heart today.</p>
+        <a href="/by-heart/">Download</a>
+      </div>
+    </article>
+  </div>
 </ByHeartAppLayout>

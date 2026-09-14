@@ -2,6 +2,7 @@
 title: "The five-minute rule for busy couples"
 description: "A small daily habit beats an occasional big gesture. Here's the case for both."
 pubDate: 2026-07-26
+category: "Small habits"
 ---
 
 There's a version of romance that shows up mostly in movies: the grand gesture, the surprise trip, the elaborate plan that takes weeks to pull off. It's a nice idea, and it's also not how most relationships are actually sustained day to day, especially once work, kids, and everyone's calendar get involved.
@@ -13,6 +14,8 @@ The research on this is pretty consistent: the small, frequent stuff predicts ho
 Five minutes is enough to send a text that isn't logistics. Enough to ask a specific follow-up question about something they mentioned last week. Enough to do the one small thing you know would help today — not something generic, something you know because you've been paying attention.
 
 The constraint is useful, not limiting. A five-minute version of "be thoughtful" has to be concrete, because you don't have time to overthink it. That's exactly the size of thing that's sustainable on a busy week, which is most weeks.
+
+> A five-minute conversation that actually lands beats a once-a-year vacation that everyone's too tired to enjoy.
 
 ## The big gesture isn't wrong, it's just rare
 
