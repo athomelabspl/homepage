@@ -7,7 +7,7 @@ const DATE_LOCALES: Record<Locale, string> = {
   es: 'es',
   fr: 'fr-FR',
   de: 'de-DE',
-  pt: 'pt-PT',
+  pt: 'pt-BR',
   pl: 'pl-PL',
 };
 

@@ -3,6 +3,8 @@ import AppLayout from '../../../../layouts/AppLayout.astro';
 import Hreflang from '../../../../components/seo/Hreflang.astro';
 import OpenGraph from '../../../../components/seo/OpenGraph.astro';
 import FAQPageSchema from '../../../../components/seo/FAQPageSchema.astro';
+import SoftwareApplicationSchema from '../../../../components/seo/SoftwareApplicationSchema.astro';
+import { brands } from '../../../../config/brands';
 import BlogPostingSchema from '../../../../components/seo/BlogPostingSchema.astro';
 import BlogArticleHeader from '../../../../components/blog/BlogArticleHeader.astro';
 import BlogFigure from '../../../../components/blog/BlogFigure.astro';
@@ -87,6 +89,11 @@ const cover = post.data.cover;
     slot="head"
   />
   {faqItems.length > 0 && <FAQPageSchema items={faqItems} slot="head" />}
+  {
+    post.data.cluster === 'product' && (
+      <SoftwareApplicationSchema brand={brands['breakup-reset']} slot="head" />
+    )
+  }
 
   <article class="blog-article">
     <div class="prose blog-article-intro">
