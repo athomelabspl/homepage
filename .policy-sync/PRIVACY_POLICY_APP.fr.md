@@ -1,3 +1,7 @@
+| Champ | Détail |
+|---|---|
+| **Dernière mise à jour** | 18 novembre 2026 |
+
 ## 1. Informations générales
 
 - **Nom de l’application** : Breakup Reset
@@ -19,7 +23,7 @@ Ci-dessous, nous décrivons les catégories de données et l’endroit où elles
 - adresse e-mail
 - données d’authentification (mot de passe non en clair ; le fournisseur d’authentification le conserve sous forme chiffrée/hachée)
 - données de connexion/session (p. ex. horodatages ; des informations techniques telles que l’adresse IP et l’agent utilisateur peuvent aussi apparaître dans les journaux système)
-- si vous utilisez une connexion externe (p. ex. Google) : identifiants et données de profil transmis par le fournisseur de connexion dans le cadre d’OAuth
+- si vous utilisez une connexion externe (p. ex. Google ou Apple, c’est-à-dire Sign in with Apple) : identifiants et données de profil transmis par le fournisseur de connexion dans le cadre d’OAuth
 
 **Où conservons-nous** : côté serveur (Supabase Auth).
 
@@ -54,10 +58,13 @@ L’application peut conserver des contenus saisis par vous, notamment :
 
 - notes associées aux défis complétés (champ « notes »)
 - entrées de journal/réflexions (peuvent être conservées localement sur l’appareil, selon la fonctionnalité)
+- photos (de l’appareil photo ou de la photothèque) et enregistrements vocaux (du microphone) ajoutés au journal
 
 De tels contenus peuvent contenir des informations sensibles au sens courant (p. ex. description de relations, d’émotions). Nous ne vous encourageons pas à saisir des données que vous ne souhaitez pas conserver.
 
-**Où conservons-nous** : les notes de défis peuvent être conservées sur le serveur ; le journal/réflexions peut être conservé localement sur l’appareil (selon la fonctionnalité).
+**Où conservons-nous** : les notes de défis sont conservées uniquement en local sur l’appareil et chiffrées sur l’appareil (elles ne sont pas sur le serveur) ; le journal/réflexions peut être conservé localement sur l’appareil (selon la fonctionnalité), et les entrées de journal en texte sont chiffrées sur l’appareil ; les photos et enregistrements vocaux sont enregistrés uniquement en local sur l’appareil et ne sont pas envoyés à un serveur.
+
+**Attention** : les photos et enregistrements se trouvent uniquement sur votre appareil. Il est impossible de les récupérer si vous perdez votre téléphone ou le réinitialisez.
 
 ### 2.5 Notifications
 
@@ -91,6 +98,8 @@ L’application peut collecter des données analytiques sur l’utilisation de l
 
 Nous pouvons inclure des **signaux d’usage non identifiants** comme propriétés d’événements dans l’analytique (p. ex. l’étiquette d’émotion quotidienne sélectionnée, telle que « sad » ou « anxious »). Nous n’envoyons **pas** le texte du journal ni d’autres contenus saisis en texte libre à l’analytique.
 
+Après la suppression du compte, l’application peut envoyer un seul événement analytique anonyme (PostHog) contenant le motif de suppression que vous avez choisi, la version de l’application et la langue de l’interface. Il ne contient ni identifiant d’utilisateur, ni adresse e-mail, ni identifiant d’appareil, et ne crée pas votre profil. La question est facultative (une seule pression, sans champ de texte).
+
 **Où traitons-nous** : chez le fournisseur d’analytique (PostHog).
 
 ### 2.8 Achats (soutien volontaire de l’application)
@@ -109,6 +118,7 @@ Nous traitons les données aux fins suivantes :
 - **fourniture des fonctionnalités de l’application** (progression, quiz, personnalisation des contenus, préférences)
 - **notifications** (si activées) : rappels et messages relatifs à la progression/aux accomplissements
 - **analyse produit** : compréhension du fonctionnement de l’application et amélioration de la qualité (PostHog)
+- **diagnostic des erreurs et stabilité de l’application** : rapports de plantage (Sentry)
 - **gestion du soutien financier de l’application** (si utilisé) : vérification des droits et du statut de soutien (RevenueCat)
 - **marketing / newsletter** : uniquement si vous **donnez votre consentement (opt-in)** et uniquement dans la mesure où la fonctionnalité est activée
 
@@ -123,7 +133,7 @@ Selon la finalité, nous traitons les données sur la base de :
   - fourniture des fonctionnalités de l’application (progression, quiz, personnalisation dans le cadre du fonctionnement de l’application)
   - notifications, lorsqu’elles résultent des paramètres et du fonctionnement de l’application (l’activation des notifications sur l’appareil est volontaire)
 - **art. 6, § 1, f RGPD (intérêt légitime du Responsable du traitement)** :
-  - sécurité, prévention des abus, diagnostic des erreurs, maintenance de l’infrastructure et exercice/défense de droits en justice
+  - sécurité, prévention des abus, diagnostic des erreurs (y compris les rapports de plantage dans Sentry), maintenance de l’infrastructure et exercice/défense de droits en justice
   - analyse de base du fonctionnement de l’application dans la mesure nécessaire à sa maintenance et à son amélioration (si une configuration donnée ne requiert pas le consentement)
 - **art. 6, § 1, a RGPD (consentement)** :
   - marketing/newsletter (si activés) – uniquement après votre opt-in volontaire
@@ -150,6 +160,8 @@ L’application conserve certaines données localement sur l’appareil (AsyncSt
 
 Si vous activez la fonctionnalité de reconnaissance douce de l’activité (pas), l’application conserve localement **uniquement les préférences de cette fonctionnalité** ainsi que des **drapeaux quotidiens** empêchant l’affichage du message plus d’une fois par jour (sans nécessiter d’enregistrer l’historique des pas).
 
+Les photos et enregistrements vocaux ajoutés au journal sont enregistrés uniquement en local sur l’appareil. Ils ne sont pas envoyés à un serveur, sont exclus de la sauvegarde iCloud sur iOS (sur Android, `allowBackup` est désactivé) et sont supprimés lors de la suppression du compte. Les entrées de journal en texte sont chiffrées sur l’appareil. **Les photos et enregistrements ne peuvent pas être récupérés si vous perdez votre téléphone ou le réinitialisez.**
+
 Le mécanisme de suppression des données locales lors de la suppression du compte est implémenté dans l’application. En pratique, il inclut notamment la suppression des données locales de progression, de l’historique et des contenus enregistrés dans la mémoire de l’application (le périmètre peut varier selon les fonctionnalités utilisées et la version de l’application).
 
 ---
@@ -160,12 +172,20 @@ Selon les fonctionnalités utilisées, les données peuvent être traitées par 
 
 ### 5.1 Supabase (hébergement du backend et de la base de données, authentification)
 
-- Supabase traite les données de compte et de session ainsi que les données applicatives enregistrées dans la base de données (p. ex. progression, profil, préférences, notes de défis).
+- Supabase traite les données de compte et de session ainsi que les données applicatives enregistrées dans la base de données (p. ex. progression, profil, préférences). Les notes de défis ne sont pas sur le serveur ; elles sont conservées localement sur l’appareil.
 
 ### 5.2 PostHog (analyse produit)
 
 - PostHog traite les données d’événements analytiques ainsi que les propriétés d’événements.
 - Dans la configuration actuelle de l’application, l’ingestion d’analytique est configurée sur l’endpoint UE `https://eu.i.posthog.com`. Selon la configuration du prestataire, le traitement analytique peut néanmoins impliquer des transferts en dehors de l’EEE.
+
+### 5.2A Sentry (rapports de plantage)
+
+- Sur iOS et Android, l’application envoie des rapports de plantage à Sentry (@sentry/react-native). Un rapport contient uniquement des données techniques sur l’erreur et l’appareil, ainsi qu’un identifiant d’utilisateur.
+- Les messages d’erreur sont nettoyés des adresses e-mail, identifiants et jetons. Les données de requêtes et les champs supplémentaires sont supprimés. Le contenu de vos entrées de journal n’est pas envoyé.
+- Les données des rapports sont conservées dans la région UE.
+- Un accord de sous-traitance des données (DPA) a été conclu avec Sentry.
+- Les rapports sont conservés pendant 30 jours.
 
 ### 5.3 Prestataires de paiement / boutiques
 
@@ -242,6 +262,7 @@ Selon la configuration des prestataires et les fonctionnalités que vous utilise
 
 - Dans la configuration auditée, Supabase opère dans une région de l’UE (`eu-central-1`).
 - PostHog : l’ingestion d’analytique est configurée sur `https://eu.i.posthog.com`. Selon la configuration du prestataire et votre utilisation des fonctionnalités, le traitement peut néanmoins impliquer des transferts en dehors de l’EEE.
+- Sentry : les rapports de plantage sont conservés dans la région UE. Selon la configuration du prestataire, le traitement peut néanmoins impliquer des transferts en dehors de l’EEE. Pour les transferts vers Sentry (Functional Software, Inc., États-Unis), le cadre de protection des données UE-États-Unis s’applique ou, s’il n’est pas applicable, les clauses contractuelles types incluses dans l’accord de sous-traitance.
 - Les boutiques (Apple/Google) et les prestataires de notifications peuvent traiter les données dans différentes juridictions.
 
 En cas de transferts hors EEE, les mécanismes de conformité fournis par les prestataires (p. ex. clauses contractuelles types) sont utilisés dans la mesure requise.
@@ -254,7 +275,8 @@ En cas de transferts hors EEE, les mécanismes de conformité fournis par les pr
 - **Données de profil (p. ex. alias, `user_gender`, `ex_gender`)** : en principe facultatives ; l’absence peut limiter la personnalisation des contenus.
 - **Notifications** : facultatives ; l’absence d’autorisation dans le système d’exploitation signifie l’absence de notifications push.
 - **Données de pas/mouvement (reconnaissance d’une marche)** : facultatives ; la fonctionnalité fonctionne uniquement si vous l’activez dans l’application et accordez l’autorisation dans le système d’exploitation. Vous pouvez la désactiver à tout moment.
-- **Analytique** : si des paramètres de confidentialité sont disponibles dans l’application, vous pouvez limiter/désactiver l’analytique (dans la mesure où elle n’est pas nécessaire à la sécurité et au fonctionnement de l’application).
+- **Appareil photo, microphone et photos (photos et enregistrements vocaux dans le journal)** : facultatifs ; l’accès est optionnel et nécessite l’autorisation du système d’exploitation. Les photos et enregistrements se trouvent uniquement sur l’appareil et ne peuvent pas être récupérés si vous perdez votre téléphone ou le réinitialisez.
+- **Analytique** : l’application ne propose actuellement pas d’interrupteur pour l’analytique. Vous pouvez exercer votre droit d’opposition ou d’effacement en contactant le Responsable du traitement (voir 8.1).
 
 ---
 

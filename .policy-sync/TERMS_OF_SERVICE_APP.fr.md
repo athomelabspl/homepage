@@ -8,7 +8,7 @@
 | **N° d'identification fiscale (NIP)** | 9512512357 |
 | **E-mail de contact** | athomelabs.studio@gmail.com |
 | **Site web** | https://athomelabs.eu |
-| **Dernière mise à jour** | 13 mai 2026 |
+| **Dernière mise à jour** | 18 novembre 2026 |
 
 Les présentes Conditions d'Utilisation ("Conditions") régissent votre utilisation de l'application mobile Breakup Reset ("Application"). En téléchargeant, installant ou utilisant l'Application, vous acceptez d'être lié par ces Conditions. Si vous n'êtes pas d'accord, n'utilisez pas l'Application.
 
@@ -41,13 +41,15 @@ L'Application propose :
 - Un quiz de personnalité et des perspectives personnalisées
 - Des défis quotidiens et un suivi des progrès
 - Des outils de journalisation et de réflexion
+- Ajout de photos et d'enregistrements vocaux au journal
+- Reconnaissances de mouvement facultatives basées sur le nombre de pas (activées par vous)
 - Un suivi des jours sans contact
 - Des notifications et rappels (facultatifs, activés par vous)
 - Du contenu informatif
 
 ### 2.1 Utilisation en tant qu'invité
 
-Vous pouvez passer le quiz de personnalité et voir les résultats sans créer de compte. La création d'un compte débloque toutes les fonctionnalités, y compris la persistance des progrès entre les sessions et la synchronisation entre les appareils (via la sauvegarde dans le cloud). Les données créées en tant qu'invité sont stockées localement sur votre appareil et peuvent être perdues si vous désinstallez l'Application ou effacez les données locales. Si vous vous inscrivez ultérieurement, les données d'invité seront transférées vers votre compte dans la mesure du possible.
+Vous pouvez passer le quiz de personnalité et voir les résultats sans créer de compte. La création d'un compte débloque toutes les fonctionnalités, y compris la persistance des progrès, du profil et des préférences entre les sessions et les appareils. Les données créées en tant qu'invité sont stockées localement sur votre appareil et peuvent être perdues si vous désinstallez l'Application ou effacez les données locales. Si vous vous inscrivez ultérieurement, les données d'invité seront transférées vers votre compte dans la mesure du possible.
 
 ### 2.2 Absence de service professionnel
 
@@ -96,7 +98,7 @@ Vous êtes responsable de toute activité se produisant sous votre compte. Nous 
 
 Vous pouvez supprimer votre compte à tout moment via les paramètres de l'Application. Après la suppression, nous supprimerons ou anonymiserons vos données personnelles conformément à notre Politique de confidentialité. Certaines données anonymisées ou agrégées peuvent être conservées à des fins analytiques.
 
-**Important** : Le contenu stocké uniquement sur votre appareil (comme certaines entrées de journal — voir la Section 7) peut ne pas être récupérable après la suppression du compte ou la désinstallation de l'Application. Nous vous recommandons de sauvegarder tout contenu que vous souhaitez conserver avant de supprimer votre compte.
+**Important** : Le contenu stocké uniquement sur votre appareil (comme les photos, les enregistrements vocaux et certaines entrées de journal — voir la Section 7) peut ne pas être récupérable après la suppression du compte ou la désinstallation de l'Application. Nous vous recommandons de sauvegarder tout contenu que vous souhaitez conserver avant de supprimer votre compte.
 
 ---
 
@@ -135,8 +137,8 @@ Vous conservez tous les droits de propriété sur le contenu que vous créez dan
 
 ### 7.2 Où le Contenu Est Stocké
 
-- **Contenu stocké sur le serveur** : Le contenu lié au compte (par exemple, notes de défis, données de profil) est stocké sur notre backend (Supabase).
-- **Contenu uniquement sur l'appareil** : Certains contenus, comme certaines entrées de journal ou l'historique des contrôles d'humeur quotidiens, peuvent être stockés exclusivement sur votre appareil et ne sont pas sauvegardés sur nos serveurs. Ce contenu peut être irrémédiablement perdu si vous désinstallez l'Application, effacez les données locales ou si votre appareil est endommagé ou perdu.
+- **Contenu stocké sur le serveur** : Le contenu lié au compte (par exemple, données de profil) est stocké sur notre backend (Supabase).
+- **Contenu uniquement sur l'appareil** : Certains contenus, comme les photos et enregistrements vocaux du journal, les notes de défis, certaines entrées de journal ou l'historique des contrôles d'humeur quotidiens, peuvent être stockés exclusivement sur votre appareil et ne sont pas sauvegardés sur nos serveurs. Ce contenu peut être irrémédiablement perdu si vous désinstallez l'Application, effacez les données locales ou si votre appareil est endommagé ou perdu. Ce contenu n'est pas transféré vers un nouveau téléphone, y compris via une sauvegarde iCloud ou Google.
 
 Consultez notre Politique de confidentialité pour des informations détaillées sur les données stockées et leur emplacement.
 
@@ -214,7 +216,7 @@ Après la résiliation :
 
 - Votre droit d'utiliser l'Application cesse immédiatement.
 - Nous supprimerons ou anonymiserons vos données personnelles conformément à notre Politique de confidentialité.
-- Le contenu stocké uniquement sur votre appareil (par exemple, les entrées de journal stockées localement) relève de votre responsabilité — sauvegardez-le avant la résiliation.
+- Le contenu stocké uniquement sur votre appareil (par exemple, les photos, enregistrements vocaux et entrées de journal stockés localement) relève de votre responsabilité — sauvegardez-le avant la résiliation.
 - Les dispositions de ces Conditions qui, par leur nature, doivent survivre à la résiliation resteront en vigueur (y compris les clauses de non-responsabilité, la limitation de responsabilité, l'indemnisation et le droit applicable).
 
 ---
@@ -303,7 +305,7 @@ Votre utilisation continue de l'Application après l'entrée en vigueur des modi
 
 ## 17. Langue et Traductions
 
-Ce document est rédigé à l'origine en anglais. Des traductions dans d'autres langues peuvent être fournies pour des raisons de commodité. En cas de divergence entre la version anglaise et une version traduite, la version anglaise prévaut.
+Ce document est rédigé à l'origine en polonais. Des traductions dans d'autres langues sont fournies pour des raisons de commodité. En cas de divergence entre la version polonaise et une version traduite, la version polonaise prévaut. Cela n'affecte pas la protection dont vous bénéficiez en vertu des dispositions impératives de la loi de votre pays de résidence.
 
 ---
 

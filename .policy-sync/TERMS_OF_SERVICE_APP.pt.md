@@ -8,7 +8,7 @@
 | **NIF (NIP)** | 9512512357 |
 | **E-mail de contacto** | athomelabs.studio@gmail.com |
 | **Site** | https://athomelabs.eu |
-| **Última atualização** | 13 de maio de 2026 |
+| **Última atualização** | 18 de novembro de 2026 |
 
 Estes Termos de Serviço ("Termos") regem a sua utilização da aplicação móvel Breakup Reset ("Aplicação"). Ao descarregar, instalar ou utilizar a Aplicação, concorda em ficar vinculado por estes Termos. Se não concordar, não utilize a Aplicação.
 
@@ -41,13 +41,15 @@ A Aplicação oferece:
 - Um questionário de personalidade e perceções personalizadas
 - Desafios diários e acompanhamento do progresso
 - Ferramentas de diário e reflexão
+- Anexar fotografias e gravações de voz ao diário
+- Reconhecimentos de movimento opcionais com base no número de passos (ativados por si)
 - Acompanhamento de dias sem contacto
 - Notificações e lembretes (opcionais, ativados por si)
 - Conteúdo informativo
 
 ### 2.1 Utilização como Convidado
 
-Pode realizar o questionário de personalidade e ver os resultados sem criar uma conta. A criação de uma conta desbloqueia a funcionalidade completa, incluindo a persistência do progresso entre sessões e a sincronização entre dispositivos (através de cópia de segurança na nuvem). Os dados criados como convidado são armazenados localmente no seu dispositivo e podem ser perdidos se desinstalar a Aplicação ou limpar os dados locais. Se mais tarde se registar, os dados de convidado serão transferidos para a sua conta sempre que possível.
+Pode realizar o questionário de personalidade e ver os resultados sem criar uma conta. A criação de uma conta desbloqueia a funcionalidade completa, incluindo a persistência do progresso, do perfil e das preferências entre sessões e dispositivos. Os dados criados como convidado são armazenados localmente no seu dispositivo e podem ser perdidos se desinstalar a Aplicação ou limpar os dados locais. Se mais tarde se registar, os dados de convidado serão transferidos para a sua conta sempre que possível.
 
 ### 2.2 Sem Serviço Profissional
 
@@ -96,7 +98,7 @@ Para aceder a certas funcionalidades, necessita de criar uma conta. Concorda em:
 
 Pode eliminar a sua conta em qualquer altura através das definições da Aplicação. Após a eliminação, removeremos ou anonimizaremos os seus dados pessoais de acordo com a nossa Política de Privacidade. Alguns dados anonimizados ou agregados podem ser retidos para fins analíticos.
 
-**Importante**: O conteúdo armazenado apenas no seu dispositivo (como certas entradas de diário — veja a Secção 7) pode não ser recuperável após a eliminação da conta ou desinstalação da Aplicação. Recomendamos que faça uma cópia de segurança de qualquer conteúdo que pretenda manter antes de eliminar a sua conta.
+**Importante**: O conteúdo armazenado apenas no seu dispositivo (como fotografias, gravações de voz e certas entradas de diário — veja a Secção 7) pode não ser recuperável após a eliminação da conta ou desinstalação da Aplicação. Recomendamos que faça uma cópia de segurança de qualquer conteúdo que pretenda manter antes de eliminar a sua conta.
 
 ---
 
@@ -135,8 +137,8 @@ Retém todos os direitos de propriedade sobre o conteúdo que criar na Aplicaç�
 
 ### 7.2 Onde o Conteúdo é Armazenado
 
-- **Conteúdo armazenado no servidor**: O conteúdo relacionado com a conta (por exemplo, notas de desafios, dados de perfil) é armazenado no nosso backend (Supabase).
-- **Conteúdo apenas no dispositivo**: Alguns conteúdos, como certas entradas de diário ou o histórico de verificação diária de humor, podem ser armazenados exclusivamente no seu dispositivo e não são copiados para os nossos servidores. Este conteúdo pode ser irremediavelmente perdido se desinstalar a Aplicação, limpar os dados locais, ou se o seu dispositivo for danificado ou perdido.
+- **Conteúdo armazenado no servidor**: O conteúdo relacionado com a conta (por exemplo, dados de perfil) é armazenado no nosso backend (Supabase).
+- **Conteúdo apenas no dispositivo**: Alguns conteúdos, como as fotografias e gravações de voz do diário, as notas de desafios, certas entradas de diário ou o histórico de verificação diária de humor, podem ser armazenados exclusivamente no seu dispositivo e não são copiados para os nossos servidores. Este conteúdo pode ser irremediavelmente perdido se desinstalar a Aplicação, limpar os dados locais, ou se o seu dispositivo for danificado ou perdido. Este conteúdo não é transferido para um novo telemóvel, mesmo através de uma cópia de segurança do iCloud ou da Google.
 
 Consulte a nossa Política de Privacidade para obter informações detalhadas sobre quais os dados armazenados e onde.
 
@@ -214,7 +216,7 @@ Após a rescisão:
 
 - O seu direito de usar a Aplicação cessa imediatamente.
 - Eliminaremos ou anonimizaremos os seus dados pessoais de acordo com a nossa Política de Privacidade.
-- O conteúdo armazenado apenas no seu dispositivo (por exemplo, entradas de diário armazenadas localmente) é da sua responsabilidade — faça uma cópia de segurança antes da rescisão.
+- O conteúdo armazenado apenas no seu dispositivo (por exemplo, fotografias, gravações de voz e entradas de diário armazenadas localmente) é da sua responsabilidade — faça uma cópia de segurança antes da rescisão.
 - As secções destes Termos que, pela sua natureza, devam sobreviver à rescisão permanecerão em vigor (incluindo isenções de responsabilidade, limitação de responsabilidade, indemnização e lei aplicável).
 
 ---
@@ -303,7 +305,7 @@ A sua utilização continuada da Aplicação após a entrada em vigor das altera
 
 ## 17. Idioma e Traduções
 
-Este documento foi originalmente redigido em inglês. As traduções para outros idiomas podem ser fornecidas por conveniência. Em caso de discrepância entre a versão inglesa e uma versão traduzida, a versão inglesa prevalece.
+Este documento foi originalmente redigido em polaco. As traduções para outros idiomas são fornecidas por conveniência. Em caso de discrepância entre a versão polaca e uma versão traduzida, a versão polaca prevalece. Isto não afeta a proteção de que beneficia ao abrigo das normas imperativas do seu país de residência.
 
 ---
 

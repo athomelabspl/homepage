@@ -1,3 +1,7 @@
+| Feld | Angabe |
+|---|---|
+| **Letzte Aktualisierung** | 18. November 2026 |
+
 ## 1. Allgemeine Informationen
 
 - **Name der App**: Breakup Reset
@@ -19,7 +23,7 @@ Nachfolgend beschreiben wir Datenkategorien sowie den typischen Speicherort (**a
 - E-Mail-Adresse
 - Authentifizierungsdaten (Passwort nicht im Klartext; der Authentifizierungsanbieter speichert es verschlüsselt/gehasht)
 - Login-/Sitzungsdaten (z. B. Zeitstempel; in Systemlogs können auch technische Informationen wie IP-Adresse und User Agent erscheinen)
-- bei Nutzung eines externen Logins (z. B. Google): Kennungen und Profildaten, die der Login-Anbieter im Rahmen von OAuth übermittelt
+- bei Nutzung eines externen Logins (z. B. Google oder Apple, d. h. Sign in with Apple): Kennungen und Profildaten, die der Login-Anbieter im Rahmen von OAuth übermittelt
 
 **Wo wir speichern**: serverseitig (Supabase Auth).
 
@@ -54,10 +58,13 @@ Die App kann von Ihnen eingegebene Inhalte speichern, insbesondere:
 
 - Notizen zu abgeschlossenen Challenges (Feld „notes“)
 - Tagebucheinträge/Reflexionen (je nach Funktion ggf. lokal auf dem Gerät gespeichert)
+- Fotos (aus Kamera oder Fotomediathek) und Sprachaufnahmen (über das Mikrofon), die dem Tagebuch hinzugefügt werden
 
 Solche Einträge können im umgangssprachlichen Sinne sensible Informationen enthalten (z. B. Beschreibungen von Beziehungen, Emotionen). Wir empfehlen nicht, Daten einzugeben, die Sie nicht speichern möchten.
 
-**Wo wir speichern**: Notizen zu Challenges können auf dem Server gespeichert werden; Tagebuch/Reflexionen können lokal auf dem Gerät gespeichert werden (je nach Funktion).
+**Wo wir speichern**: Notizen zu Challenges werden ausschließlich lokal auf dem Gerät gespeichert und auf dem Gerät verschlüsselt (nicht auf dem Server); Tagebuch/Reflexionen können lokal auf dem Gerät gespeichert werden (je nach Funktion), Tagebuch-Texteinträge werden auf dem Gerät verschlüsselt; Fotos und Sprachaufnahmen werden ausschließlich lokal auf dem Gerät gespeichert und nicht an einen Server gesendet.
+
+**Hinweis**: Fotos und Aufnahmen befinden sich nur auf Ihrem Gerät. Sie können nicht wiederhergestellt werden, wenn Sie Ihr Telefon verlieren oder zurücksetzen.
 
 ### 2.5 Benachrichtigungen
 
@@ -91,6 +98,8 @@ Die App kann Analysedaten zur App-Nutzung erfassen (z. B. Events, Event-Eigensch
 
 Wir können **nicht-identifizierende Nutzungssignale** als Event-Eigenschaften in der Analytik verwenden (z. B. das ausgewählte tägliche Emotionslabel wie „sad“ oder „anxious“). Wir senden **keine Tagebuchtexte** oder andere von Ihnen eingegebene Freitexte an die Analytik.
 
+Nach dem Löschen des Kontos kann die App ein einziges anonymes Analyse-Event (PostHog) senden, mit dem von Ihnen gewählten Löschgrund, der App-Version und der Sprache der Oberfläche. Es enthält keine Nutzerkennung, keine E-Mail-Adresse und keine Gerätekennung und erstellt kein Profil von Ihnen. Die Frage ist optional (ein Tippen, kein Textfeld).
+
 **Wo wir verarbeiten**: beim Analytik-Anbieter (PostHog).
 
 ### 2.8 Käufe (freiwillige Unterstützung der App)
@@ -109,6 +118,7 @@ Wir verarbeiten Daten zu folgenden Zwecken:
 - **Bereitstellung von App-Funktionen** (Fortschritt, Quiz, Personalisierung von Inhalten, Präferenzen)
 - **Benachrichtigungen** (falls aktiviert): Erinnerungen und Mitteilungen zu Fortschritt/Erfolgen
 - **Produktanalyse**: Verständnis der App-Nutzung und Qualitätsverbesserung (PostHog)
+- **Fehlerdiagnose und Stabilität der App**: Absturzberichte (Sentry)
 - **Abwicklung der finanziellen Unterstützung der App** (falls genutzt): Prüfung von Berechtigungen und Unterstützungsstatus (RevenueCat)
 - **Marketing / Newsletter**: nur, wenn Sie **einwilligen (Opt-in)** und nur im Umfang, in dem die Funktion aktiviert ist
 
@@ -123,7 +133,7 @@ Je nach Zweck verarbeiten wir Daten auf Grundlage von:
   - Bereitstellung von App-Funktionen (Fortschritt, Quiz, Personalisierung im Rahmen des App-Betriebs)
   - Benachrichtigungen, sofern sie sich aus den Einstellungen und dem Betrieb der App ergeben (die Aktivierung von Benachrichtigungen auf dem Gerät ist freiwillig)
 - **Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse des Verantwortlichen)**:
-  - Gewährleistung der Sicherheit, Verhinderung von Missbrauch, Fehlerdiagnose, Betrieb der Infrastruktur sowie Geltendmachung/Abwehr von Ansprüchen
+  - Gewährleistung der Sicherheit, Verhinderung von Missbrauch, Fehlerdiagnose (einschließlich Absturzberichten in Sentry), Betrieb der Infrastruktur sowie Geltendmachung/Abwehr von Ansprüchen
   - grundlegende Analyse der App-Funktionsweise im erforderlichen Umfang zur Aufrechterhaltung und Verbesserung (sofern in einer bestimmten Konfiguration keine Einwilligung erforderlich ist)
 - **Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)**:
   - Marketing/Newsletter (falls aktiviert) – ausschließlich nach Ihrem freiwilligen Opt-in
@@ -150,6 +160,8 @@ Die App speichert bestimmte Daten lokal auf dem Gerät (AsyncStorage), z. B. For
 
 Wenn Sie die Funktion der sanften Bewegungsanerkennungen (Schritte) aktivieren, speichert die App lokal **ausschließlich die Präferenzen dieser Funktion** sowie **tägliche Flags**, die verhindern, dass die Mitteilung mehr als einmal pro Tag angezeigt wird (ohne die Notwendigkeit, eine Schritt-Historie zu speichern).
 
+Dem Tagebuch hinzugefügte Fotos und Sprachaufnahmen werden ausschließlich lokal auf dem Gerät gespeichert. Sie werden nicht an einen Server gesendet, sind unter iOS von der iCloud-Sicherung ausgeschlossen (unter Android ist `allowBackup` deaktiviert) und werden beim Löschen des Kontos gelöscht. Tagebuch-Texteinträge werden auf dem Gerät verschlüsselt. **Fotos und Aufnahmen können nicht wiederhergestellt werden, wenn Sie Ihr Telefon verlieren oder zurücksetzen.**
+
 Ein Mechanismus zum Löschen lokaler Daten beim Löschen des Kontos ist in der App implementiert. In der Praxis umfasst dies u. a. das Löschen lokaler Fortschrittsdaten, der Historie sowie in der App gespeicherter Inhalte (der Umfang kann je nach genutzten Funktionen und App-Version variieren).
 
 ---
@@ -160,12 +172,20 @@ Je nach genutzten Funktionen können Daten von folgenden Anbietern verarbeitet w
 
 ### 5.1 Supabase (Hosting von Backend und Datenbank, Authentifizierung)
 
-- Supabase verarbeitet Konto- und Sitzungsdaten sowie in der Datenbank gespeicherte App-Daten (z. B. Fortschritt, Profil, Präferenzen, Notizen zu Challenges).
+- Supabase verarbeitet Konto- und Sitzungsdaten sowie in der Datenbank gespeicherte App-Daten (z. B. Fortschritt, Profil, Präferenzen). Notizen zu Challenges liegen nicht auf dem Server, sondern werden lokal auf dem Gerät gespeichert.
 
 ### 5.2 PostHog (Produktanalyse)
 
 - PostHog verarbeitet Analysedaten zu Events sowie Event-Eigenschaften.
 - In der aktuellen App-Konfiguration ist die Analytik-Ingestion auf den EU-Endpoint `https://eu.i.posthog.com` eingestellt. Je nach Anbieter-Konfiguration kann die Analytik-Verarbeitung dennoch Übermittlungen außerhalb des EWR beinhalten.
+
+### 5.2A Sentry (Absturzberichte)
+
+- Die App sendet unter iOS und Android Absturzberichte an Sentry (@sentry/react-native). Ein Bericht enthält ausschließlich technische Daten zum Fehler und zum Gerät sowie eine Nutzerkennung.
+- Fehlermeldungen werden von E-Mail-Adressen, Kennungen und Tokens bereinigt. Anfragedaten und zusätzliche Felder werden entfernt. Der Inhalt Ihrer Tagebucheinträge wird nicht gesendet.
+- Die Daten der Berichte werden in der EU-Region gespeichert.
+- Mit Sentry besteht ein Auftragsverarbeitungsvertrag (DPA).
+- Berichte werden 30 Tage lang aufbewahrt.
 
 ### 5.3 Zahlungsanbieter / Stores
 
@@ -242,6 +262,7 @@ Je nach Konfiguration der Anbieter und den von Ihnen genutzten Funktionen:
 
 - Supabase arbeitet in der auditierten Konfiguration in einer EU-Region (`eu-central-1`).
 - PostHog: Die Analytik-Ingestion ist auf `https://eu.i.posthog.com` eingestellt. Je nach Anbieter-Konfiguration und genutzten Funktionen kann die Verarbeitung dennoch Übermittlungen außerhalb des EWR beinhalten.
+- Sentry: Absturzberichte werden in der EU-Region gespeichert. Je nach Anbieter-Konfiguration kann die Verarbeitung dennoch Übermittlungen außerhalb des EWR beinhalten. Für Übermittlungen an Sentry (Functional Software, Inc., USA) gilt das EU-US Data Privacy Framework oder, falls dieses nicht anwendbar ist, die im Auftragsverarbeitungsvertrag enthaltenen Standardvertragsklauseln.
 - Stores (Apple/Google) und Benachrichtigungsanbieter können Daten in unterschiedlichen Jurisdiktionen verarbeiten.
 
 Bei Übermittlungen außerhalb des EWR kommen von den Anbietern bereitgestellte Compliance-Mechanismen (z. B. Standardvertragsklauseln) zum Einsatz, soweit erforderlich.
@@ -254,7 +275,8 @@ Bei Übermittlungen außerhalb des EWR kommen von den Anbietern bereitgestellte 
 - **Profildaten (z. B. Alias, `user_gender`, `ex_gender`)**: grundsätzlich freiwillig; fehlende Angaben können die Personalisierung einschränken.
 - **Benachrichtigungen**: freiwillig; fehlende Zustimmung im Betriebssystem bedeutet keine Push-Benachrichtigungen.
 - **Schritte-/Bewegungsdaten (Anerkennung eines Spaziergangs)**: freiwillig; die Funktion wirkt nur nach Aktivierung in der App und Erteilung der Berechtigung im Betriebssystem. Sie können sie jederzeit deaktivieren.
-- **Analytik**: sofern Datenschutzeinstellungen in der App verfügbar sind, können Sie Analytik einschränken/deaktivieren (sofern sie nicht zur Gewährleistung von Sicherheit und Betrieb der App erforderlich ist).
+- **Kamera, Mikrofon und Fotos (Fotos und Sprachaufnahmen im Tagebuch)**: freiwillig; der Zugriff ist optional und erfordert die Berechtigung im Betriebssystem. Fotos und Aufnahmen befinden sich nur auf dem Gerät und können nicht wiederhergestellt werden, wenn Sie Ihr Telefon verlieren oder zurücksetzen.
+- **Analytik**: Die App bietet derzeit keinen Schalter für die Analytik. Sie können Ihr Widerspruchs- oder Löschungsrecht ausüben, indem Sie den Verantwortlichen kontaktieren (siehe 8.1).
 
 ---
 

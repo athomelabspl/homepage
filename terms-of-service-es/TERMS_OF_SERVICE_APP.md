@@ -8,7 +8,7 @@
 | **NIF (NIP)** | 9512512357 |
 | **Correo de contacto** | athomelabs.studio@gmail.com |
 | **Sitio web** | https://athomelabs.eu |
-| **Última actualización** | 13 de mayo de 2026 |
+| **Última actualización** | 18 de noviembre de 2026 |
 
 Estos Términos de Servicio ("Términos") rigen el uso de la aplicación móvil Breakup Reset ("Aplicación"). Al descargar, instalar o usar la Aplicación, usted acepta estar sujeto a estos Términos. Si no está de acuerdo, no utilice la Aplicación.
 
@@ -41,13 +41,15 @@ La Aplicación ofrece:
 - Un cuestionario de personalidad y perspectivas personalizadas
 - Desafíos diarios y seguimiento del progreso
 - Herramientas de diario y reflexión
+- Adjuntar fotos y grabaciones de voz al diario
+- Reconocimientos de movimiento opcionales basados en el número de pasos (activados por usted)
 - Seguimiento de días sin contacto
 - Notificaciones y recordatorios (opcionales, activados por usted)
 - Contenido informativo
 
 ### 2.1 Uso como invitado
 
-Puede realizar el cuestionario de personalidad y ver los resultados sin crear una cuenta. Crear una cuenta desbloquea la funcionalidad completa, incluida la persistencia del progreso entre sesiones y la sincronización entre dispositivos (mediante copia de seguridad en la nube). Los datos creados como invitado se almacenan localmente en su dispositivo y pueden perderse si desinstala la Aplicación o borra los datos locales. Si más tarde se registra, los datos de invitado se transferirán a su cuenta cuando sea posible.
+Puede realizar el cuestionario de personalidad y ver los resultados sin crear una cuenta. Crear una cuenta desbloquea la funcionalidad completa, incluida la persistencia del progreso, el perfil y las preferencias entre sesiones y dispositivos. Los datos creados como invitado se almacenan localmente en su dispositivo y pueden perderse si desinstala la Aplicación o borra los datos locales. Si más tarde se registra, los datos de invitado se transferirán a su cuenta cuando sea posible.
 
 ### 2.2 Sin servicio profesional
 
@@ -96,7 +98,7 @@ Usted es responsable de toda actividad que ocurra bajo su cuenta. No somos respo
 
 Puede eliminar su cuenta en cualquier momento a través de la configuración de la Aplicación. Tras la eliminación, eliminaremos o anonimizaremos sus datos personales de acuerdo con nuestra Política de Privacidad. Podemos conservar algunos datos anonimizados o agregados para fines analíticos.
 
-**Importante**: El contenido almacenado solo en su dispositivo (como ciertas entradas del diario — consulte la Sección 7) puede no ser recuperable después de eliminar la cuenta o desinstalar la Aplicación. Le recomendamos hacer una copia de seguridad de cualquier contenido que desee conservar antes de eliminar su cuenta.
+**Importante**: El contenido almacenado solo en su dispositivo (como fotos, grabaciones de voz y ciertas entradas del diario — consulte la Sección 7) puede no ser recuperable después de eliminar la cuenta o desinstalar la Aplicación. Le recomendamos hacer una copia de seguridad de cualquier contenido que desee conservar antes de eliminar su cuenta.
 
 ---
 
@@ -135,8 +137,8 @@ Usted conserva todos los derechos de propiedad sobre el contenido que cree dentr
 
 ### 7.2 Dónde se Almacena el Contenido
 
-- **Contenido almacenado en el servidor**: El contenido relacionado con la cuenta (p. ej., notas de desafíos, datos de perfil) se almacena en nuestro backend (Supabase).
-- **Contenido solo en el dispositivo**: Algunos contenidos, como ciertas entradas del diario o el historial de control de estado de ánimo diario, pueden almacenarse exclusivamente en su dispositivo y no tienen copia de seguridad en nuestros servidores. Este contenido puede perderse irremediablemente si desinstala la Aplicación, borra los datos locales o si su dispositivo se daña o se pierde.
+- **Contenido almacenado en el servidor**: El contenido relacionado con la cuenta (p. ej., datos de perfil) se almacena en nuestro backend (Supabase).
+- **Contenido solo en el dispositivo**: Algunos contenidos, como las fotos y grabaciones de voz del diario, las notas de los desafíos, ciertas entradas del diario o el historial de control de estado de ánimo diario, pueden almacenarse exclusivamente en su dispositivo y no tienen copia de seguridad en nuestros servidores. Este contenido puede perderse irremediablemente si desinstala la Aplicación, borra los datos locales o si su dispositivo se daña o se pierde. Este contenido no se transfiere a un teléfono nuevo, ni siquiera mediante una copia de seguridad de iCloud o Google.
 
 Consulte nuestra Política de Privacidad para obtener información detallada sobre qué datos se almacenan y dónde.
 
@@ -214,7 +216,7 @@ Tras la terminación:
 
 - Su derecho a usar la Aplicación cesa inmediatamente.
 - Eliminaremos o anonimizaremos sus datos personales de acuerdo con nuestra Política de Privacidad.
-- El contenido almacenado solo en su dispositivo (p. ej., entradas del diario almacenadas localmente) es su responsabilidad de respaldar antes de la terminación.
+- El contenido almacenado solo en su dispositivo (p. ej., fotos, grabaciones de voz y entradas del diario almacenadas localmente) es su responsabilidad de respaldar antes de la terminación.
 - Las secciones de estos Términos que por su naturaleza deban sobrevivir a la terminación seguirán vigentes (incluyendo exenciones de responsabilidad, limitación de responsabilidad, indemnización y ley aplicable).
 
 ---
@@ -303,7 +305,7 @@ El uso continuado de la Aplicación después de que los cambios entren en vigor 
 
 ## 17. Idioma y Traducciones
 
-Este documento está redactado originalmente en inglés. Las traducciones a otros idiomas pueden proporcionarse por conveniencia. En caso de discrepancia entre la versión inglesa y una versión traducida, prevalecerá la versión inglesa.
+Este documento está redactado originalmente en polaco. Las traducciones a otros idiomas se proporcionan por conveniencia. En caso de discrepancia entre la versión polaca y una versión traducida, prevalecerá la versión polaca. Esto no afecta a la protección que le corresponde conforme a las normas imperativas de su país de residencia.
 
 ---
 

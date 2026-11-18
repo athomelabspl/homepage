@@ -8,7 +8,7 @@
 | **Tax ID (NIP)** | 9512512357 |
 | **Contact e-mail** | athomelabs.studio@gmail.com |
 | **Website** | https://athomelabs.eu |
-| **Last updated** | May 13, 2026 |
+| **Last updated** | November 18, 2026 |
 
 These Terms of Service ("Terms") govern your use of the Breakup Reset mobile application ("App"). By downloading, installing, or using the App, you agree to be bound by these Terms. If you do not agree, do not use the App.
 
@@ -41,13 +41,15 @@ The App offers:
 - A personality quiz and personalized insights
 - Daily challenges and progress tracking
 - Journaling and reflection tools
+- Attaching photos and voice recordings to the journal
+- Optional movement acknowledgements based on step count (enabled by you)
 - No-contact day tracking
 - Notifications and reminders (optional, enabled by you)
 - Informational content
 
 ### 2.1 Guest Use
 
-You can take the personality quiz and view results without creating an account. Creating an account unlocks full functionality, including progress persistence across sessions and sync across devices (via cloud backup). Data created as a guest is stored locally on your device and may be lost if you uninstall the App or clear local data. If you later register, guest data carried forward to your account where possible.
+You can take the personality quiz and view results without creating an account. Creating an account unlocks full functionality, including persistence of progress, profile and preferences across sessions and devices. Data created as a guest is stored locally on your device and may be lost if you uninstall the App or clear local data. If you later register, guest data carried forward to your account where possible.
 
 ### 2.2 No Professional Service
 
@@ -96,7 +98,7 @@ You are responsible for all activity that occurs under your account. We are not 
 
 You may delete your account at any time through the App settings. Upon deletion, we will remove or anonymize your personal data in accordance with our Privacy Policy. Some anonymized or aggregated data may be retained for analytical purposes.
 
-**Important**: Content stored only on your device (such as certain journal entries — see Section 7) may not be recoverable after account deletion or app uninstallation. We recommend backing up any content you wish to keep before deleting your account.
+**Important**: Content stored only on your device (such as photos, voice recordings and certain journal entries — see Section 7) may not be recoverable after account deletion or app uninstallation. We recommend backing up any content you wish to keep before deleting your account.
 
 ---
 
@@ -135,8 +137,8 @@ You retain all ownership rights to content you create within the App, including 
 
 ### 7.2 Where Content Is Stored
 
-- **Server-stored content**: Account-related content (e.g., challenge notes, profile data) is stored on our backend (Supabase).
-- **Device-only content**: Some content, such as certain journal entries or daily emotion check-in history, may be stored exclusively on your device and is not backed up to our servers. This content may be irretrievably lost if you uninstall the App, clear local data, or your device is damaged or lost.
+- **Server-stored content**: Account-related content (e.g., profile data) is stored on our backend (Supabase).
+- **Device-only content**: Some content, such as photos and voice recordings from the journal, challenge notes, certain journal entries or daily emotion check-in history, may be stored exclusively on your device and is not backed up to our servers. This content may be irretrievably lost if you uninstall the App, clear local data, or your device is damaged or lost. This content is not transferred to a new phone, including through an iCloud or Google backup.
 
 See our Privacy Policy for detailed information on what data is stored where.
 
@@ -214,7 +216,7 @@ Upon termination:
 
 - Your right to use the App ceases immediately.
 - We will delete or anonymize your personal data in accordance with our Privacy Policy.
-- Content stored only on your device (e.g., locally stored journal entries) is your responsibility to back up before termination.
+- Content stored only on your device (e.g., locally stored photos, voice recordings and journal entries) is your responsibility to back up before termination.
 - Sections of these Terms that by their nature should survive termination will survive (including disclaimers, limitation of liability, indemnification, and governing law).
 
 ---
@@ -303,7 +305,7 @@ Your continued use of the App after the changes take effect constitutes your acc
 
 ## 17. Language and Translations
 
-This document is originally written in English. Translations into other languages may be provided for convenience. In the event of any discrepancy between the English version and a translated version, the English version prevails.
+This document was originally written in Polish. Translations into other languages are provided for the convenience of users. In the event of any discrepancy between the Polish version and a translation, the Polish version prevails. This does not affect the protection you have under the mandatory laws of your country of residence.
 
 ---
 

@@ -1,3 +1,7 @@
+| Field | Detail |
+|---|---|
+| **Last updated** | November 18, 2026 |
+
 ## 1. General information
 
 - **App name**: Breakup Reset
@@ -19,7 +23,7 @@ Below we describe the categories of data and where they are typically stored (**
 - e-mail address
 - authentication data (password in non-plain form; the authentication provider stores it in encrypted/hashed form)
 - login/session data (e.g., timestamps; system logs may also include technical information such as IP address and user agent)
-- if you use external login (e.g., Google): identifiers and profile data provided by the login provider under OAuth
+- if you use external login (e.g., Google or Apple, via Sign in with Apple): identifiers and profile data provided by the login provider under OAuth
 
 **Where we store it**: on the server side (Supabase Auth).
 
@@ -54,10 +58,13 @@ The app may store content entered by you, in particular:
 
 - notes to completed challenges (the “notes” field)
 - journal entries/reflections (may be stored locally on the device, depending on the feature)
+- photos (from the camera or photo library) and voice recordings (from the microphone) added to the journal
 
 Entries of this kind may contain sensitive information in a colloquial sense (e.g., descriptions of relationships, emotions). We do not encourage entering data you do not want to store.
 
-**Where we store it**: challenge notes may be stored on the server; journal/reflection entries may be stored locally on the device (depending on the feature).
+**Where we store it**: challenge notes are stored only locally on the device and encrypted on the device (not on the server); journal/reflection entries may be stored locally on the device (depending on the feature), and text journal entries are encrypted on the device; photos and voice recordings are saved only locally on the device and are not sent to a server.
+
+**Note**: photos and recordings exist only on your device. They cannot be recovered if you lose your phone or reset it.
 
 ### 2.5 Notifications
 
@@ -91,6 +98,8 @@ The app may collect analytics data about app usage (e.g., events, event properti
 
 We may include **non-identifying usage signals** in analytics event properties (e.g., the selected daily emotion label such as “sad” or “anxious”). We do **not** send journal text or other free-text content you enter to analytics.
 
+After you delete your account, the app may send one anonymous analytics event (PostHog) with the reason you picked for deleting, the app version and the interface language. It contains no user ID, e-mail address or device ID and does not create a profile of you. The question is optional (one tap, no text field).
+
 **Where we process it**: with the analytics provider (PostHog).
 
 ### 2.8 Purchases (voluntary support of the app)
@@ -109,6 +118,7 @@ We process data for the following purposes:
 - **providing app features** (progress, quiz, content personalization, preferences)
 - **notifications** (if enabled): reminders and messages about progress/achievements
 - **product analytics**: understanding how the app works and improving quality (PostHog)
+- **error diagnostics and app stability**: crash reports (Sentry)
 - **handling financial support of the app** (if you use it): verifying entitlements and support status (RevenueCat)
 - **marketing / newsletter**: only if you **give consent (opt-in)** and only to the extent the feature is enabled
 
@@ -123,7 +133,7 @@ Depending on the purpose, we process data on the basis of:
   - providing app features (progress, quiz, personalization within app operation)
   - notifications, if they result from the app’s settings and operation (while enabling notifications on the device itself is voluntary)
 - **Art. 6(1)(f) GDPR (legitimate interests of the Controller)**:
-  - ensuring security, preventing abuse, error diagnostics, infrastructure maintenance, and pursuing/defending claims
+  - ensuring security, preventing abuse, error diagnostics (including crash reports in Sentry), infrastructure maintenance, and pursuing/defending claims
   - basic app performance analytics necessary to maintain and improve the app (if it does not require consent in a given configuration)
 - **Art. 6(1)(a) GDPR (consent)**:
   - marketing/newsletter (if enabled) – only after your voluntary opt-in
@@ -150,6 +160,8 @@ The app stores some data locally on the device (AsyncStorage), e.g., progress, q
 
 If you enable the gentle movement acknowledgements feature (steps), the app stores locally **only this feature’s preferences** and **daily flags** preventing the message from being shown more than once per day (without the need to store step history).
 
+Photos and voice recordings added to the journal are saved only locally on the device. They are not sent to a server, are excluded from iCloud backup on iOS (on Android `allowBackup` is turned off), and are deleted when you delete your account. Text journal entries are encrypted on the device. **Photos and recordings cannot be recovered if you lose your phone or reset it.**
+
 The mechanism for clearing local data when deleting an account is implemented in the app. In practice, it includes deleting, among other things, local progress data, history, and content saved in the app’s memory (the scope may vary depending on features used and app version).
 
 ---
@@ -160,12 +172,20 @@ Depending on the features used, data may be processed by the following providers
 
 ### 5.1 Supabase (backend and database hosting, authentication)
 
-- Supabase processes account and session data as well as app data stored in the database (e.g., progress, profile, preferences, challenge notes).
+- Supabase processes account and session data as well as app data stored in the database (e.g., progress, profile, preferences). Challenge notes are not on the server; they are stored locally on the device.
 
 ### 5.2 PostHog (product analytics)
 
 - PostHog processes analytics event data and event properties.
 - In the current app configuration, analytics ingestion is set to the EU endpoint `https://eu.i.posthog.com`. Depending on provider configuration, analytics processing may still involve transfers outside the EEA.
+
+### 5.2A Sentry (crash reports)
+
+- On iOS and Android the app sends crash reports to Sentry (@sentry/react-native). A report contains only technical data about the error and the device, and a user identifier.
+- Error messages are cleaned of e-mail addresses, identifiers and tokens. Request data and additional fields are removed. The content of your journal entries is not sent.
+- Report data is stored in the EU region.
+- We have a data processing agreement (DPA) with Sentry.
+- Reports are kept for 30 days.
 
 ### 5.3 Payment providers / stores
 
@@ -242,6 +262,7 @@ Depending on provider configurations and which features you use:
 
 - In the audited configuration, Supabase operates in an EU region (`eu-central-1`).
 - PostHog: analytics ingestion is set to `https://eu.i.posthog.com`. Depending on provider configuration and your use of features, processing may still involve transfers outside the EEA.
+- Sentry: crash reports are stored in the EU region. Depending on the provider’s configuration, processing may still involve transfers outside the EEA. Transfers to Sentry (Functional Software, Inc., USA) rely on the EU-U.S. Data Privacy Framework or, where it does not apply, on the standard contractual clauses included in the data processing agreement.
 - Stores (Apple/Google) and notification providers may process data in various jurisdictions.
 
 Where transfers outside the EEA occur, compliance mechanisms provided by suppliers are used (e.g., standard contractual clauses), to the extent required.
@@ -254,7 +275,8 @@ Where transfers outside the EEA occur, compliance mechanisms provided by supplie
 - **Profile data (e.g., alias, `user_gender`, `ex_gender`)**: generally voluntary; omission may limit personalization.
 - **Notifications**: voluntary; lack of consent in the operating system means no push notifications.
 - **Steps/movement data (walk acknowledgement)**: voluntary; the feature works only if enabled in the app and permission is granted in the operating system. You can disable it at any time.
-- **Analytics**: if privacy settings are available in the app, you can limit/disable analytics (provided it is not necessary to ensure the security and operation of the app).
+- **Camera, microphone and photos (photos and voice recordings in the journal)**: voluntary; access is optional and requires permission in the operating system. Photos and recordings are only on the device and cannot be recovered if you lose your phone or reset it.
+- **Analytics**: the app currently has no analytics switch. You can use your right to object or to erasure by contacting the Controller (see 8.1).
 
 ---
 

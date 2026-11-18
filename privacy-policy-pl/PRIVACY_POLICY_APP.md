@@ -1,3 +1,7 @@
+| Pole | Szczegóły |
+|---|---|
+| **Data ostatniej aktualizacji** | 18 listopada 2026 |
+
 ## 1. Informacje ogólne
 
 - **Nazwa aplikacji**: Breakup Reset
@@ -19,7 +23,7 @@ Poniżej opisujemy kategorie danych oraz gdzie typowo są one przechowywane (**n
 - adres e-mail
 - dane uwierzytelniania (hasło w postaci niejawnej; dostawca uwierzytelniania przechowuje je w formie zaszyfrowanej/haszowanej)
 - dane o logowaniach/sesjach (np. znaczniki czasu; w logach systemowych mogą pojawiać się także informacje techniczne typu IP i user agent)
-- jeśli korzystasz z logowania zewnętrznego (np. Google): identyfikatory i dane profilu przekazywane przez dostawcę logowania w ramach OAuth
+- jeśli korzystasz z logowania zewnętrznego (np. Google lub Apple, czyli Sign in with Apple): identyfikatory i dane profilu przekazywane przez dostawcę logowania w ramach OAuth
 
 **Gdzie przechowujemy**: po stronie serwera (Supabase Auth).
 
@@ -54,10 +58,13 @@ Aplikacja może przechowywać treści wpisywane przez Ciebie, w szczególności:
 
 - notatki do ukończonych wyzwań (pole “notes”)
 - wpisy dziennika/refleksje (mogą być przechowywane lokalnie na urządzeniu, zależnie od funkcji)
+- zdjęcia (z aparatu lub biblioteki zdjęć) i nagrania głosowe (z mikrofonu) dodawane do dziennika
 
 Wpisy tego typu mogą zawierać dane wrażliwe w potocznym sensie (np. opis relacji, emocji). Nie zachęcamy do wpisywania danych, których nie chcesz przechowywać.
 
-**Gdzie przechowujemy**: notatki do wyzwań mogą być przechowywane na serwerze; dziennik/refleksje mogą być przechowywane lokalnie na urządzeniu (zależnie od funkcji).
+**Gdzie przechowujemy**: notatki do wyzwań są przechowywane wyłącznie lokalnie na urządzeniu i szyfrowane na urządzeniu (nie są na serwerze); dziennik/refleksje mogą być przechowywane lokalnie na urządzeniu (zależnie od funkcji), a wpisy tekstowe w dzienniku są szyfrowane na urządzeniu; zdjęcia i nagrania głosowe są zapisywane wyłącznie lokalnie na urządzeniu i nie są wysyłane na serwer.
+
+**Uwaga**: zdjęcia i nagrania są tylko na urządzeniu. Nie da się ich odzyskać po zgubieniu lub resecie telefonu.
 
 ### 2.5 Powiadomienia
 
@@ -91,6 +98,8 @@ Aplikacja może zbierać dane analityczne dotyczące użycia aplikacji (np. zdar
 
 W analityce możemy uwzględniać **nieidentyfikujące sygnały użycia** jako właściwości zdarzeń (np. wybraną etykietę emocji w check-inie, taką jak „sad” lub „anxious”). Do analityki **nie wysyłamy treści dziennika** ani innych treści wpisywanych w polach tekstowych.
 
+Po usunięciu konta aplikacja może wysłać jedno anonimowe zdarzenie analityczne (PostHog) z wybranym przez Ciebie powodem usunięcia, wersją aplikacji i językiem interfejsu. Zdarzenie nie zawiera identyfikatora użytkownika, adresu e-mail ani identyfikatora urządzenia i nie tworzy Twojego profilu. Pytanie jest opcjonalne (jedno dotknięcie, bez pola tekstowego).
+
 **Gdzie przetwarzamy**: u dostawcy analityki (PostHog).
 
 ### 2.8 Zakupy (dobrowolne wsparcie aplikacji)
@@ -109,6 +118,7 @@ Przetwarzamy dane w następujących celach:
 - **świadczenie funkcji aplikacji** (postęp, quiz, personalizacja treści, preferencje)
 - **powiadomienia** (jeśli włączysz): przypomnienia i komunikaty o postępach/osiągnięciach
 - **analityka produktowa**: rozumienie działania aplikacji i poprawa jakości (PostHog)
+- **diagnostyka błędów i stabilność aplikacji**: raporty o awariach (Sentry)
 - **obsługa wsparcia finansowego aplikacji** (jeśli skorzystasz): weryfikacja uprawnień i statusu wsparcia (RevenueCat)
 - **marketing / newsletter**: tylko jeśli **wyrazisz zgodę (opt-in)** i tylko w zakresie, w jakim dana funkcja jest uruchomiona
 
@@ -123,7 +133,7 @@ W zależności od celu przetwarzamy dane na podstawie:
   - świadczenie funkcji aplikacji (postęp, quiz, personalizacja w ramach działania aplikacji)
   - powiadomienia, jeżeli wynikają z ustawień i działania aplikacji (przy czym samo włączenie powiadomień na urządzeniu jest dobrowolne)
 - **art. 6 ust. 1 lit. f RODO (prawnie uzasadniony interes Administratora)**:
-  - zapewnienie bezpieczeństwa, zapobieganie nadużyciom, diagnostyka błędów, utrzymanie infrastruktury oraz dochodzenie/obrona roszczeń
+  - zapewnienie bezpieczeństwa, zapobieganie nadużyciom, diagnostyka błędów (w tym raporty o awariach w Sentry), utrzymanie infrastruktury oraz dochodzenie/obrona roszczeń
   - podstawowa analityka działania aplikacji w zakresie niezbędnym do jej utrzymania i poprawy (jeżeli nie wymaga zgody w danej konfiguracji)
 - **art. 6 ust. 1 lit. a RODO (zgoda)**:
   - marketing/newsletter (jeżeli uruchomione) – wyłącznie po Twoim dobrowolnym opt-in
@@ -150,6 +160,8 @@ Aplikacja przechowuje część danych lokalnie na urządzeniu (AsyncStorage), np
 
 Jeśli włączysz funkcję łagodnych uznań ruchu (kroki), aplikacja przechowuje lokalnie **wyłącznie preferencje tej funkcji** oraz **dzienne flagi** zapobiegające powtarzaniu komunikatu więcej niż raz dziennie (bez potrzeby zapisywania historii kroków).
 
+Zdjęcia i nagrania głosowe dodane do dziennika są zapisywane wyłącznie lokalnie na urządzeniu. Nie są wysyłane na serwer, są wyłączone z kopii zapasowej iCloud na iOS (na Androidzie `allowBackup` jest wyłączone) i są usuwane przy usunięciu konta. Wpisy tekstowe w dzienniku są szyfrowane na urządzeniu. **Zdjęć i nagrań nie da się odzyskać po zgubieniu lub resecie telefonu.**
+
 Mechanizm czyszczenia danych lokalnych przy usuwaniu konta jest zaimplementowany w aplikacji. W praktyce obejmuje on usuwanie m.in. lokalnych danych postępu, historii i treści zapisanych w pamięci aplikacji (zakres może się różnić w zależności od używanych funkcji i wersji aplikacji).
 
 ---
@@ -160,12 +172,20 @@ W zależności od używanych funkcji, dane mogą być przetwarzane przez następ
 
 ### 5.1 Supabase (hosting backendu i bazy, uwierzytelnianie)
 
-- Supabase przetwarza dane konta, sesji oraz dane aplikacyjne zapisane w bazie (np. postęp, profil, preferencje, notatki do wyzwań).
+- Supabase przetwarza dane konta, sesji oraz dane aplikacyjne zapisane w bazie (np. postęp, profil, preferencje). Notatki do wyzwań nie są na serwerze, są przechowywane lokalnie na urządzeniu.
 
 ### 5.2 PostHog (analityka produktowa)
 
 - PostHog przetwarza dane analityczne zdarzeń oraz właściwości zdarzeń.
 - W aktualnej konfiguracji aplikacji ingestion analityki jest ustawiony na endpoint UE `https://eu.i.posthog.com`. W zależności od konfiguracji dostawcy przetwarzanie analityki może nadal wiązać się z przekazywaniem danych poza EOG.
+
+### 5.2A Sentry (raporty o awariach)
+
+- Na iOS i Androidzie aplikacja wysyła raporty o awariach do Sentry (@sentry/react-native). Raport zawiera wyłącznie techniczne dane o błędzie i urządzeniu oraz identyfikator użytkownika.
+- Treści błędów są oczyszczane z adresów e-mail, identyfikatorów i tokenów. Dane żądań i dodatkowe pola są usuwane. Treść Twoich wpisów w dzienniku nie jest wysyłana.
+- Dane z raportów są przechowywane w regionie UE.
+- Z Sentry zawarta jest umowa powierzenia przetwarzania danych (DPA).
+- Raporty są przechowywane przez 30 dni.
 
 ### 5.3 Dostawcy płatności / sklepy
 
@@ -242,6 +262,7 @@ W zależności od konfiguracji dostawców i tego, z jakich funkcji korzystasz:
 
 - Supabase w audytowanej konfiguracji działa w regionie UE (`eu-central-1`).
 - PostHog: ingestion analityki jest ustawiony na `https://eu.i.posthog.com`. W zależności od konfiguracji dostawcy i korzystania z funkcji przetwarzanie może nadal wiązać się z przekazywaniem danych poza EOG.
+- Sentry: raporty o awariach są przechowywane w regionie UE. W zależności od konfiguracji dostawcy przetwarzanie może nadal wiązać się z przekazywaniem danych poza EOG. Dla transferów do Sentry (Functional Software, Inc., USA) stosuje się Data Privacy Framework UE-USA, a jeśli nie ma on zastosowania, standardowe klauzule umowne zawarte w umowie powierzenia przetwarzania.
 - Sklepy (Apple/Google) i dostawcy powiadomień mogą przetwarzać dane w różnych jurysdykcjach.
 
 W przypadku transferów poza EOG stosuje się mechanizmy zgodności zapewniane przez dostawców (np. standardowe klauzule umowne), w zakresie w jakim są wymagane.
@@ -254,7 +275,8 @@ W przypadku transferów poza EOG stosuje się mechanizmy zgodności zapewniane p
 - **Dane profilu (np. alias, `user_gender`, `ex_gender`)**: co do zasady dobrowolne; brak może ograniczyć personalizację treści.
 - **Powiadomienia**: dobrowolne; brak zgody w systemie operacyjnym oznacza brak powiadomień push.
 - **Dane o krokach/ruchu (uznanie spaceru)**: dobrowolne; funkcja działa tylko po włączeniu jej w aplikacji i udzieleniu zgody w systemie operacyjnym. Możesz ją w każdej chwili wyłączyć.
-- **Analityka**: jeżeli dostępne są ustawienia prywatności w aplikacji, możesz ograniczyć/wyłączyć analitykę (o ile nie jest ona niezbędna do zapewnienia bezpieczeństwa i działania aplikacji).
+- **Aparat, mikrofon i zdjęcia (zdjęcia i nagrania głosowe w dzienniku)**: dobrowolne; dostęp jest opcjonalny i wymaga zgody w systemie operacyjnym. Zdjęcia i nagrania są tylko na urządzeniu i nie da się ich odzyskać po zgubieniu lub resecie telefonu.
+- **Analityka**: obecnie aplikacja nie udostępnia przełącznika analityki. Możesz skorzystać z prawa sprzeciwu lub usunięcia danych, kontaktując się z Administratorem (pkt 8.1).
 
 ---
 

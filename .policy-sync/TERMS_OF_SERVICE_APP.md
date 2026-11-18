@@ -8,7 +8,7 @@
 | **NIP** | 9512512357 |
 | **Adres e-mail kontaktowy** | athomelabs.studio@gmail.com |
 | **Strona internetowa** | https://athomelabs.eu |
-| **Data ostatniej aktualizacji** | 13 maja 2026 |
+| **Data ostatniej aktualizacji** | 18 listopada 2026 |
 
 Niniejsze Warunki korzystania z usługi ("Warunki") regulują korzystanie z aplikacji mobilnej Breakup Reset ("Aplikacja"). Pobierając, instalując lub korzystając z Aplikacji, wyrażasz zgodę na związanie się niniejszymi Warunkami. Jeśli nie zgadzasz się na nie, nie korzystaj z Aplikacji.
 
@@ -41,13 +41,15 @@ Aplikacja oferuje:
 - Quiz osobowości i spersonalizowane spostrzeżenia
 - Codzienne wyzwania i śledzenie postępów
 - Narzędzia do prowadzenia dziennika i refleksji
+- Dołączanie zdjęć i nagrań głosowych do dziennika
+- Opcjonalne uznania ruchu na podstawie liczby kroków (po włączeniu przez Ciebie)
 - Śledzenie dni bez kontaktu
 - Powiadomienia i przypomnienia (opcjonalne, włączane przez Ciebie)
 - Treści informacyjne
 
 ### 2.1 Korzystanie bez rejestracji
 
-Możesz wziąć udział w quizie osobowości i zobaczyć wyniki bez zakładania konta. Założenie konta odblokowuje pełną funkcjonalność, w tym utrwalanie postępów między sesjami i synchronizację między urządzeniami (poprzez kopię zapasową w chmurze). Dane utworzone jako gość są przechowywane lokalnie na Twoim urządzeniu i mogą zostać utracone w przypadku odinstalowania Aplikacji lub wyczyszczenia danych lokalnych. Jeśli później się zarejestrujesz, dane gościa zostaną w miarę możliwości przeniesione na Twoje konto.
+Możesz wziąć udział w quizie osobowości i zobaczyć wyniki bez zakładania konta. Założenie konta odblokowuje pełną funkcjonalność, w tym utrwalanie postępów, profilu i preferencji między sesjami i urządzeniami. Dane utworzone jako gość są przechowywane lokalnie na Twoim urządzeniu i mogą zostać utracone w przypadku odinstalowania Aplikacji lub wyczyszczenia danych lokalnych. Jeśli później się zarejestrujesz, dane gościa zostaną w miarę możliwości przeniesione na Twoje konto.
 
 ### 2.2 Brak usługi profesjonalnej
 
@@ -96,7 +98,7 @@ Ponosisz odpowiedzialność za wszelkie działania podejmowane w ramach Twojego 
 
 Możesz usunąć swoje konto w dowolnym momencie w ustawieniach Aplikacji. Po usunięciu usuniemy lub zanonimizujemy Twoje dane osobowe zgodnie z naszą Polityką prywatności. Część zanonimizowanych lub zagregowanych danych może zostać zachowana do celów analitycznych.
 
-**Ważne**: Treści przechowywane wyłącznie na Twoim urządzeniu (takie jak niektóre wpisy w dzienniku — patrz Sekcja 7) mogą być nieodzyskiwalne po usunięciu konta lub odinstalowaniu Aplikacji. Zalecamy wykonanie kopii zapasowej wszelkich treści, które chcesz zachować, przed usunięciem konta.
+**Ważne**: Treści przechowywane wyłącznie na Twoim urządzeniu (takie jak zdjęcia, nagrania głosowe i niektóre wpisy w dzienniku — patrz Sekcja 7) mogą być nieodzyskiwalne po usunięciu konta lub odinstalowaniu Aplikacji. Zalecamy wykonanie kopii zapasowej wszelkich treści, które chcesz zachować, przed usunięciem konta.
 
 ---
 
@@ -135,8 +137,8 @@ Zachowujesz wszelkie prawa własności do treści tworzonych w Aplikacji, w tym 
 
 ### 7.2 Miejsce przechowywania treści
 
-- **Treści przechowywane na serwerze**: Treści związane z kontem (np. notatki do wyzwań, dane profilowe) są przechowywane na naszym zapleczu (Supabase).
-- **Treści przechowywane wyłącznie na urządzeniu**: Niektóre treści, takie jak część wpisów w dzienniku czy historia codziennych kontroli nastroju, mogą być przechowywane wyłącznie na Twoim urządzeniu i nie są archiwizowane na naszych serwerach. Treści te mogą zostać bezpowrotnie utracone w przypadku odinstalowania Aplikacji, wyczyszczenia danych lokalnych lub uszkodzenia bądź zgubienia urządzenia.
+- **Treści przechowywane na serwerze**: Treści związane z kontem (np. dane profilowe) są przechowywane na naszym zapleczu (Supabase).
+- **Treści przechowywane wyłącznie na urządzeniu**: Niektóre treści, takie jak zdjęcia i nagrania głosowe z dziennika, notatki do wyzwań, część wpisów w dzienniku czy historia codziennych kontroli nastroju, mogą być przechowywane wyłącznie na Twoim urządzeniu i nie są archiwizowane na naszych serwerach. Treści te mogą zostać bezpowrotnie utracone w przypadku odinstalowania Aplikacji, wyczyszczenia danych lokalnych lub uszkodzenia bądź zgubienia urządzenia. Treści te nie są przenoszone na nowy telefon, także przez kopię zapasową iCloud lub Google.
 
 Szczegółowe informacje o tym, które dane są przechowywane gdzie, znajdują się w naszej Polityce prywatności.
 
@@ -214,7 +216,7 @@ Po rozwiązaniu umowy:
 
 - Twoje prawo do korzystania z Aplikacji wygasa natychmiast.
 - Usuniemy lub zanonimizujemy Twoje dane osobowe zgodnie z naszą Polityką prywatności.
-- Treści przechowywane wyłącznie na Twoim urządzeniu (np. lokalnie przechowywane wpisy w dzienniku) stanowią Twoją odpowiedzialność — zalecamy wykonanie kopii zapasowej przed rozwiązaniem umowy.
+- Treści przechowywane wyłącznie na Twoim urządzeniu (np. lokalnie przechowywane zdjęcia, nagrania głosowe i wpisy w dzienniku) stanowią Twoją odpowiedzialność — zalecamy wykonanie kopii zapasowej przed rozwiązaniem umowy.
 - Postanowienia niniejszych Warunków, które ze swej natury powinny obowiązywać po rozwiązaniu umowy, pozostają w mocy (w tym zastrzeżenia, ograniczenie odpowiedzialności, indemnizacja i prawo właściwe).
 
 ---
@@ -303,7 +305,7 @@ Dalsze korzystanie z Aplikacji po wejściu zmian w życie stanowi akceptację za
 
 ## 17. Język i tłumaczenia
 
-Niniejszy dokument został sporządzony w języku angielskim. Tłumaczenia na inne języki mogą być udostępnione dla wygody użytkowników. W przypadku jakichkolwiek rozbieżności między wersją angielską a tłumaczeniem, wersja angielska ma charakter wiążący.
+Niniejszy dokument został sporządzony w języku polskim. Tłumaczenia na inne języki są udostępniane dla wygody użytkowników. W razie rozbieżności między wersją polską a tłumaczeniem wiążąca jest wersja polska. Nie wpływa to na ochronę przysługującą Ci na mocy bezwzględnie obowiązujących przepisów prawa Twojego kraju zamieszkania.
 
 ---
 

@@ -1,3 +1,7 @@
+| Campo | Detalhe |
+|---|---|
+| **Última atualização** | 18 de novembro de 2026 |
+
 ## 1. Informações gerais
 
 - **Nome da aplicação**: Breakup Reset
@@ -19,7 +23,7 @@ Abaixo descrevemos as categorias de dados e onde tipicamente são armazenados (*
 - endereço de e-mail
 - dados de autenticação (palavra-passe não em texto simples; o fornecedor de autenticação armazena-a de forma encriptada/hasheada)
 - dados de início de sessão/sessão (p. ex., carimbos de data/hora; nos registos do sistema podem também surgir informações técnicas como IP e user agent)
-- se utilizar autenticação externa (p. ex., Google): identificadores e dados de perfil transmitidos pelo fornecedor de autenticação no âmbito de OAuth
+- se utilizar autenticação externa (p. ex., Google ou Apple, ou seja, Sign in with Apple): identificadores e dados de perfil transmitidos pelo fornecedor de autenticação no âmbito de OAuth
 
 **Onde armazenamos**: do lado do servidor (Supabase Auth).
 
@@ -54,10 +58,13 @@ A aplicação pode armazenar conteúdos introduzidos por si, em particular:
 
 - notas associadas a desafios concluídos (campo “notes”)
 - entradas de diário/reflexões (podem ser armazenadas localmente no dispositivo, consoante a funcionalidade)
+- fotografias (da câmara ou da biblioteca de fotografias) e gravações de voz (do microfone) adicionadas ao diário
 
 Este tipo de entradas pode conter informação sensível num sentido comum (p. ex., descrições de relações, emoções). Não encorajamos a introdução de dados que não queira armazenar.
 
-**Onde armazenamos**: as notas de desafios podem ser armazenadas no servidor; o diário/reflexões pode ser armazenado localmente no dispositivo (consoante a funcionalidade).
+**Onde armazenamos**: as notas de desafios são armazenadas apenas localmente no dispositivo e cifradas no dispositivo (não estão no servidor); o diário/reflexões pode ser armazenado localmente no dispositivo (consoante a funcionalidade), e as entradas de texto do diário são cifradas no dispositivo; as fotografias e gravações de voz são guardadas apenas localmente no dispositivo e não são enviadas para um servidor.
+
+**Aviso**: as fotografias e gravações existem apenas no seu dispositivo. Não é possível recuperá-las se perder o telemóvel ou o repuser para as definições de fábrica.
 
 ### 2.5 Notificações
 
@@ -91,6 +98,8 @@ A aplicação pode recolher dados analíticos sobre a utilização (p. ex., even
 
 Podemos incluir **sinais de utilização não identificativos** como propriedades de eventos na analítica (p. ex., a etiqueta de emoção diária selecionada, como “sad” ou “anxious”). Não enviamos para a analítica o **texto do diário** nem outros conteúdos de texto livre que introduza.
 
+Depois de eliminar a conta, a aplicação pode enviar um único evento analítico anónimo (PostHog) com o motivo de eliminação que escolher, a versão da aplicação e o idioma da interface. Não contém identificador de utilizador, e-mail nem identificador do dispositivo e não cria o seu perfil. A pergunta é opcional (um toque, sem campo de texto).
+
 **Onde tratamos**: no fornecedor de analítica (PostHog).
 
 ### 2.8 Compras (apoio voluntário à aplicação)
@@ -109,6 +118,7 @@ Tratamos dados para as seguintes finalidades:
 - **prestação de funcionalidades da aplicação** (progresso, quiz, personalização de conteúdos, preferências)
 - **notificações** (se ativar): lembretes e comunicações sobre progresso/conquistas
 - **analítica de produto**: compreender o funcionamento da aplicação e melhorar a qualidade (PostHog)
+- **diagnóstico de erros e estabilidade da aplicação**: relatórios de falhas (Sentry)
 - **gestão do apoio financeiro à aplicação** (se utilizar): verificação de permissões e estado de apoio (RevenueCat)
 - **marketing / newsletter**: apenas se **der consentimento (opt-in)** e apenas na medida em que a funcionalidade estiver ativa
 
@@ -123,7 +133,7 @@ Consoante a finalidade, tratamos dados com base em:
   - prestação de funcionalidades da aplicação (progresso, quiz, personalização no âmbito do funcionamento da aplicação)
   - notificações, se resultarem das definições e do funcionamento da aplicação (ativar notificações no dispositivo é voluntário)
 - **art. 6.º, n.º 1, al. f) RGPD (interesse legítimo do Responsável)**:
-  - garantir segurança, prevenir abusos, diagnosticar erros, manter a infraestrutura e exercer/defender direitos
+  - garantir segurança, prevenir abusos, diagnosticar erros (incluindo relatórios de falhas no Sentry), manter a infraestrutura e exercer/defender direitos
   - analítica básica do funcionamento da aplicação na medida necessária à manutenção e melhoria (se não exigir consentimento numa dada configuração)
 - **art. 6.º, n.º 1, al. a) RGPD (consentimento)**:
   - marketing/newsletter (se ativos) – apenas após o seu opt-in voluntário
@@ -150,6 +160,8 @@ A aplicação armazena alguns dados localmente no dispositivo (AsyncStorage), p.
 
 Se ativar a funcionalidade de reconhecimentos suaves de movimento (passos), a aplicação armazena localmente **apenas as preferências desta funcionalidade** e **flags diárias** que evitam mostrar a mensagem mais do que uma vez por dia (sem necessidade de guardar histórico de passos).
 
+As fotografias e gravações de voz adicionadas ao diário são guardadas apenas localmente no dispositivo. Não são enviadas para um servidor, estão excluídas da cópia de segurança do iCloud no iOS (no Android, `allowBackup` está desativado) e são eliminadas quando elimina a conta. As entradas de texto do diário são cifradas no dispositivo. **As fotografias e gravações não podem ser recuperadas se perder o telemóvel ou o repuser para as definições de fábrica.**
+
 O mecanismo de limpeza de dados locais ao eliminar a conta está implementado na aplicação. Na prática, inclui a eliminação de, entre outros, dados locais de progresso, histórico e conteúdos guardados na memória da aplicação (o âmbito pode variar consoante as funcionalidades usadas e a versão da aplicação).
 
 ---
@@ -160,12 +172,20 @@ Consoante as funcionalidades utilizadas, os dados podem ser tratados pelos segui
 
 ### 5.1 Supabase (hosting do backend e da base de dados, autenticação)
 
-- A Supabase trata dados de conta e sessão e dados da aplicação guardados na base de dados (p. ex., progresso, perfil, preferências, notas de desafios).
+- A Supabase trata dados de conta e sessão e dados da aplicação guardados na base de dados (p. ex., progresso, perfil, preferências). As notas de desafios não estão no servidor; são armazenadas localmente no dispositivo.
 
 ### 5.2 PostHog (analítica de produto)
 
 - A PostHog trata dados analíticos de eventos e propriedades de eventos.
 - Na configuração atual da aplicação, a ingestão de analítica está configurada no endpoint da UE `https://eu.i.posthog.com`. Consoante a configuração do fornecedor, o tratamento de analítica pode ainda envolver transferências para fora do EEE.
+
+### 5.2A Sentry (relatórios de falhas)
+
+- No iOS e no Android, a aplicação envia relatórios de falhas para o Sentry (@sentry/react-native). Um relatório contém apenas dados técnicos sobre o erro e o dispositivo, e um identificador de utilizador.
+- As mensagens de erro são limpas de endereços de e-mail, identificadores e tokens. Os dados de pedidos e os campos adicionais são removidos. O conteúdo das suas entradas de diário não é enviado.
+- Os dados dos relatórios são armazenados na região da UE.
+- Foi celebrado com a Sentry um acordo de tratamento de dados (DPA).
+- Os relatórios são conservados durante 30 dias.
 
 ### 5.3 Fornecedores de pagamento / lojas
 
@@ -242,6 +262,7 @@ Consoante a configuração dos fornecedores e as funcionalidades que utiliza:
 
 - Na configuração auditada, a Supabase opera numa região da UE (`eu-central-1`).
 - PostHog: a ingestão de analítica está configurada em `https://eu.i.posthog.com`. Consoante a configuração do fornecedor e a sua utilização de funcionalidades, o tratamento pode ainda envolver transferências para fora do EEE.
+- Sentry: os relatórios de falhas são armazenados na região da UE. Consoante a configuração do fornecedor, o tratamento pode ainda envolver transferências para fora do EEE. Para as transferências para a Sentry (Functional Software, Inc., EUA) aplica-se o Quadro de Proteção de Dados UE-EUA ou, se este não for aplicável, as cláusulas contratuais-tipo incluídas no acordo de tratamento de dados.
 - As lojas (Apple/Google) e fornecedores de notificações podem tratar dados em diferentes jurisdições.
 
 No caso de transferências para fora do EEE, aplicam-se mecanismos de conformidade disponibilizados pelos fornecedores (p. ex., cláusulas contratuais-tipo), na medida em que sejam exigidos.
@@ -254,7 +275,8 @@ No caso de transferências para fora do EEE, aplicam-se mecanismos de conformida
 - **Dados de perfil (p. ex., alias, `user_gender`, `ex_gender`)**: em regra, voluntários; a ausência pode limitar a personalização de conteúdos.
 - **Notificações**: voluntárias; a ausência de autorização no sistema operativo implica ausência de notificações push.
 - **Dados de passos/movimento (reconhecimento de caminhada)**: voluntários; a funcionalidade só funciona após ativação na aplicação e concessão de autorização no sistema operativo. Pode desativá-la a qualquer momento.
-- **Analítica**: se existirem definições de privacidade na aplicação, pode limitar/desativar a analítica (desde que não seja necessária para garantir a segurança e funcionamento da aplicação).
+- **Câmara, microfone e fotografias (fotografias e gravações de voz no diário)**: voluntários; o acesso é opcional e requer autorização no sistema operativo. As fotografias e gravações existem apenas no dispositivo e não podem ser recuperadas se perder o telemóvel ou o repuser para as definições de fábrica.
+- **Analítica**: atualmente a aplicação não dispõe de um interruptor de analítica. Pode exercer o seu direito de oposição ou de apagamento contactando o Responsável (ver 8.1).
 
 ---
 

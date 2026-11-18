@@ -8,7 +8,7 @@
 | **Steuernummer (NIP)** | 9512512357 |
 | **Kontakt-E-Mail** | athomelabs.studio@gmail.com |
 | **Website** | https://athomelabs.eu |
-| **Letzte Aktualisierung** | 13. Mai 2026 |
+| **Letzte Aktualisierung** | 18. November 2026 |
 
 Diese Nutzungsbedingungen ("Bedingungen") regeln die Nutzung der mobilen Anwendung Breakup Reset ("App"). Durch Herunterladen, Installieren oder Nutzen der App erklären Sie sich mit diesen Bedingungen einverstanden. Wenn Sie nicht einverstanden sind, nutzen Sie die App nicht.
 
@@ -41,13 +41,15 @@ Die App bietet:
 - Einen Persönlichkeitsquiz und personalisierte Erkenntnisse
 - Tägliche Herausforderungen und Fortschrittsverfolgung
 - Tagebuch- und Reflexionswerkzeuge
+- Hinzufügen von Fotos und Sprachaufnahmen zum Tagebuch
+- Optionale Bewegungsanerkennungen auf Grundlage der Schrittzahl (von Ihnen aktiviert)
 - Kontaktsperren-Tracking (No-Contact)
 - Benachrichtigungen und Erinnerungen (optional, von Ihnen aktiviert)
 - Informationsinhalte
 
 ### 2.1 Gastnutzung
 
-Sie können den Persönlichkeitsquiz absolvieren und Ergebnisse ansehen, ohne ein Konto zu erstellen. Die Erstellung eines Kontos schaltet die volle Funktionalität frei, einschließlich der Fortschrittsspeicherung über Sitzungen hinweg und der Synchronisierung zwischen Geräten (über Cloud-Backup). Als Gast erstellte Daten werden lokal auf Ihrem Gerät gespeichert und können verloren gehen, wenn Sie die App deinstallieren oder lokale Daten löschen. Wenn Sie sich später registrieren, werden Gastdaten nach Möglichkeit auf Ihr Konto übertragen.
+Sie können den Persönlichkeitsquiz absolvieren und Ergebnisse ansehen, ohne ein Konto zu erstellen. Die Erstellung eines Kontos schaltet die volle Funktionalität frei, einschließlich der Speicherung von Fortschritt, Profil und Präferenzen über Sitzungen und Geräte hinweg. Als Gast erstellte Daten werden lokal auf Ihrem Gerät gespeichert und können verloren gehen, wenn Sie die App deinstallieren oder lokale Daten löschen. Wenn Sie sich später registrieren, werden Gastdaten nach Möglichkeit auf Ihr Konto übertragen.
 
 ### 2.2 Kein professioneller Dienst
 
@@ -96,7 +98,7 @@ Sie sind für alle Aktivitäten verantwortlich, die unter Ihrem Konto stattfinde
 
 Sie können Ihr Konto jederzeit über die Einstellungen der App löschen. Nach der Löschung werden wir Ihre personenbezogenen Daten gemäß unserer Datenschutzerklärung löschen oder anonymisieren. Einige anonymisierte oder aggregierte Daten können zu Analysezwecken aufbewahrt werden.
 
-**Wichtig**: Inhalte, die nur auf Ihrem Gerät gespeichert sind (wie bestimmte Tagebucheinträge — siehe Abschnitt 7), sind nach der Kontolöschung oder Deinstallation der App möglicherweise nicht wiederherstellbar. Wir empfehlen, vor der Löschung Ihres Kontos eine Sicherungskopie aller Inhalte zu erstellen, die Sie behalten möchten.
+**Wichtig**: Inhalte, die nur auf Ihrem Gerät gespeichert sind (wie Fotos, Sprachaufnahmen und bestimmte Tagebucheinträge — siehe Abschnitt 7), sind nach der Kontolöschung oder Deinstallation der App möglicherweise nicht wiederherstellbar. Wir empfehlen, vor der Löschung Ihres Kontos eine Sicherungskopie aller Inhalte zu erstellen, die Sie behalten möchten.
 
 ---
 
@@ -135,8 +137,8 @@ Sie behalten alle Eigentumsrechte an den Inhalten, die Sie in der App erstellen,
 
 ### 7.2 Speicherort der Inhalte
 
-- **Serverseitig gespeicherte Inhalte**: Kontobezogene Inhalte (z. B. Herausforderungsnotizen, Profildaten) werden auf unserem Backend (Supabase) gespeichert.
-- **Nur auf dem Gerät gespeicherte Inhalte**: Einige Inhalte, wie bestimmte Tagebucheinträge oder der tägliche Emotions-Check-in-Verlauf, können ausschließlich auf Ihrem Gerät gespeichert werden und werden nicht auf unseren Servern gesichert. Diese Inhalte können unwiederbringlich verloren gehen, wenn Sie die App deinstallieren, lokale Daten löschen oder Ihr Gerät beschädigt wird oder verloren geht.
+- **Serverseitig gespeicherte Inhalte**: Kontobezogene Inhalte (z. B. Profildaten) werden auf unserem Backend (Supabase) gespeichert.
+- **Nur auf dem Gerät gespeicherte Inhalte**: Einige Inhalte, wie Fotos und Sprachaufnahmen aus dem Tagebuch, Herausforderungsnotizen, bestimmte Tagebucheinträge oder der tägliche Emotions-Check-in-Verlauf, können ausschließlich auf Ihrem Gerät gespeichert werden und werden nicht auf unseren Servern gesichert. Diese Inhalte können unwiederbringlich verloren gehen, wenn Sie die App deinstallieren, lokale Daten löschen oder Ihr Gerät beschädigt wird oder verloren geht. Diese Inhalte werden nicht auf ein neues Telefon übertragen, auch nicht über eine iCloud- oder Google-Sicherung.
 
 Einzelheiten dazu, welche Daten wo gespeichert werden, finden Sie in unserer Datenschutzerklärung.
 
@@ -214,7 +216,7 @@ Nach der Beendigung:
 
 - Ihr Recht zur Nutzung der App erlischt sofort.
 - Wir werden Ihre personenbezogenen Daten gemäß unserer Datenschutzerklärung löschen oder anonymisieren.
-- Inhalte, die nur auf Ihrem Gerät gespeichert sind (z. B. lokal gespeicherte Tagebucheinträge), liegen in Ihrer Verantwortung — sichern Sie diese vor der Beendigung.
+- Inhalte, die nur auf Ihrem Gerät gespeichert sind (z. B. lokal gespeicherte Fotos, Sprachaufnahmen und Tagebucheinträge), liegen in Ihrer Verantwortung — sichern Sie diese vor der Beendigung.
 - Bestimmungen dieser Bedingungen, die ihrer Natur nach über die Beendigung hinaus fortgelten sollen, bleiben wirksam (einschließlich Haftungsausschlüsse, Haftungsbeschränkung, Freistellung und anzuwendendes Recht).
 
 ---
@@ -303,7 +305,7 @@ Ihre fortgesetzte Nutzung der App nach Inkrafttreten der Änderungen stellt Ihre
 
 ## 17. Sprache und Übersetzungen
 
-Dieses Dokument wurde ursprünglich in englischer Sprache verfasst. Übersetzungen in andere Sprachen können aus Gründen der Bequemlichkeit bereitgestellt werden. Im Falle von Abweichungen zwischen der englischen Fassung und einer Übersetzung ist die englische Fassung maßgeblich.
+Dieses Dokument wurde ursprünglich in polnischer Sprache verfasst. Übersetzungen in andere Sprachen werden aus Gründen der Bequemlichkeit bereitgestellt. Im Falle von Abweichungen zwischen der polnischen Fassung und einer Übersetzung ist die polnische Fassung maßgeblich. Dies berührt nicht den Schutz, der Ihnen nach den zwingenden Rechtsvorschriften Ihres Wohnsitzlandes zusteht.
 
 ---
 
